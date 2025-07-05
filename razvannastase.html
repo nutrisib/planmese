@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-    <meta charset="UTF-8">
+	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ReDefine 1.0</title>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -169,6 +169,23 @@
             background-color: #EEF2FF;
             color: #4338CA;
         }
+        .print-button {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: #48bb78;
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border: none;
+        }
+        .print-button:hover {
+            background-color: #3f9e65;
+        }
         .macro-bar-container {
             display: flex;
             width: 100%;
@@ -241,7 +258,7 @@
 
         <div id="introducere" class="tab-content active">
             <div class="card">
-                <h2 class="text-2xl font-bold text-gray-700 mb-4">Înțelegerea provocării: hipertrigliceridemia și surplusul de greutate</h2>
+                <h2 class="text-2xl font-bold text-gray-700 mb-4">Înțelegerea provocării: hipertrigliceridemiei și surplusului de greutate</h2>
                 <p class="text-gray-600 mb-4">Acest plan este conceput pentru un bărbat de 35 de ani, medic stomatolog, cu hipertrigliceridemie severă, un indice de masă corporală (IMC) de 29 (indicând supraponderalitate) și un diametru abdominal de peste 100 cm, sugerând o acumulare semnificativă de grăsime viscerală. Aceste condiții impun o abordare cuprinzătoare și holistică, esențială pentru îmbunătățirea stării de sănătate.</p>
                 <p class="text-gray-600 mb-4">Hipertrigliceridemia, alături de surplusul de greutate și grăsimea viscerală, crește riscul de afecțiuni cardiovasculare, diabet de tip 2 și alte complicații metabolice. O abordare integrată, care vizează atât nutriția, cât și stilul de viață, este crucială pentru detoxifierea organismului, diminuarea nivelului de trigliceride și reducerea grăsimii viscerale.</p>
                 <h2 class="text-2xl font-bold text-gray-700 mb-4 mt-8">Recâștigă-ți vitalitatea: un parteneriat pentru transformare</h2>
@@ -387,10 +404,10 @@
                     <div>
                         <h3 class="text-xl font-bold text-gray-800 mb-2">Obiective principale:</h3>
                         <ul class="list-disc list-inside space-y-1 text-gray-600">
-                            <li>Îmbunătățirea sănătății cardiovasculare.</li>
-                            <li>Accelerarea metabolismului și arderea grăsimilor (în special a celei viscerale).</li>
-                            <li>Creșterea masei musculare și a forței.</li>
-                            <li>Reducerea nivelului de stres.</li>
+                            <li><b>Îmbunătățirea sănătății cardiovasculare.</b></li>
+                            <li><b>Accelerarea metabolismului și arderea grăsimilor (în special a celei viscerale).</b></li>
+                            <li><b>Creșterea masei musculare și a forței.</b></li>
+                            <li><b>Reducerea nivelului de stres.</b></li>
                         </ul>
                     </div>
                     <div>
@@ -574,9 +591,9 @@
         const mealPlanDisplay = document.getElementById('mealPlanDisplay');
         const weeklyPlanDisplay = document.getElementById('weeklyPlanDisplay');
         const fullPlanTableBody = document.getElementById('fullPlanTableBody');
-        const wellnessAccordionContainer = document.getElementById('wellnessAccordion');
-        const hipertrigliceridemieAccordionContainer = document.getElementById('hipertrigliceridemieAccordion');
-        const planActiuneAccordionContainer = document.getElementById('planActiuneAccordion');
+        const wellnessAccordion = document.getElementById('wellnessAccordion'); /* Corrected: Changed from 'accordion' to 'wellnessAccordion' */
+        const hipertrigliceridemieAccordion = document.getElementById('hipertrigliceridemieAccordion');
+        const planActiuneAccordion = document.getElementById('planActiuneAccordion');
 
         // --- DATA ---
         const mealPlanData = [];
@@ -661,10 +678,10 @@
         const mealTemplates = {
             breakfast: [ { food: 'Shake Herbalife (2 linguri F1 + 2 linguri PDM) cu apă, 1 lingură Fibre de măr și ovăz, 1 lingură Beta Heart.', base: shakeBase, additions: ['fibre_mar_ovaz_7g', 'betaheart_7g'] } ],
             snack1: [
-                { food: '1 măr mediu și 40g migdale.', kcal: 350, protein: 12, carbs: 35, fat: 28, fiber: 8 }, { food: '200g iaurt 2-3% cu 20g semințe de dovleac și 5g tărâțe de psyllium.', kcal: 280, protein: 18, carbs: 18, fat: 18, fiber: 8 }, { food: '1 banană mare și 30g nuci.', kcal: 350, protein: 8, carbs: 50, fat: 25, fiber: 8 }, { food: '250ml chefir și 15g semințe de chia.', kcal: 280, protein: 9, carbs: 20, fat: 15, fiber: 9 }, { food: '150g morcovi și 100g hummus.', kcal: 250, protein: 8, carbs: 30, fat: 12, fiber: 12 }, { food: 'Baton proteic Herbalife.', kcal: 140, protein: 10, carbs: 15, fat: 5, fiber: 3 },
+                { food: '1 măr mediu și 40g migdale.', kcal: 200, protein: 6, carbs: 25, fat: 12, fiber: 5 }, { food: '200g iaurt 2-3% cu 20g semințe de dovleac și 5g tărâțe de psyllium.', kcal: 180, protein: 9, carbs: 14, fat: 9, fiber: 5 }, { food: '1 banană mare și 30g nuci.', kcal: 180, protein: 4, carbs: 25, fat: 9, fiber: 4 }, { food: '150ml chefir și 10g semințe de chia.', kcal: 140, protein: 5, carbs: 9, fat: 6, fiber: 3.5 }, { food: 'Morcovi (100g) și 50g hummus.', kcal: 120, protein: 4, carbs: 15, fat: 5, fiber: 5 }, { food: 'Baton proteic (ex. Herbalife, fără zahăr adăugat, bogat în fibre).', kcal: 140, protein: 10, carbs: 15, fat: 5, fiber: 3 },
             ],
             snack2: [
-                { food: '1 pară mare și 20g caju.', kcal: 280, protein: 6, carbs: 40, fat: 15, fiber: 8 }, { food: '250ml chefir, 1 lingură PDM, 15g semințe de floarea soarelui și 5g tărâțe de psyllium.', kcal: 280, protein: 13.5, carbs: 14.5, fat: 8, fiber: 8 }, { food: 'Orez expandat (40g) cu 25g unt de arahide.', kcal: 320, protein: 10, carbs: 40, fat: 18, fiber: 4 }, { food: '150g fructe de pădure și 20g nuci braziliene.', kcal: 250, protein: 5, carbs: 20, fat: 18, fiber: 7 }, { food: 'Baton proteic Herbalife.', kcal: 140, protein: 10, carbs: 15, fat: 5, fiber: 3 }, { food: '150g brânză de vaci cu 20g semințe de in măcinate.', kcal: 220, protein: 25, carbs: 6, fat: 12, fiber: 6 },
+                { food: '1 pară și 10g caju.', kcal: 150, protein: 3, carbs: 25, fat: 6, fiber: 4 }, { food: '150ml chefir, 1 lingură PDM, 15g semințe de floarea soarelui și 5g tărâțe de psyllium.', kcal: 160, protein: 6, carbs: 12, fat: 7, fiber: 4.5 }, { food: 'Orez expandat (20g) cu 15g unt de arahide.', kcal: 180, protein: 6, carbs: 20, fat: 10, fiber: 2 }, { food: 'O mână de fructe de pădure (50g) și 10g nuci braziliene.', kcal: 100, protein: 2, carbs: 10, fat: 8, fiber: 2.5 }, { food: 'Baton proteic (ex. Herbalife, fără zahăr adăugat, bogat în fibre).', kcal: 180, protein: 15, carbs: 15, fat: 7, fiber: 5 }, { food: '50g brânză de vaci cu 10g semințe de in măcinate.', kcal: 80, protein: 10, carbs: 2, fat: 3, fiber: 3 },
             ],
             lunch: [
                 { food: 'Salată mare cu 180g piept de pui la grătar, mix de salată verde, roșii, castraveți, ardei, 20ml ulei de măsline, oțet balsamic.', kcal: 650, protein: 60, carbs: 30, fat: 40, fiber: 10 }, { food: 'Supă cremă de linte (400ml) conține 100g crutoane integrale și 20g semințe de dovleac.', kcal: 600, protein: 28, carbs: 80, fat: 25, fiber: 18 }, { food: 'Quinoa (120g uscată) cu 150g tofu copt, 250g legume la abur (broccoli, morcovi), 20ml ulei de măsline.', kcal: 750, protein: 35, carbs: 80, fat: 40, fiber: 20 }, { food: 'File de cod la cuptor (200g) cu 250g cartofi dulci copți și 200g fasole verde.', kcal: 700, protein: 50, carbs: 70, fat: 25, fiber: 15 }, { food: 'Wrap integral (120g) cu 150g humus, legume proaspete (ardei, castraveți, salată), 100g piept de curcan feliat.', kcal: 650, protein: 40, carbs: 70, fat: 28, fiber: 12 }, { food: 'Tocană de năut și legume (400g) cu 100g orez brun.', kcal: 600, protein: 28, carbs: 80, fat: 15, fiber: 20 }, { food: 'Salată cu ton în saramură (150g), 3 ouă fierte, mix de salată, roșii, castraveți, 20ml ulei de măsline.', kcal: 600, protein: 50, carbs: 25, fat: 35, fiber: 9 }, { food: 'Paste integrale (120g uscate) cu sos pesto (30g) și 150g ciuperci sotate.', kcal: 650, protein: 22, carbs: 75, fat: 30, fiber: 11 }, { food: 'Burger vegetarian (200g din fasole neagră) într-o chiflă integrală (120g), cu 100g cartofi dulci prăjiți în aer fryer, salată.', kcal: 750, protein: 30, carbs: 90, fat: 30, fiber: 25 }, { food: 'Piept de curcan (180g) la grătar cu 150g bulgur și 250g salată de varză roșie cu ulei de măsline.', kcal: 680, protein: 60, carbs: 60, fat: 25, fiber: 12 },
@@ -727,7 +744,7 @@
                                     <div><span class="font-semibold block">${(meal.protein || 0).toFixed(1)} g</span><span class="text-xs text-gray-500">Proteine</span></div>
                                     <div><span class="font-semibold block">${(meal.carbs || 0).toFixed(1)} g</span><span class="text-xs text-gray-500">Carbo.</span></div>
                                     <div><span class="font-semibold block">${(meal.fat || 0).toFixed(1)} g</span><span class="text-xs text-gray-500">Grăsimi</span></div>
-                                    <div><span class="font-semibold block">${(meal.fiber || 0).toFixed(1)} g</span><span class="text-xs text-gray-500">Fibre</span></div>
+                                    <div><b class="font-semibold block">${(meal.fiber || 0).toFixed(1)} g</b><span class="text-xs text-gray-500">Fibre</span></div>
                                 </div>
                             </div>
                         `).join('')}
@@ -807,7 +824,10 @@
                 <div class="accordion-item">
                     <h2>
                         <button type="button" class="accordion-button" aria-expanded="false">
-                            <span>${item.title}</span>
+                            <span class="flex items-center gap-4">
+                                <span class="text-2xl">${item.icon || ''}</span>
+                                <span>${item.title}</span>
+                            </span>
                             <span class="accordion-icon text-2xl font-light text-indigo-500">+</span>
                         </button>
                     </h2>
@@ -821,6 +841,17 @@
                 button.addEventListener('click', () => {
                     const content = button.parentElement.nextElementSibling;
                     const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+                    // Optional: Close all other accordions
+                    container.querySelectorAll('.accordion-button').forEach(btn => {
+                        if (btn !== button) {
+                            btn.classList.remove('open');
+                            btn.setAttribute('aria-expanded', 'false');
+                            btn.parentElement.nextElementSibling.classList.remove('open');
+                            btn.parentElement.nextElementSibling.style.maxHeight = null;
+                            btn.parentElement.nextElementSibling.style.padding = '0 1.5rem';
+                        }
+                    });
 
                     button.setAttribute('aria-expanded', !isExpanded);
                     button.classList.toggle('open');
@@ -838,9 +869,9 @@
         // --- INITIALIZATION ---
         populateDaySelector();
         populateFullTable();
-        createAccordion(wellnessAccordionContainer, wellnessData);
-        createAccordion(hipertrigliceridemieAccordionContainer, hipertrigliceridemieData);
-        createAccordion(planActiuneAccordionContainer, planActiuneData);
+        createAccordion(wellnessAccordion, wellnessData);
+        createAccordion(hipertrigliceridemieAccordion, hipertrigliceridemieData);
+        createAccordion(planActiuneAccordion, planActiuneData);
 
         if (daySelector) {
             daySelector.addEventListener('change', (e) => showDay(e.target.value));
