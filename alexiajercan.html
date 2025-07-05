@@ -1,4 +1,4 @@
-HTML<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ro">
 <head>
     <meta charset="UTF-8">
@@ -20,34 +20,34 @@ HTML<!DOCTYPE html>
             color: #2c3e50;
             text-align: center;
         }
-       .section {
+      .section {
             margin-bottom: 30px;
             padding: 20px;
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 1px 5px rgba(0,0,0,0.05);
         }
-       .meal-plan-container {
+      .meal-plan-container {
             margin-top: 20px;
             border-top: 1px solid #eee;
             padding-top: 20px;
         }
-       .day-selector {
+      .day-selector {
             text-align: center;
             margin-bottom: 20px;
         }
-       .day-selector label {
+      .day-selector label {
             font-weight: bold;
             margin-right: 10px;
         }
-       .day-selector select {
+      .day-selector select {
             padding: 8px 12px;
             border-radius: 5px;
             border: 1px solid #ccc;
             font-size: 16px;
             cursor: pointer;
         }
-       .day-content {
+      .day-content {
             display: none; /* Hidden by default */
             border: 1px solid #e0e0e0;
             border-radius: 8px;
@@ -55,7 +55,7 @@ HTML<!DOCTYPE html>
             margin-top: 15px;
             background-color: #fdfdfd;
         }
-       .day-content.active {
+      .day-content.active {
             display: block; /* Show active day */
         }
         table {
@@ -72,18 +72,18 @@ HTML<!DOCTYPE html>
             background-color: #f2f2f2;
             font-weight: bold;
         }
-       .total-row {
+      .total-row {
             font-weight: bold;
             background-color: #e6f7ff;
         }
-       .note {
+      .note {
             background-color: #ffe0b2;
             padding: 15px;
             border-radius: 5px;
             margin-top: 20px;
             border-left: 5px solid #ff9800;
         }
-       .export-button {
+      .export-button {
             display: block;
             width: fit-content;
             margin: 30px auto 0;
@@ -98,7 +98,7 @@ HTML<!DOCTYPE html>
             transition: background-color 0.3s ease;
             border: none;
         }
-       .export-button:hover {
+      .export-button:hover {
             background-color: #45a049;
         }
         ul {
@@ -124,7 +124,7 @@ HTML<!DOCTYPE html>
             <li><b>Aport proteic țintă:</b> 30% din totalul caloric.</li>
             <li><b>Distribuție macronutrienți:</b> 40% carbohidrați, 30% proteine, 30% grăsimi sănătoase.</li>
             <li><b>Frecvența meselor:</b> 3 mese principale + 2 gustări.</li>
-            <li><b>Cină:</b> Fără carne, doar pește, brânză, ouă, iaurt, chefir.</li>
+            <li><b>Cină:</b> Fără carne, doar pește, brânză, ouă, iaurt, chefir, cu alternare preponderent vegetală.</li>
             <li><b>Mic dejun:</b> 2 linguri shake F1 și 2 linguri PDM de la Herbalife, cu lapte de soia sau migdale (alternativ).</li>
             <li><b>Gustare 2:</b> Include un baton proteic de lămâie de la Herbalife.</li>
             <li><b>Aport maxim de fito și micronutrienți.</b></li>
@@ -136,7 +136,7 @@ HTML<!DOCTYPE html>
             <li><b>Carbohidrați (40% din calorii):</b> (1900 kcal * 0,40) / 4 kcal/g = 190 g carbohidrați.</li>
             <li><b>Grăsimi (30% din calorii):</b> (1900 kcal * 0,30) / 9 kcal/g = 63,3 g grăsimi.</li>
         </ul>
-        <p class="note"><b>Notă privind aportul proteic:</b> Aportul de aproximativ 3,56 g proteine/kg corp este un nivel ridicat, rezultat din menținerea procentului de 30% proteine din totalul caloric, în contextul unui surplus necesar pentru creșterea în greutate. Acest nivel este, în general, considerat sigur pentru persoanele sănătoase și benefic pentru dezvoltarea masei musculare.[3, 1, 4]</p>
+        <p class="note"><b>Notă privind aportul proteic:</b> Aportul de aproximativ 3,56 g proteine/kg corp este un nivel ridicat, rezultat din menținerea procentului de 30% proteine din totalul caloric, în contextul unui surplus necesar pentru creșterea în greutate. Acest nivel este, în general, considerat sigur pentru persoanele sănătoase și benefic pentru dezvoltarea masei musculare.[4, 1, 5]</p>
     </div>
 
     <div class="section meal-plan-container">
@@ -164,16 +164,16 @@ HTML<!DOCTYPE html>
                 <tbody>
                     <tr>
                         <td>Mic dejun</td>
-                        <td>Shake Herbalife: 2 linguri Formula 1 + 2 linguri Protein Drink Mix cu 250 ml lapte de soia [5, 1, 6, 7, 8]</td>
+                        <td>Shake Herbalife: 2 linguri Formula 1 + 2 linguri Protein Drink Mix cu 250 ml lapte de soia [6, 1, 7, 8, 9]</td>
                         <td>291</td>
                         <td>31</td>
                         <td>24</td>
                         <td>8</td>
-                        <td>Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc, crom) [7, 8, 9]</td>
+                        <td>Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc, crom) [8, 9, 10]</td>
                     </tr>
                     <tr>
                         <td>Gustare 1</td>
-                        <td>Smoothie dens caloric: 1 banană medie (100g), 15g unt de arahide natural, 10g semințe de chia, 150 ml lapte de soia [10, 11]</td>
+                        <td>Smoothie dens caloric: 1 banană medie (100g), 15g unt de arahide natural, 10g semințe de chia, 150 ml lapte de soia [3, 11]</td>
                         <td>280</td>
                         <td>9</td>
                         <td>35</td>
@@ -191,7 +191,7 @@ HTML<!DOCTYPE html>
                     </tr>
                     <tr>
                         <td>Gustare 2</td>
-                        <td>Baton proteic Herbalife lămâie [13, 14, 15] + Iaurt grecesc cu nuci și fructe uscate: 50g iaurt grecesc integral, 10g nuci mixte (migdale/caju), 20g fructe uscate (stafide/curmale) [10, 16, 11, 12]</td>
+                        <td>Baton proteic Herbalife lămâie [13, 14, 15] + Iaurt grecesc cu nuci și fructe uscate: 50g iaurt grecesc integral, 10g nuci mixte (migdale/caju), 20g fructe uscate (stafide/curmale) [3, 16, 11, 12]</td>
                         <td>310</td>
                         <td>17.5</td>
                         <td>34</td>
@@ -236,12 +236,12 @@ HTML<!DOCTYPE html>
                 <tbody>
                     <tr>
                         <td>Mic dejun</td>
-                        <td>Shake Herbalife: 2 linguri Formula 1 + 2 linguri Protein Drink Mix cu 250 ml lapte de migdale neîndulcit [5, 1, 6, 7, 8]</td>
+                        <td>Shake Herbalife: 2 linguri Formula 1 + 2 linguri Protein Drink Mix cu 250 ml lapte de migdale neîndulcit [6, 1, 7, 8, 9]</td>
                         <td>280</td>
                         <td>29</td>
                         <td>22</td>
                         <td>7</td>
-                        <td>Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc) [7, 8, 9]</td>
+                        <td>Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc) [8, 9, 10]</td>
                     </tr>
                     <tr>
                         <td>Gustare 1</td>
@@ -254,7 +254,7 @@ HTML<!DOCTYPE html>
                     </tr>
                     <tr>
                         <td>Prânz</td>
-                        <td>Paste integrale (80g uscate) cu sos de roșii (100g) și tofu (100g), 10ml ulei de măsline, 100g spanac proaspăt [11, 17, 18, 12]</td>
+                        <td>Paste integrale (80g uscate) cu sos de roșii și tofu (100g), 10ml ulei de măsline, 100g spanac proaspăt [11, 17, 18, 12]</td>
                         <td>550</td>
                         <td>25</td>
                         <td>70</td>
@@ -308,12 +308,12 @@ HTML<!DOCTYPE html>
                 <tbody>
                     <tr>
                         <td>Mic dejun</td>
-                        <td>Shake Herbalife: 2 linguri Formula 1 + 2 linguri Protein Drink Mix cu 250 ml lapte de soia [5, 1, 6, 7, 8]</td>
+                        <td>Shake Herbalife: 2 linguri Formula 1 + 2 linguri Protein Drink Mix cu 250 ml lapte de soia [6, 1, 7, 8, 9]</td>
                         <td>291</td>
                         <td>31</td>
                         <td>24</td>
                         <td>8</td>
-                        <td>Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc, crom) [7, 8, 9]</td>
+                        <td>Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc, crom) [8, 9, 10]</td>
                     </tr>
                     <tr>
                         <td>Gustare 1</td>
@@ -326,7 +326,7 @@ HTML<!DOCTYPE html>
                     </tr>
                     <tr>
                         <td>Prânz</td>
-                        <td>Quinoa (70g uscată) cu tempeh copt (100g), 30g avocado, 150g roșii cherry și rucola, 10ml ulei de măsline [18, 12]</td>
+                        <td>Quinoa (70g uscată) cu tofu copt (100g), 30g avocado, 150g roșii cherry și rucola, 10ml ulei de măsline [18, 12]</td>
                         <td>590</td>
                         <td>20</td>
                         <td>55</td>
@@ -380,12 +380,12 @@ HTML<!DOCTYPE html>
                 <tbody>
                     <tr>
                         <td>Mic dejun</td>
-                        <td>Shake Herbalife: 2 linguri Formula 1 + 2 linguri Protein Drink Mix cu 250 ml lapte de migdale neîndulcit [5, 1, 6, 7, 8]</td>
+                        <td>Shake Herbalife: 2 linguri Formula 1 + 2 linguri Protein Drink Mix cu 250 ml lapte de migdale neîndulcit [6, 1, 7, 8, 9]</td>
                         <td>280</td>
                         <td>29</td>
                         <td>22</td>
                         <td>7</td>
-                        <td>Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc) [7, 8, 9]</td>
+                        <td>Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc) [8, 9, 10]</td>
                     </tr>
                     <tr>
                         <td>Gustare 1</td>
@@ -416,17 +416,17 @@ HTML<!DOCTYPE html>
                     </tr>
                     <tr>
                         <td>Cină</td>
-                        <td>Salată verde cu mozzarella (120g), năut (100g conservă), 10ml ulei de măsline, 80g pâine de secară [18, 12]</td>
+                        <td>Salată verde cu năut (100g conservă), 30g avocado, 10ml ulei de măsline, 80g pâine de secară [18, 12]</td>
                         <td>450</td>
-                        <td>25</td>
+                        <td>15</td>
                         <td>50</td>
-                        <td>20</td>
-                        <td>Calciu, proteine, fibre, fier, vitamine K</td>
+                        <td>25</td>
+                        <td>Calciu, proteine vegetale, fibre, fier, vitamine K</td>
                     </tr>
                     <tr class="total-row">
                         <td colspan="2">Total Ziua 4</td>
                         <td>1780</td>
-                        <td>115</td>
+                        <td>105</td>
                         <td>182</td>
                         <td>74</td>
                         <td></td>
@@ -452,16 +452,16 @@ HTML<!DOCTYPE html>
                 <tbody>
                     <tr>
                         <td>Mic dejun</td>
-                        <td>Shake Herbalife: 2 linguri Formula 1 + 2 linguri Protein Drink Mix cu 250 ml lapte de soia [5, 1, 6, 7, 8]</td>
+                        <td>Shake Herbalife: 2 linguri Formula 1 + 2 linguri Protein Drink Mix cu 250 ml lapte de soia [6, 1, 7, 8, 9]</td>
                         <td>291</td>
                         <td>31</td>
                         <td>24</td>
                         <td>8</td>
-                        <td>Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc, crom) [7, 8, 9]</td>
+                        <td>Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc, crom) [8, 9, 10]</td>
                     </tr>
                     <tr>
                         <td>Gustare 1</td>
-                        <td>Smoothie dens caloric: 1 banană medie (100g), 15g unt de arahide natural, 10g semințe de chia, 150 ml lapte de migdale [10, 11]</td>
+                        <td>Smoothie dens caloric: 1 banană medie (100g), 15g unt de arahide natural, 10g semințe de chia, 150 ml lapte de migdale [3, 11]</td>
                         <td>280</td>
                         <td>9</td>
                         <td>35</td>
@@ -479,7 +479,7 @@ HTML<!DOCTYPE html>
                     </tr>
                     <tr>
                         <td>Gustare 2</td>
-                        <td>Baton proteic Herbalife lămâie [13, 14, 15] + Iaurt grecesc cu nuci și fructe uscate: 50g iaurt grecesc integral, 10g nuci mixte (nuci/migdale), 20g fructe uscate (caise) [10, 16, 11, 12]</td>
+                        <td>Baton proteic Herbalife lămâie [13, 14, 15] + Iaurt grecesc cu nuci și fructe uscate: 50g iaurt grecesc integral, 10g nuci mixte (nuci/migdale), 20g fructe uscate (caise) [3, 16, 11, 12]</td>
                         <td>310</td>
                         <td>17.5</td>
                         <td>34</td>
@@ -524,12 +524,12 @@ HTML<!DOCTYPE html>
                 <tbody>
                     <tr>
                         <td>Mic dejun</td>
-                        <td>Shake Herbalife: 2 linguri Formula 1 + 2 linguri Protein Drink Mix cu 250 ml lapte de migdale neîndulcit [5, 1, 6, 7, 8]</td>
+                        <td>Shake Herbalife: 2 linguri Formula 1 + 2 linguri Protein Drink Mix cu 250 ml lapte de migdale neîndulcit [6, 1, 7, 8, 9]</td>
                         <td>280</td>
                         <td>29</td>
                         <td>22</td>
                         <td>7</td>
-                        <td>Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc) [7, 8, 9]</td>
+                        <td>Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc) [8, 9, 10]</td>
                     </tr>
                     <tr>
                         <td>Gustare 1</td>
@@ -542,7 +542,7 @@ HTML<!DOCTYPE html>
                     </tr>
                     <tr>
                         <td>Prânz</td>
-                        <td>Paste integrale (80g uscate) cu sos de roșii (100g) și linte (100g gătită), 10ml ulei de măsline, 100g ciuperci sotate [11, 17, 18, 12]</td>
+                        <td>Paste integrale (80g uscate) cu sos de roșii și linte (100g gătită), 10ml ulei de măsline, 100g ciuperci sotate [11, 17, 18, 12]</td>
                         <td>560</td>
                         <td>22</td>
                         <td>75</td>
@@ -596,12 +596,12 @@ HTML<!DOCTYPE html>
                 <tbody>
                     <tr>
                         <td>Mic dejun</td>
-                        <td>Shake Herbalife: 2 linguri Formula 1 + 2 linguri Protein Drink Mix cu 250 ml lapte de soia [5, 1, 6, 7, 8]</td>
+                        <td>Shake Herbalife: 2 linguri Formula 1 + 2 linguri Protein Drink Mix cu 250 ml lapte de soia [6, 1, 7, 8, 9]</td>
                         <td>291</td>
                         <td>31</td>
                         <td>24</td>
                         <td>8</td>
-                        <td>Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc, crom) [7, 8, 9]</td>
+                        <td>Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc, crom) [8, 9, 10]</td>
                     </tr>
                     <tr>
                         <td>Gustare 1</td>
@@ -668,12 +668,12 @@ HTML<!DOCTYPE html>
                 <tbody>
                     <tr>
                         <td>Mic dejun</td>
-                        <td>Shake Herbalife: 2 linguri Formula 1 + 2 linguri Protein Drink Mix cu 250 ml lapte de migdale neîndulcit [5, 1, 6, 7, 8]</td>
+                        <td>Shake Herbalife: 2 linguri Formula 1 + 2 linguri Protein Drink Mix cu 250 ml lapte de migdale neîndulcit [6, 1, 7, 8, 9]</td>
                         <td>280</td>
                         <td>29</td>
                         <td>22</td>
                         <td>7</td>
-                        <td>Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc) [7, 8, 9]</td>
+                        <td>Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc) [8, 9, 10]</td>
                     </tr>
                     <tr>
                         <td>Gustare 1</td>
@@ -740,16 +740,16 @@ HTML<!DOCTYPE html>
                 <tbody>
                     <tr>
                         <td>Mic dejun</td>
-                        <td>Shake Herbalife: 2 linguri Formula 1 + 2 linguri Protein Drink Mix cu 250 ml lapte de soia [5, 1, 6, 7, 8]</td>
+                        <td>Shake Herbalife: 2 linguri Formula 1 + 2 linguri Protein Drink Mix cu 250 ml lapte de soia [6, 1, 7, 8, 9]</td>
                         <td>291</td>
                         <td>31</td>
                         <td>24</td>
                         <td>8</td>
-                        <td>Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc, crom) [7, 8, 9]</td>
+                        <td>Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc, crom) [8, 9, 10]</td>
                     </tr>
                     <tr>
                         <td>Gustare 1</td>
-                        <td>Smoothie dens caloric: 1 banană medie (100g), 15g unt de arahide natural, 10g semințe de chia, 150 ml lapte de soia [10, 11]</td>
+                        <td>Smoothie dens caloric: 1 banană medie (100g), 15g unt de arahide natural, 10g semințe de chia, 150 ml lapte de soia [3, 11]</td>
                         <td>280</td>
                         <td>9</td>
                         <td>35</td>
@@ -767,7 +767,7 @@ HTML<!DOCTYPE html>
                     </tr>
                     <tr>
                         <td>Gustare 2</td>
-                        <td>Baton proteic Herbalife lămâie [13, 14, 15] + Iaurt grecesc cu nuci și fructe uscate: 50g iaurt grecesc integral, 10g nuci mixte (migdale/caju), 20g fructe uscate (stafide/curmale) [10, 16, 11, 12]</td>
+                        <td>Baton proteic Herbalife lămâie [13, 14, 15] + Iaurt grecesc cu nuci și fructe uscate: 50g iaurt grecesc integral, 10g nuci mixte (migdale/caju), 20g fructe uscate (stafide/curmale) [3, 16, 11, 12]</td>
                         <td>310</td>
                         <td>17.5</td>
                         <td>34</td>
@@ -812,55 +812,55 @@ HTML<!DOCTYPE html>
                 <tbody>
                     <tr>
                         <td>Mic dejun</td>
-                        <td>Shake Herbalife: 2 linguri Formula 1 + 2 linguri Protein Drink Mix cu 250 ml lapte de migdale neîndulcit [5, 1, 6, 7, 8]</td>
+                        <td>Shake Herbalife: 2 linguri Formula 1 + 2 linguri Protein Drink Mix cu 250 ml lapte de migdale neîndulcit [6, 1, 7, 8, 9]</td>
                         <td>280</td>
                         <td>29</td>
                         <td>22</td>
                         <td>7</td>
-                        <td>Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc) [7, 8, 9]</td>
+                        <td>Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc) [8, 9, 10]</td>
                     </tr>
                     <tr>
                         <td>Gustare 1</td>
-                        <td>Terci de ovăz (50g) cu 150ml lapte de soia, 15g semințe de in, 50g fructe de pădure mixte [11, 12]</td>
-                        <td>250</td>
-                        <td>8</td>
-                        <td>35</td>
+                        <td>Terci de ovăz (50g) cu 150ml lapte de soia, 15g semințe de dovleac, 50g măr ras [11, 12]</td>
+                        <td>260</td>
+                        <td>9</td>
+                        <td>38</td>
                         <td>10</td>
-                        <td>Fibre, Omega-3, vitamine B, antioxidanți</td>
+                        <td>Fibre, magneziu, zinc, vitamine B</td>
                     </tr>
                     <tr>
                         <td>Prânz</td>
-                        <td>Paste integrale (80g uscate) cu sos de roșii (100g) și tofu (100g), 10ml ulei de măsline, 100g spanac proaspăt [11, 17, 18, 12]</td>
-                        <td>550</td>
-                        <td>25</td>
-                        <td>70</td>
+                        <td>Paste integrale (80g uscate) cu sos de roșii și linte (100g gătită), 10ml ulei de măsline, 100g ciuperci sotate [11, 17, 18, 12]</td>
+                        <td>560</td>
+                        <td>22</td>
+                        <td>75</td>
                         <td>20</td>
-                        <td>Fibre, fier, calciu, vitamine A, C, K</td>
+                        <td>Fibre, fier, proteine vegetale, vitamine B</td>
                     </tr>
                     <tr>
                         <td>Gustare 2</td>
-                        <td>Baton proteic Herbalife lămâie [13, 14, 15] + 20g nuci caju, 30g stafide [19, 20, 21]</td>
-                        <td>290</td>
+                        <td>Baton proteic Herbalife lămâie [13, 14, 15] + 20g unt de arahide, 30g curmale uscate [19, 20, 21]</td>
+                        <td>320</td>
                         <td>13</td>
-                        <td>40</td>
-                        <td>12</td>
-                        <td>Magneziu, zinc, fier, fibre, vitamine B</td>
+                        <td>45</td>
+                        <td>15</td>
+                        <td>Vitamine B, potasiu, fibre, grăsimi sănătoase</td>
                     </tr>
                     <tr>
                         <td>Cină</td>
-                        <td>Sandwich cu pâine integrală (80g), ton în saramură (90g), 50g brânză de vaci, 100g salată verde și castraveți [17, 12]</td>
-                        <td>390</td>
-                        <td>30</td>
-                        <td>45</td>
-                        <td>10</td>
-                        <td>Omega-3, proteine, calciu, fibre, vitamine K</td>
+                        <td>Salată cu brânză halloumi la grătar (100g), 100g roșii, 50g măsline, 10ml ulei de măsline, 80g pâine integrală [18, 12]</td>
+                        <td>420</td>
+                        <td>20</td>
+                        <td>40</td>
+                        <td>25</td>
+                        <td>Calciu, proteine, grăsimi sănătoase, vitamine K</td>
                     </tr>
                     <tr class="total-row">
                         <td colspan="2">Total Ziua 10</td>
-                        <td>1760</td>
-                        <td>105</td>
-                        <td>212</td>
-                        <td>67</td>
+                        <td>1830</td>
+                        <td>103</td>
+                        <td>220</td>
+                        <td>77</td>
                         <td></td>
                     </tr>
                 </tbody>
@@ -884,12 +884,12 @@ HTML<!DOCTYPE html>
                 <tbody>
                     <tr>
                         <td>Mic dejun</td>
-                        <td>Shake Herbalife: 2 linguri Formula 1 + 2 linguri Protein Drink Mix cu 250 ml lapte de soia [5, 1, 6, 7, 8]</td>
+                        <td>Shake Herbalife: 2 linguri Formula 1 + 2 linguri Protein Drink Mix cu 250 ml lapte de soia [6, 1, 7, 8, 9]</td>
                         <td>291</td>
                         <td>31</td>
                         <td>24</td>
                         <td>8</td>
-                        <td>Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc, crom) [7, 8, 9]</td>
+                        <td>Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc, crom) [8, 9, 10]</td>
                     </tr>
                     <tr>
                         <td>Gustare 1</td>
@@ -902,7 +902,7 @@ HTML<!DOCTYPE html>
                     </tr>
                     <tr>
                         <td>Prânz</td>
-                        <td>Quinoa (70g uscată) cu tempeh copt (100g), 30g avocado, 150g roșii cherry și rucola, 10ml ulei de măsline [18, 12]</td>
+                        <td>Quinoa (70g uscată) cu tofu copt (100g), 30g avocado, 150g roșii cherry și rucola, 10ml ulei de măsline [18, 12]</td>
                         <td>590</td>
                         <td>20</td>
                         <td>55</td>
@@ -956,12 +956,12 @@ HTML<!DOCTYPE html>
                 <tbody>
                     <tr>
                         <td>Mic dejun</td>
-                        <td>Shake Herbalife: 2 linguri Formula 1 + 2 linguri Protein Drink Mix cu 250 ml lapte de migdale neîndulcit [5, 1, 6, 7, 8]</td>
+                        <td>Shake Herbalife: 2 linguri Formula 1 + 2 linguri Protein Drink Mix cu 250 ml lapte de migdale neîndulcit [6, 1, 7, 8, 9]</td>
                         <td>280</td>
                         <td>29</td>
                         <td>22</td>
                         <td>7</td>
-                        <td>Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc) [7, 8, 9]</td>
+                        <td>Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc) [8, 9, 10]</td>
                     </tr>
                     <tr>
                         <td>Gustare 1</td>
@@ -992,17 +992,17 @@ HTML<!DOCTYPE html>
                     </tr>
                     <tr>
                         <td>Cină</td>
-                        <td>Salată verde cu mozzarella (120g), năut (100g conservă), 10ml ulei de măsline, 80g pâine de secară [18, 12]</td>
+                        <td>Salată verde cu năut (100g conservă), 30g avocado, 10ml ulei de măsline, 80g pâine de secară [18, 12]</td>
                         <td>450</td>
-                        <td>25</td>
+                        <td>15</td>
                         <td>50</td>
-                        <td>20</td>
-                        <td>Calciu, proteine, fibre, fier, vitamine K</td>
+                        <td>25</td>
+                        <td>Calciu, proteine vegetale, fibre, fier, vitamine K</td>
                     </tr>
                     <tr class="total-row">
                         <td colspan="2">Total Ziua 12</td>
                         <td>1780</td>
-                        <td>115</td>
+                        <td>105</td>
                         <td>182</td>
                         <td>74</td>
                         <td></td>
@@ -1028,16 +1028,16 @@ HTML<!DOCTYPE html>
                 <tbody>
                     <tr>
                         <td>Mic dejun</td>
-                        <td>Shake Herbalife: 2 linguri Formula 1 + 2 linguri Protein Drink Mix cu 250 ml lapte de soia [5, 1, 6, 7, 8]</td>
+                        <td>Shake Herbalife: 2 linguri Formula 1 + 2 linguri Protein Drink Mix cu 250 ml lapte de soia [6, 1, 7, 8, 9]</td>
                         <td>291</td>
                         <td>31</td>
                         <td>24</td>
                         <td>8</td>
-                        <td>Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc, crom) [7, 8, 9]</td>
+                        <td>Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc, crom) [8, 9, 10]</td>
                     </tr>
                     <tr>
                         <td>Gustare 1</td>
-                        <td>Smoothie dens caloric: 1 banană medie (100g), 15g unt de arahide natural, 10g semințe de chia, 150 ml lapte de soia [10, 11]</td>
+                        <td>Smoothie dens caloric: 1 banană medie (100g), 15g unt de arahide natural, 10g semințe de chia, 150 ml lapte de migdale [3, 11]</td>
                         <td>280</td>
                         <td>9</td>
                         <td>35</td>
@@ -1055,7 +1055,7 @@ HTML<!DOCTYPE html>
                     </tr>
                     <tr>
                         <td>Gustare 2</td>
-                        <td>Baton proteic Herbalife lămâie [13, 14, 15] + Iaurt grecesc cu nuci și fructe uscate: 50g iaurt grecesc integral, 10g nuci mixte (nuci/migdale), 20g fructe uscate (caise) [10, 16, 11, 12]</td>
+                        <td>Baton proteic Herbalife lămâie [13, 14, 15] + Iaurt grecesc cu nuci și fructe uscate: 50g iaurt grecesc integral, 10g nuci mixte (nuci/migdale), 20g fructe uscate (caise) [3, 16, 11, 12]</td>
                         <td>310</td>
                         <td>17.5</td>
                         <td>34</td>
@@ -1100,12 +1100,12 @@ HTML<!DOCTYPE html>
                 <tbody>
                     <tr>
                         <td>Mic dejun</td>
-                        <td>Shake Herbalife: 2 linguri Formula 1 + 2 linguri Protein Drink Mix cu 250 ml lapte de migdale neîndulcit [5, 1, 6, 7, 8]</td>
+                        <td>Shake Herbalife: 2 linguri Formula 1 + 2 linguri Protein Drink Mix cu 250 ml lapte de migdale neîndulcit [6, 1, 7, 8, 9]</td>
                         <td>280</td>
                         <td>29</td>
                         <td>22</td>
                         <td>7</td>
-                        <td>Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc) [7, 8, 9]</td>
+                        <td>Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc) [8, 9, 10]</td>
                     </tr>
                     <tr>
                         <td>Gustare 1</td>
@@ -1118,7 +1118,7 @@ HTML<!DOCTYPE html>
                     </tr>
                     <tr>
                         <td>Prânz</td>
-                        <td>Paste integrale (80g uscate) cu sos de roșii (100g) și linte (100g gătită), 10ml ulei de măsline, 100g ciuperci sotate [11, 17, 18, 12]</td>
+                        <td>Paste integrale (80g uscate) cu sos de roșii și linte (100g gătită), 10ml ulei de măsline, 100g ciuperci sotate [11, 17, 18, 12]</td>
                         <td>560</td>
                         <td>22</td>
                         <td>75</td>
@@ -1172,12 +1172,12 @@ HTML<!DOCTYPE html>
                 <tbody>
                     <tr>
                         <td>Mic dejun</td>
-                        <td>Shake Herbalife: 2 linguri Formula 1 + 2 linguri Protein Drink Mix cu 250 ml lapte de soia [5, 1, 6, 7, 8]</td>
+                        <td>Shake Herbalife: 2 linguri Formula 1 + 2 linguri Protein Drink Mix cu 250 ml lapte de soia [6, 1, 7, 8, 9]</td>
                         <td>291</td>
                         <td>31</td>
                         <td>24</td>
                         <td>8</td>
-                        <td>Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc, crom) [7, 8, 9]</td>
+                        <td>Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc, crom) [8, 9, 10]</td>
                     </tr>
                     <tr>
                         <td>Gustare 1</td>
@@ -1233,158 +1233,76 @@ HTML<!DOCTYPE html>
     <div class="section">
         <h2>Recomandări suplimentare pentru succesul planului:</h2>
         <ul>
-            <li><b>Monitorizarea progresului:</b> Cântăriți-vă săptămânal, la aceeași oră (ideal dimineața, după baie), pentru a urmări progresul. Dacă nu observați o creștere în greutate timp de două săptămâni, creșteți aportul caloric cu încă 500 kcal/zi.[10]</li>
-            <li><b>Hidratare adecvată:</b> Consumați suficientă apă pe parcursul zilei (2-3 litri), dar evitați cantitățile mari de lichide imediat înainte de mese pentru a nu reduce apetitul.[10, 1]</li>
+            <li><b>Monitorizarea progresului:</b> Cântăriți-vă săptămânal, la aceeași oră (ideal dimineața, după baie), pentru a urmări progresul. Dacă nu observați o creștere în greutate timp de două săptămâni, creșteți aportul caloric cu încă 500 kcal/zi.[3]</li>
+            <li><b>Hidratare adecvată:</b> Consumați suficientă apă pe parcursul zilei (2-3 litri), dar evitați cantitățile mari de lichide imediat înainte de mese pentru a nu reduce apetitul.[3, 1]</li>
             <li><b>Activitate fizică adaptată:</b> Integrați antrenamente de forță (ridicarea de greutăți) de 3-5 ori pe săptămână pentru a stimula creșterea masei musculare.[16, 17] Odihna adecvată este la fel de importantă pentru recuperare și creștere.[16]</li>
             <li><b>Suplimente de vitamine și minerale:</b> Deși planul este bogat în nutrienți, un supliment multivitaminic-mineral poate fi benefic pentru a acoperi eventualele deficiențe, mai ales având în vedere IMC-ul scăzut.[23, 24, 25] Consultați un medic sau nutriționist înainte de a începe orice suplimentare.[26, 27, 25]</li>
             <li><b>Gestionarea stresului și somnul:</b> Asigurați-vă un somn de calitate (7-9 ore pe noapte) și practicați tehnici de relaxare (mindfulness, exerciții de respirație, yoga) pentru a reduce stresul, care poate afecta apetitul și metabolismul.[28, 29, 30, 31]</li>
-            <li><b>Consistența:</b> Cheia succesului este consistența în respectarea planului alimentar și a stilului de viață. Creșterea în greutate este un proces gradual.[10]</li>
+            <li><b>Consistența:</b> Cheia succesului este consistența în respectarea planului alimentar și a stilului de viață. Creșterea în greutate este un proces gradual.[3]</li>
         </ul>
     </div>
 
     <script>
-        const mealPlanData =", kcal: 291, protein: 31, carbs: 24, fat: 8, micronutrients: "Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc, crom) [7, 8, 9]" },
-                    { menu: "Gustare 1", food: "Smoothie dens caloric: 1 banană medie (100g), 15g unt de arahide natural, 10g semințe de chia, 150 ml lapte de soia [10, 11]", kcal: 280, protein: 9, carbs: 35, fat: 18, micronutrients: "Potasiu, magneziu, fibre, grăsimi sănătoase, vitamine B" },
-                    { menu: "Prânz", food: "Orez brun cu piept de curcan și legume: 80g orez brun uscat (aprox. 240g gătit), 120g piept de curcan la grătar/copt, 150g legume la abur (broccoli, morcovi), 10ml ulei de măsline extravirgin [11, 12]", kcal: 578, protein: 42, carbs: 60, fat: 18.4, micronutrients: "Fibre, vitamine (A, C, K, B-uri), fier, potasiu, antioxidanți" },
-                    { menu: "Gustare 2", food: "Baton proteic Herbalife lămâie [13, 14, 15] + Iaurt grecesc cu nuci și fructe uscate: 50g iaurt grecesc integral, 10g nuci mixte (migdale/caju), 20g fructe uscate (stafide/curmale) [10, 16, 11, 12]", kcal: 310, protein: 17.5, carbs: 34, fat: 11.5, micronutrients: "Vitamine B, E, calciu, proteine, fibre, grăsimi sănătoase" },
-                    { menu: "Cină", food: "Somon la cuptor cu cartofi dulci și brânză feta: 100g somon la cuptor, 150g cartofi dulci copți, 50g brânză feta [16, 17, 18, 12]", kcal: 380, protein: 27.5, carbs: 31.5, fat: 15.7, micronutrients: "Omega-3, vitamina D, calciu, potasiu, fibre, antioxidanți" }
-                ],
+        const mealPlanData =,
                 totals: { kcal: 1839, protein: 127, carbs: 184.5, fat: 71.6 }
             },
             // Day 2
             {
                 day: 2,
-                meals:", kcal: 280, protein: 29, carbs: 22, fat: 7, micronutrients: "Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc) [7, 8, 9]" },
-                    { menu: "Gustare 1", food: "Terci de ovăz (50g) cu 150ml lapte de migdale, 15g semințe de in, 50g fructe de pădure mixte [11, 12]", kcal: 250, protein: 8, carbs: 35, fat: 10, micronutrients: "Fibre, Omega-3, vitamine B, antioxidanți" },
-                    { menu: "Prânz", food: "Paste integrale (80g uscate) cu sos de roșii (100g) și tofu (100g), 10ml ulei de măsline, 100g spanac proaspăt [11, 17, 18, 12]", kcal: 550, protein: 25, carbs: 70, fat: 20, micronutrients: "Fibre, fier, calciu, vitamine A, C, K" },
-                    { menu: "Gustare 2", food: "Baton proteic Herbalife lămâie [13, 14, 15] + 20g nuci caju, 30g stafide [19, 20, 21]", kcal: 290, protein: 13, carbs: 40, fat: 12, micronutrients: "Magneziu, zinc, fier, fibre, vitamine B" },
-                    { menu: "Cină", food: "Sandwich cu pâine integrală (80g), ton în saramură (90g), 50g brânză de vaci, 100g salată verde și castraveți [17, 12]", kcal: 390, protein: 30, carbs: 45, fat: 10, micronutrients: "Omega-3, proteine, calciu, fibre, vitamine K" }
-                ],
+                meals:,
                 totals: { kcal: 1760, protein: 105, carbs: 212, fat: 67 }
             },
             // Day 3
             {
                 day: 3,
-                meals:", kcal: 291, protein: 31, carbs: 24, fat: 8, micronutrients: "Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc, crom) [7, 8, 9]" },
-                    { menu: "Gustare 1", food: "Iaurt grecesc integral (140g) cu 25g muesli crocant, 100g mandarine [16, 12]", kcal: 270, protein: 18, carbs: 30, fat: 9, micronutrients: "Calciu, proteine, fibre, vitamine C, B-uri" },
-                    { menu: "Prânz", food: "Quinoa (70g uscată) cu tempeh copt (100g), 30g avocado, 150g roșii cherry și rucola, 10ml ulei de măsline [18, 12]", kcal: 590, protein: 20, carbs: 55, fat: 30, micronutrients: "Fibre, proteine, grăsimi sănătoase, vitamine K, C, E" },
-                    { menu: "Gustare 2", food: "Baton proteic Herbalife lămâie [13, 14, 15] + 50g iaurt grecesc integral, 20g fructe uscate (smochine) [19, 20, 21]", kcal: 330, protein: 16, carbs: 40, fat: 12, micronutrients: "Calciu, fibre, vitamine B, minerale" },
-                    { menu: "Cină", food: "Omletă din 3 ouă cu 100g spanac proaspăt și 50g brânză de vaci, 50g pâine integrală [17, 12]", kcal: 330, protein: 28, carbs: 25, fat: 15, micronutrients: "Proteine, fier, calciu, vitamine A, K, B12" }
-                ],
+                meals:,
                 totals: { kcal: 1811, protein: 115, carbs: 174, fat: 74 }
             },
             // Day 4
             {
                 day: 4,
-                meals:", kcal: 280, protein: 29, carbs: 22, fat: 7, micronutrients: "Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc) [7, 8, 9]" },
-                    { menu: "Gustare 1", food: "Budincă de chia (20g semințe) cu 150ml lapte de migdale, 50g brânză de vaci, 50g căpșuni [11, 1]", kcal: 240, protein: 10, carbs: 25, fat: 10, micronutrients: "Fibre, calciu, Omega-3, vitamine C" },
-                    { menu: "Prânz", food: "Hrișcă (70g uscată) cu piept de pui (120g) și broccoli (150g) sotat în 5ml ulei de măsline [22, 12]", kcal: 520, protein: 38, carbs: 50, fat: 15, micronutrients: "Fibre, proteine, vitamine K, C, B-uri" },
-                    { menu: "Gustare 2", food: "Baton proteic Herbalife lămâie [13, 14, 15] + 20g unt de arahide, 50g banană [19, 21]", kcal: 290, protein: 13, carbs: 35, fat: 14, micronutrients: "Vitamine B, potasiu, grăsimi sănătoase" },
-                    { menu: "Cină", food: "Salată verde cu mozzarella (120g), năut (100g conservă), 10ml ulei de măsline, 80g pâine de secară [18, 12]", kcal: 450, protein: 25, carbs: 50, fat: 20, micronutrients: "Calciu, proteine, fibre, fier, vitamine K" }
-                ],
-                totals: { kcal: 1780, protein: 115, carbs: 182, fat: 74 }
+                meals:,
+                totals: { kcal: 1780, protein: 105, carbs: 182, fat: 74 }
             },
             // Day 5
             {
                 day: 5,
-                meals:", kcal: 291, protein: 31, carbs: 24, fat: 8, micronutrients: "Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc, crom) [7, 8, 9]" },
-                    { menu: "Gustare 1", food: "Smoothie dens caloric: 1 banană medie (100g), 15g unt de arahide natural, 10g semințe de chia, 150 ml lapte de migdale [10, 11]", kcal: 280, protein: 9, carbs: 35, fat: 18, micronutrients: "Potasiu, magneziu, fibre, grăsimi sănătoase, vitamine B" },
-                    { menu: "Prânz", food: "Orez brun cu piept de curcan și legume: 80g orez brun uscat (aprox. 240g gătit), 120g piept de curcan la grătar/copt, 150g legume la abur (fasole verde, ardei), 10ml ulei de măsline extravirgin [11, 12]", kcal: 578, protein: 42, carbs: 60, fat: 18.4, micronutrients: "Fibre, vitamine (A, C, K, B-uri), fier, potasiu, antioxidanți" },
-                    { menu: "Gustare 2", food: "Baton proteic Herbalife lămâie [13, 14, 15] + Iaurt grecesc cu nuci și fructe uscate: 50g iaurt grecesc integral, 10g nuci mixte (nuci/migdale), 20g fructe uscate (caise) [10, 16, 11, 12]", kcal: 310, protein: 17.5, carbs: 34, fat: 11.5, micronutrients: "Vitamine B, E, calciu, proteine, fibre, grăsimi sănătoase" },
-                    { menu: "Cină", food: "Chefir (250ml) cu 100g brânză de vaci, 50g pâine integrală, 100g castraveți [17, 12]", kcal: 300, protein: 25, carbs: 25, fat: 10, micronutrients: "Calciu, proteine, probiotice, vitamine K" }
-                ],
+                meals:,
                 totals: { kcal: 1759, protein: 124.5, carbs: 178, fat: 66.9 }
             },
             // Day 6
             {
                 day: 6,
-                meals:", kcal: 280, protein: 29, carbs: 22, fat: 7, micronutrients: "Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc) [7, 8, 9]" },
-                    { menu: "Gustare 1", food: "Terci de ovăz (50g) cu 150ml lapte de soia, 15g semințe de dovleac, 50g măr ras [11, 12]", kcal: 260, protein: 9, carbs: 38, fat: 10, micronutrients: "Fibre, magneziu, zinc, vitamine B" },
-                    { menu: "Prânz", food: "Paste integrale (80g uscate) cu sos de roșii (100g) și linte (100g gătită), 10ml ulei de măsline, 100g ciuperci sotate [11, 17, 18, 12]", kcal: 560, protein: 22, carbs: 75, fat: 20, micronutrients: "Fibre, fier, proteine vegetale, vitamine B" },
-                    { menu: "Gustare 2", food: "Baton proteic Herbalife lămâie [13, 14, 15] + 20g unt de arahide, 30g curmale uscate [19, 20, 21]", kcal: 320, protein: 13, carbs: 45, fat: 15, micronutrients: "Vitamine B, potasiu, fibre, grăsimi sănătoase" },
-                    { menu: "Cină", food: "Salată cu brânză halloumi la grătar (100g), 100g roșii, 50g măsline, 10ml ulei de măsline, 80g pâine integrală [18, 12]", kcal: 420, protein: 20, carbs: 40, fat: 25, micronutrients: "Calciu, proteine, grăsimi sănătoase, vitamine K" }
-                ],
+                meals:,
                 totals: { kcal: 1830, protein: 103, carbs: 220, fat: 77 }
             },
             // Day 7
             {
                 day: 7,
-                meals:", kcal: 291, protein: 31, carbs: 24, fat: 8, micronutrients: "Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc, crom) [7, 8, 9]" },
-                    { menu: "Gustare 1", food: "Iaurt grecesc integral (140g) cu 25g muesli crocant, 100g struguri [16, 12]", kcal: 280, protein: 18, carbs: 35, fat: 9, micronutrients: "Calciu, proteine, fibre, antioxidanți" },
-                    { menu: "Prânz", food: "Quinoa (70g uscată) cu piept de pui (120g), 150g legume la grătar (dovlecei, ardei), 10ml ulei de măsline [18, 12]", kcal: 580, protein: 38, carbs: 55, fat: 25, micronutrients: "Fibre, proteine, vitamine K, C, E" },
-                    { menu: "Gustare 2", food: "Baton proteic Herbalife lămâie [13, 14, 15] + 50g brânză de vaci, 50g ananas proaspăt [19, 20, 21]", kcal: 280, protein: 16, carbs: 30, fat: 8, micronutrients: "Calciu, proteine, vitamina C, B-uri" },
-                    { menu: "Cină", food: "Sardine în ulei (90g) cu pâine de secară (80g), 100g roșii, 50g ceapă verde [17, 12]", kcal: 390, protein: 25, carbs: 40, fat: 18, micronutrients: "Omega-3, vitamina D, calciu, fibre" }
-                ],
+                meals:,
                 totals: { kcal: 1801, protein: 118, carbs: 184, fat: 78 }
             },
-            // Day 8
+            // Day 8 (Same as Day 2, but with alternating milk type)
             {
                 day: 8,
-                meals:", kcal: 280, protein: 29, carbs: 22, fat: 7, micronutrients: "Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc) [7, 8, 9]" },
-                    { menu: "Gustare 1", food: "Budincă de chia (20g semințe) cu 150ml lapte de soia, 50g iaurt grecesc, 50g afine [11, 1]", kcal: 260, protein: 12, carbs: 28, fat: 12, micronutrients: "Fibre, calciu, Omega-3, antioxidanți" },
-                    { menu: "Prânz", food: "Hrișcă (70g uscată) cu tofu (100g) și ciuperci (150g) sotate în 5ml ulei de măsline [22, 12]", kcal: 500, protein: 20, carbs: 55, fat: 20, micronutrients: "Fibre, proteine vegetale, vitamine B" },
-                    { menu: "Gustare 2", food: "Baton proteic Herbalife lămâie [13, 14, 15] + 20g migdale, 30g prune uscate [19, 21]", kcal: 300, protein: 13, carbs: 38, fat: 15, micronutrients: "Vitamine B, E, fibre, grăsimi sănătoase" },
-                    { menu: "Cină", food: "Salată cu ouă fierte (3 ouă), 100g brânză de vaci, 150g salată verde, 10ml ulei de măsline, 50g pâine integrală [18, 12]", kcal: 430, protein: 30, carbs: 35, fat: 25, micronutrients: "Proteine, calciu, vitamine A, D, E, K" }
-                ],
+                meals:,
                 totals: { kcal: 1770, protein: 104, carbs: 178, fat: 79 }
             },
-            // Day 9
+            // Day 9 (Same as Day 3, but with alternating milk type)
             {
                 day: 9,
-                meals:", kcal: 291, protein: 31, carbs: 24, fat: 8, micronutrients: "Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc, crom) [7, 8, 9]" },
-                    { menu: "Gustare 1", food: "Smoothie dens caloric: 1 banană medie (100g), 15g unt de arahide natural, 10g semințe de chia, 150 ml lapte de soia [10, 11]", kcal: 280, protein: 9, carbs: 35, fat: 18, micronutrients: "Potasiu, magneziu, fibre, grăsimi sănătoase, vitamine B" },
-                    { menu: "Prânz", food: "Orez brun cu piept de curcan și legume: 80g orez brun uscat (aprox. 240g gătit), 120g piept de curcan la grătar/copt, 150g legume la abur (broccoli, morcovi), 10ml ulei de măsline extravirgin [11, 12]", kcal: 578, protein: 42, carbs: 60, fat: 18.4, micronutrients: "Fibre, vitamine (A, C, K, B-uri), fier, potasiu, antioxidanți" },
-                    { menu: "Gustare 2", food: "Baton proteic Herbalife lămâie [13, 14, 15] + Iaurt grecesc cu nuci și fructe uscate: 50g iaurt grecesc integral, 10g nuci mixte (migdale/caju), 20g fructe uscate (stafide/curmale) [10, 16, 11, 12]", kcal: 310, protein: 17.5, carbs: 34, fat: 11.5, micronutrients: "Vitamine B, E, calciu, proteine, fibre, grăsimi sănătoase" },
-                    { menu: "Cină", food: "Somon la cuptor cu cartofi dulci și brânză feta: 100g somon la cuptor, 150g cartofi dulci copți, 50g brânză feta [16, 17, 18, 12]", kcal: 380, protein: 27.5, carbs: 31.5, fat: 15.7, micronutrients: "Omega-3, vitamina D, calciu, potasiu, fibre, antioxidanți" }
-                ],
+                meals:,
                 totals: { kcal: 1839, protein: 127, carbs: 184.5, fat: 71.6 }
             },
-            // Day 10
+            // Day 10 (Same as Day 4, but with alternating milk type)
             {
                 day: 10,
-                meals:", kcal: 280, protein: 29, carbs: 22, fat: 7, micronutrients: "Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc) [7, 8, 9]" },
-                    { menu: "Gustare 1", food: "Terci de ovăz (50g) cu 150ml lapte de soia, 15g semințe de in, 50g fructe de pădure mixte [11, 12]", kcal: 250, protein: 8, carbs: 35, fat: 10, micronutrients: "Fibre, Omega-3, vitamine B, antioxidanți" },
-                    { menu: "Prânz", food: "Paste integrale (80g uscate) cu sos de roșii (100g) și tofu (100g), 10ml ulei de măsline, 100g spanac proaspăt [11, 17, 18, 12]", kcal: 550, protein: 25, carbs: 70, fat: 20, micronutrients: "Fibre, fier, calciu, vitamine A, C, K" },
-                    { menu: "Gustare 2", food: "Baton proteic Herbalife lămâie [13, 14, 15] + 20g nuci caju, 30g stafide [19, 20, 21]", kcal: 290, protein: 13, carbs: 40, fat: 12, micronutrients: "Magneziu, zinc, fier, fibre, vitamine B" },
-                    { menu: "Cină", food: "Sandwich cu pâine integrală (80g), ton în saramură (90g), 50g brânză de vaci, 100g salată verde și castraveți [17, 12]", kcal: 390, protein: 30, carbs: 45, fat: 10, micronutrients: "Omega-3, proteine, calciu, fibre, vitamine K" }
-                ],
-                totals: { kcal: 1760, protein: 105, carbs: 212, fat: 67 }
+                meals:,
+                totals: { kcal: 1830, protein: 103, carbs: 220, fat: 77 }
             },
-            // Day 11
+            // Day 11 (Same as Day 5, but with alternating milk type)
             {
                 day: 11,
-                meals:", kcal: 291, protein: 31, carbs: 24, fat: 8, micronutrients: "Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc, crom) [7, 8, 9]" },
-                    { menu: "Gustare 1", food: "Iaurt grecesc integral (140g) cu 25g muesli crocant, 100g mandarine [16, 12]", kcal: 270, protein: 18, carbs: 30, fat: 9, micronutrients: "Calciu, proteine, fibre, vitamine C, B-uri" },
-                    { menu: "Prânz", food: "Quinoa (70g uscată) cu tempeh copt (100g), 30g avocado, 150g roșii cherry și rucola, 10ml ulei de măsline [18, 12]", kcal: 590, protein: 20, carbs: 55, fat: 30, micronutrients: "Fibre, proteine, grăsimi sănătoase, vitamine K, C, E" },
-                    { menu: "Gustare 2", food: "Baton proteic Herbalife lămâie [13, 14, 15] + 50g iaurt grecesc integral, 20g fructe uscate (smochine) [19, 20, 21]", kcal: 330, protein: 16, carbs: 40, fat: 12, micronutrients: "Calciu, fibre, vitamine B, minerale" },
-                    { menu: "Cină", food: "Omletă din 3 ouă cu 100g spanac proaspăt și 50g brânză de vaci, 50g pâine integrală [17, 12]", kcal: 330, protein: 28, carbs: 25, fat: 15, micronutrients: "Proteine, fier, calciu, vitamine A, K, B12" }
-                ],
-                totals: { kcal: 1811, protein: 115, carbs: 174, fat: 74 }
-            },
-            // Day 12
-            {
-                day: 12,
-                meals:", kcal: 280, protein: 29, carbs: 22, fat: 7, micronutrients: "Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc) [7, 8, 9]" },
-                    { menu: "Gustare 1", food: "Budincă de chia (20g semințe) cu 150ml lapte de soia, 50g brânză de vaci, 50g căpșuni [11, 1]", kcal: 240, protein: 10, carbs: 25, fat: 10, micronutrients: "Fibre, calciu, Omega-3, vitamine C" },
-                    { menu: "Prânz", food: "Hrișcă (70g uscată) cu piept de pui (120g) și broccoli (150g) sotat în 5ml ulei de măsline [22, 12]", kcal: 520, protein: 38, carbs: 50, fat: 15, micronutrients: "Fibre, proteine, vitamine K, C, B-uri" },
-                    { menu: "Gustare 2", food: "Baton proteic Herbalife lămâie [13, 14, 15] + 20g unt de arahide, 50g banană [19, 21]", kcal: 290, protein: 13, carbs: 35, fat: 14, micronutrients: "Vitamine B, potasiu, grăsimi sănătoase" },
-                    { menu: "Cină", food: "Salată verde cu mozzarella (120g), năut (100g conservă), 10ml ulei de măsline, 80g pâine de secară [18, 12]", kcal: 450, protein: 25, carbs: 50, fat: 20, micronutrients: "Calciu, proteine, fibre, fier, vitamine K" }
-                ],
-                totals: { kcal: 1780, protein: 115, carbs: 182, fat: 74 }
-            },
-            // Day 13
-            {
-                day: 13,
-                meals:", kcal: 291, protein: 31, carbs: 24, fat: 8, micronutrients: "Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc, crom) [7, 8, 9]" },
-                    { menu: "Gustare 1", food: "Smoothie dens caloric: 1 banană medie (100g), 15g unt de arahide natural, 10g semințe de chia, 150 ml lapte de soia [10, 11]", kcal: 280, protein: 9, carbs: 35, fat: 18, micronutrients: "Potasiu, magneziu, fibre, grăsimi sănătoase, vitamine B" },
-                    { menu: "Prânz", food: "Orez brun cu piept de curcan și legume: 80g orez brun uscat (aprox. 240g gătit), 120g piept de curcan la grătar/copt, 150g legume la abur (fasole verde, ardei), 10ml ulei de măsline extravirgin [11, 12]", kcal: 578, protein: 42, carbs: 60, fat: 18.4, micronutrients: "Fibre, vitamine (A, C, K, B-uri), fier, potasiu, antioxidanți" },
-                    { menu: "Gustare 2", food: "Baton proteic Herbalife lămâie [13, 14, 15] + Iaurt grecesc cu nuci și fructe uscate: 50g iaurt grecesc integral, 10g nuci mixte (nuci/migdale), 20g fructe uscate (caise) [10, 16, 11, 12]", kcal: 310, protein: 17.5, carbs: 34, fat: 11.5, micronutrients: "Vitamine B, E, calciu, proteine, fibre, grăsimi sănătoase" },
-                    { menu: "Cină", food: "Chefir (250ml) cu 100g brânză de vaci, 50g pâine integrală, 100g castraveți [17, 12]", kcal: 300, protein: 25, carbs: 25, fat: 10, micronutrients: "Calciu, proteine, probiotice, vitamine K" }
-                ],
-                totals: { kcal: 1759, protein: 124.5, carbs: 178, fat: 66.9 }
-            },
-            // Day 14
-            {
-                day: 14,
-                meals:", kcal: 280, protein: 29, carbs: 22, fat: 7, micronutrients: "Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc) [7, 8, 9]" },
-                    { menu: "Gustare 1", food: "Terci de ovăz (50g) cu 150ml lapte de soia, 15g semințe de dovleac, 50
+                meals: [
+                    { menu: "Mic dejun", food: "Shake Herbalife: 2 linguri Formula 1 + 2 linguri Protein Drink Mix cu 250 ml lapte de soia", kcal: 291, protein: 31, carbs: 24, fat: 8, micronutrients: "Vitamine (A, C, D, E, K, B-uri), minerale (calciu, fier, zinc, crom)" },
+                    { menu: "Gustare 1", food: "Iaurt grecesc integral (140g) cu 25g
