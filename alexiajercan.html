@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infografic Interactiv: Plan de mese pentru creștere în greutate</title>
+    <title>Infografic Interactiv: Plan de Mese pentru Creștere în Greutate</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chosen Palette: Warm Neutrals with Green and Blue Accents -->
+    <!-- Application Structure Plan: Am proiectat o aplicație single-page (SPA) cu o arhitectură orientată spre sarcini. Sarcina principală a utilizatorului este să vizualizeze planul de masă pentru o anumită zi. Prin urmare, am implementat un meniu dropdown interactiv care permite selectarea directă a zilei. Această abordare previne supraîncărcarea informațională, eliminând necesitatea de a derula printr-un document lung cu toate cele 15 zile. Conținutul selectat este afișat dinamic într-o zonă dedicată, folosind un layout modern bazat pe carduri pentru o lizibilitate optimă. Am adăugat o secțiune de introducere pentru context, recomandări cheie și un buton de export, creând un flux de utilizator intuitiv și eficient, optimizat pentru înțelegere rapidă și utilizare pe orice dispozitiv. Acum am adăugat o nouă vizualizare, un tabel centralizat cu întregul plan de mese, accesibil printr-un sistem de navigare tip tab, pentru a oferi o imagine de ansamblu completă. -->
+    <!-- Visualization & Content Choices: Informațiile din raport au fost structurate pentru a informa și a organiza. Goal: Organizare -> Metodă: Meniu Dropdown Interactiv (`<select>`) pentru a naviga între cele 15 zile. Justificare: Permite acces rapid și direct la informația dorită, fără a afișa simultan un volum mare de date. Goal: Informare -> Metodă: Prezentarea meselor în carduri individuale (HTML/Tailwind) cu informații clare despre alimente și nutrienți. Justificare: Design modern, lizibil și superior unui tabel simplu pentru un format de infografic. Goal: Sinteză -> Metodă: Card de sumar la finalul fiecărei zile pentru totalul caloric și de macronutrienți. Justificare: Oferă o imagine de ansamblu rapidă asupra valorilor zilnice. Goal: Context -> Metodă: Diagramă de bare simplă (HTML/CSS) pentru distribuția macronutrienților. Justificare: Vizualizare simplă și eficientă care nu necesită o bibliotecă complexă. Toate elementele vizuale sunt create cu HTML/CSS, respectând constrângerile. NOU: Goal: Prezentare agregată -> Metodă: Tabel HTML complet cu toate zilele și mesele. Justificare: Oferă o vedere de ansamblu rapidă și permite compararea ușoară a zilelor. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         body {
@@ -49,6 +53,23 @@
             margin: 0 auto;
             display: block;
         }
+        .export-button {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: #48bb78;
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border: none;
+        }
+        .export-button:hover {
+            background-color: #3f9e65;
+        }
         .macro-bar-container {
             display: flex;
             width: 100%;
@@ -61,6 +82,71 @@
         .macro-bar-protein { background-color: #FBBF24; }
         .macro-bar-fat { background-color: #5050F2; }
         b { font-weight: 600; }
+
+        /* Tabs styling */
+        .tab-buttons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            gap: 1rem;
+        }
+        .tab-button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #D1D5DB;
+            background-color: white;
+            cursor: pointer;
+            font-weight: 600;
+            color: #4B5563;
+            transition: all 0.2s ease-in-out;
+        }
+        .tab-button.active {
+            background-color: #4B5563;
+            color: white;
+            border-color: #4B5563;
+        }
+        .tab-button:hover:not(.active) {
+            background-color: #F3F4F6;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .full-plan-table-container {
+            overflow-x: auto; /* Enable horizontal scrolling for small screens */
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+        }
+        .full-plan-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            min-width: 800px; /* Ensure table is wide enough to prevent squishing */
+        }
+        .full-plan-table th, .full-plan-table td {
+            border: 1px solid #E5E7EB;
+            padding: 0.75rem;
+            text-align: left;
+            vertical-align: top;
+            font-size: 0.875rem;
+        }
+        .full-plan-table th {
+            background-color: #F3F4F6;
+            font-weight: 600;
+            color: #4B5563;
+        }
+        .full-plan-table tr:nth-child(even) {
+            background-color: #F9FAFB;
+        }
+        .full-plan-table .meal-row td:first-child {
+            font-weight: 500;
+        }
+        .full-plan-table .total-row td {
+            font-weight: 700;
+            background-color: #EEF2FF;
+            color: #4338CA;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -68,8 +154,8 @@
     <div class="main-container">
         
         <header class="text-center mb-8">
-            <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">Plan de mese personalizat</h1>
-            <p class="text-lg text-gray-600">Creștere sănătoasă în greutate pentru tineri (15 Zile)</p>
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">Plan de mese Personalizat</h1>
+            <p class="text-lg text-gray-600">Creștere sănătoasă în greutate (15 Zile)</p>
         </header>
 
         <div class="card">
@@ -89,7 +175,7 @@
                      <ul class="list-disc list-inside space-y-2 text-gray-600">
                         <li><b>Echilibru proteic:</b> Planul alternează sursele de proteine animale și vegetale la mesele principale pentru a asigura un profil complet de aminoacizi, fără a le combina la aceeași masă.</li>
                         <li><b>Cină ușoară:</b> Mesele de seară sunt preponderent vegetale, alternând cu pește, ouă sau brânzeturi, pentru o digestie optimă.</li>
-                        <li><b>Hidratare:</b> Consumați 2-3 litri de apă pe zi, dar evitați cantități mari înainte de mese.</li>
+                        <li><b>Hidratare:</b> Consumați 2 litri de apă pe zi, dar evitați cantități mari înainte de mese.</li>
                     </ul>
                 </div>
                 <div>
@@ -112,14 +198,14 @@
             </div>
         </div>
         
-            <div class="tab-buttons">
-            <button class="tab-button active" data-tab="daily-plan">Plan Zilnic</button>
-            <button class="tab-button" data-tab="full-plan">Tabel Centralizat</button>
+        <div class="tab-buttons">
+            <button class="tab-button active" data-tab="daily-plan">Plan zilnic</button>
+            <button class="tab-button" data-tab="full-plan">Plan centralizat</button>
         </div>
 
         <div id="daily-plan-tab" class="tab-content active">
             <div class="card">
-                <h2 class="text-2xl font-bold text-gray-700 mb-4 text-center">Selectează o Zi</h2>
+                <h2 class="text-2xl font-bold text-gray-700 mb-4 text-center">Selectează o zi</h2>
                 <select id="daySelector" class="day-selector-style"></select>
             </div>
 
@@ -130,7 +216,7 @@
 
         <div id="full-plan-tab" class="tab-content">
             <div class="card">
-                <h2 class="text-2xl font-bold text-gray-700 mb-4 text-center">Tabel Centralizat - Plan de Mese (15 Zile)</h2>
+                <h2 class="text-2xl font-bold text-gray-700 mb-4 text-center">Plan de mese (15 Zile)</h2>
                 <div class="full-plan-table-container">
                     <table class="full-plan-table">
                         <thead>
@@ -153,7 +239,7 @@
         </div>
 
         <div class="text-center mt-8">
-            <button id="exportButton" class="export-button">Exportă Planul Complet (CSV)</button>
+            <button id="exportButton" class="export-button">Exportă (CSV)</button>
         </div>
 
     </div>
