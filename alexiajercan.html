@@ -137,6 +137,11 @@
         <div id="mealPlanDisplay">
             <!-- Conținutul planului de masă pentru ziua selectată va fi injectat aici -->
         </div>
+
+        <div class="text-center mt-8">
+            <button id="exportButton" class="export-button">Exportă Planul Complet (CSV)</button>
+        </div>
+
     </div>
 
     <script>
@@ -281,7 +286,8 @@
 
         const daySelector = document.getElementById('daySelector');
         const mealPlanDisplay = document.getElementById('mealPlanDisplay');
-        
+        const exportButton = document.getElementById('exportButton');
+
         function populateSelector() {
             mealPlanData.forEach(dayData => {
                 const option = document.createElement('option');
@@ -291,6 +297,45 @@
             });
         }
 
+        function showDay(dayNumber) {
+            const dayData = mealPlanData.find(d => d.day == dayNumber);
+            if (!dayData) return;
+
+            mealPlanDisplay.innerHTML = `
+                <div class="card">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Plan pentru Ziua ${dayData.day}</h3>
+                    <div class="space-y-4">
+                        ${dayData.meals.map(meal => `
+                            <div class="meal-card meal-card-${meal.type}">
+                                <div class="flex items-center gap-4">
+                                    <span class="text-3xl">${meal.icon}</span>
+                                    <div>
+                                        <h4 class="font-bold text-lg text-gray-700">${meal.name}</h4>
+                                        <p class="text-gray-600">${meal.food}</p>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-center text-sm mt-2 pt-2 border-t border-gray-200">
+                                    <div><span class="font-semibold block">${meal.kcal}</span><span class="text-xs text-gray-500">Kcal</span></div>
+                                    <div><span class="font-semibold block">${meal.protein} g</span><span class="text-xs text-gray-500">Proteine</span></div>
+                                    <div><span class="font-semibold block">${meal.carbs} g</span><span class="text-xs text-gray-500">Carbohidrați</span></div>
+                                    <div><span class="font-semibold block">${meal.fat.toFixed(1)} g</span><span class="text-xs text-gray-500">Grăsimi</span></div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="mt-6 p-4 bg-indigo-50 rounded-lg">
+                         <h4 class="font-bold text-lg text-center text-indigo-800 mb-2">Sumar Nutrițional - Ziua ${dayData.day}</h4>
+                         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                            <div><b class="text-xl text-indigo-700 block">${dayData.totals.kcal.toFixed(0)}</b><span class="text-sm text-gray-600">Total Kcal</span></div>
+                            <div><b class="text-xl text-indigo-700 block">${dayData.totals.protein.toFixed(0)} g</b><span class="text-sm text-gray-600">Total Proteine</span></div>
+                            <div><b class="text-xl text-indigo-700 block">${dayData.totals.carbs.toFixed(0)} g</b><span class="text-sm text-gray-600">Total Carbohidrați</span></div>
+                            <div><b class="text-xl text-indigo-700 block">${dayData.totals.fat.toFixed(1)} g</b><span class="text-sm text-gray-600">Total Grăsimi</span></div>
+                         </div>
+                    </div>
+                </div>
+            `;
+        }
+        
         function exportToCSV() {
             let csvContent = "data:text/csv;charset=utf-8,Ziua,Masa,Alimente,Calorii (kcal),Proteine (g),Carbohidrati (g),Grasimi (g)\n";
 
