@@ -3,12 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infografic Interactiv: Plan de Mese pentru Creștere în Greutate</title>
+    <title>Infografic Interactiv: Plan de mese pentru creștere în greutate</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Chosen Palette: Warm Neutrals with Green and Blue Accents -->
-    <!-- Application Structure Plan: Am proiectat o aplicație single-page (SPA) cu o arhitectură orientată spre sarcini. Sarcina principală a utilizatorului este să vizualizeze planul de masă pentru o anumită zi. Prin urmare, am implementat un meniu dropdown interactiv care permite selectarea directă a zilei. Această abordare previne supraîncărcarea informațională, eliminând necesitatea de a derula printr-un document lung cu toate cele 15 zile. Conținutul selectat este afișat dinamic într-o zonă dedicată, folosind un layout modern bazat pe carduri pentru o lizibilitate optimă. Am adăugat o secțiune de introducere pentru context, recomandări cheie și un buton de export, creând un flux de utilizator intuitiv și eficient, optimizat pentru înțelegere rapidă și utilizare pe orice dispozitiv. -->
-    <!-- Visualization & Content Choices: Informațiile din raport au fost structurate pentru a informa și a organiza. Goal: Organizare -> Metodă: Meniu Dropdown Interactiv (`<select>`) pentru a naviga între cele 15 zile. Justificare: Permite acces rapid și direct la informația dorită, fără a afișa simultan un volum mare de date. Goal: Informare -> Metodă: Prezentarea meselor în carduri individuale (HTML/Tailwind) cu informații clare despre alimente și nutrienți. Justificare: Design modern, lizibil și superior unui tabel simplu pentru un format de infografic. Goal: Sinteză -> Metodă: Card de sumar la finalul fiecărei zile pentru totalul caloric și de macronutrienți. Justificare: Oferă o imagine de ansamblu rapidă asupra valorilor zilnice. Goal: Context -> Metodă: Diagramă de bare simplă (HTML/CSS) pentru distribuția macronutrienților. Justificare: Vizualizare simplă și eficientă care nu necesită o bibliotecă complexă. Toate elementele vizuale sunt create cu HTML/CSS, respectând constrângerile. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         body {
@@ -89,7 +85,7 @@
     <div class="main-container">
         
         <header class="text-center mb-8">
-            <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">Plan de Mese Interactiv</h1>
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">Plan de mese personalizat</h1>
             <p class="text-lg text-gray-600">Creștere sănătoasă în greutate pentru tineri (15 Zile)</p>
         </header>
 
@@ -97,11 +93,20 @@
             <h2 class="text-2xl font-bold text-gray-700 mb-4 text-center">Obiective și Principii</h2>
             <div class="grid md:grid-cols-2 gap-6">
                 <div>
-                    <p class="mb-4 text-gray-700">Acest plan este conceput pentru o tânără de 20 de ani (40 kg, IMC 16) și vizează un surplus caloric de <b>350-500 kcal/zi</b> pentru o creștere sănătoasă în greutate. Aportul caloric mediu vizat este de aproximativ <b>1900 kcal/zi</b>.</p>
+                    <p class="mb-4 text-gray-700">Acest plan este conceput pentru o creștere sănătoasă în greutate</p>
+                    <ul class="list-disc list-inside space-y-2 text-gray-600">
+                        <li><b>Alexia Jercan</b></li>
+                        <li><b>Vârsta:</b> 20 ani</li>
+                        <li><b>Greutate:</b> 40 kg.</li>
+                        <li><b>IMC:</b> 16</li>
+                        <li><b>RMB:</b>1130 kcal</li>
+                        <li><b>Surplus caloric:</b>350-500 kcal/zi
+                        <li><b>Aportul caloric:</b>b>1900 kcal/zi</li>
+                    </ul>
                      <ul class="list-disc list-inside space-y-2 text-gray-600">
-                        <li><b>Echilibru Proteic:</b> Planul alternează sursele de proteine animale și vegetale la mesele principale pentru a asigura un profil complet de aminoacizi, fără a le combina la aceeași masă.</li>
-                         <li><b>Cină Ușoară:</b> Mesele de seară sunt preponderent vegetale, alternând cu pește, ouă sau brânzeturi, pentru o digestie optimă.</li>
-                         <li><b>Hidratare:</b> Consumați 2-3 litri de apă pe zi, dar evitați cantități mari înainte de mese.</li>
+                        <li><b>Echilibru proteic:</b> Planul alternează sursele de proteine animale și vegetale la mesele principale pentru a asigura un profil complet de aminoacizi, fără a le combina la aceeași masă.</li>
+                        <li><b>Cină ușoară:</b> Mesele de seară sunt preponderent vegetale, alternând cu pește, ouă sau brânzeturi, pentru o digestie optimă.</li>
+                        <li><b>Hidratare:</b> Consumați 2-3 litri de apă pe zi, dar evitați cantități mari înainte de mese.</li>
                     </ul>
                 </div>
                 <div>
