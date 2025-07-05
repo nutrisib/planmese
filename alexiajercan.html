@@ -291,45 +291,40 @@
             });
         }
 
-        function showDay(dayNumber) {
-            const dayData = mealPlanData.find(d => d.day == dayNumber);
-            if (!dayData) return;
+        function exportToCSV() {
+            let csvContent = "data:text/csv;charset=utf-8,Ziua,Masa,Alimente,Calorii (kcal),Proteine (g),Carbohidrati (g),Grasimi (g)\n";
 
-            mealPlanDisplay.innerHTML = `
-                <div class="card">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Plan pentru Ziua ${dayData.day}</h3>
-                    <div class="space-y-4">
-                        ${dayData.meals.map(meal => `
-                            <div class="meal-card meal-card-${meal.type}">
-                                <div class="flex items-center gap-4">
-                                    <span class="text-3xl">${meal.icon}</span>
-                                    <div>
-                                        <h4 class="font-bold text-lg text-gray-700">${meal.name}</h4>
-                                        <p class="text-gray-600">${meal.food}</p>
-                                    </div>
-                                </div>
-                                <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-center text-sm mt-2 pt-2 border-t border-gray-200">
-                                    <div><span class="font-semibold block">${meal.kcal}</span><span class="text-xs text-gray-500">Kcal</span></div>
-                                    <div><span class="font-semibold block">${meal.protein} g</span><span class="text-xs text-gray-500">Proteine</span></div>
-                                    <div><span class="font-semibold block">${meal.carbs} g</span><span class="text-xs text-gray-500">Carbohidrați</span></div>
-                                    <div><span class="font-semibold block">${meal.fat.toFixed(1)} g</span><span class="text-xs text-gray-500">Grăsimi</span></div>
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-                    <div class="mt-6 p-4 bg-indigo-50 rounded-lg">
-                         <h4 class="font-bold text-lg text-center text-indigo-800 mb-2">Sumar Nutrițional - Ziua ${dayData.day}</h4>
-                         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-                            <div><b class="text-xl text-indigo-700 block">${dayData.totals.kcal.toFixed(0)}</b><span class="text-sm text-gray-600">Total Kcal</span></div>
-                            <div><b class="text-xl text-indigo-700 block">${dayData.totals.protein.toFixed(0)} g</b><span class="text-sm text-gray-600">Total Proteine</span></div>
-                            <div><b class="text-xl text-indigo-700 block">${dayData.totals.carbs.toFixed(0)} g</b><span class="text-sm text-gray-600">Total Carbohidrați</span></div>
-                            <div><b class="text-xl text-indigo-700 block">${dayData.totals.fat.toFixed(1)} g</b><span class="text-sm text-gray-600">Total Grăsimi</span></div>
-                         </div>
-                    </div>
-                </div>
-            `;
+            mealPlanData.forEach(dayData => {
+                dayData.meals.forEach(meal => {
+                    // Escape commas in food description
+                    const food = `"${meal.food.replace(/"/g, '""')}"`;
+                    let row = [dayData.day, meal.name, food, meal.kcal, meal.protein, meal.carbs, meal.fat].join(",");
+                    csvContent += row + "\n";
+                });
+                // Add totals row
+                let totalsRow = [dayData.day, "Total", "---", dayData.totals.kcal, dayData.totals.protein, dayData.totals.carbs, dayData.totals.fat.toFixed(1)].join(",");
+                csvContent += totalsRow + "\n";
+            });
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "plan_mese_15_zile.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
-    }   
+
+        daySelector.addEventListener('change', (e) => {
+            showDay(e.target.value);
+        });
+
+        exportButton.addEventListener('click', exportToCSV);
+
+        // Initial setup
+        populateSelector();
+        showDay(1); // Afișează ziua 1 la încărcare
+    });
     </script>
 </body>
 </html>
