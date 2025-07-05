@@ -112,14 +112,50 @@
             </div>
         </div>
         
-        <div class="card">
-            <h2 class="text-2xl font-bold text-gray-700 mb-4 text-center">Selectează o Zi</h2>
-            <select id="daySelector" class="day-selector-style"></select>
+            <div class="tab-buttons">
+            <button class="tab-button active" data-tab="daily-plan">Plan Zilnic</button>
+            <button class="tab-button" data-tab="full-plan">Tabel Centralizat</button>
         </div>
 
-        <div id="mealPlanDisplay">
-            <!-- Conținutul planului de masă pentru ziua selectată va fi injectat aici -->
+        <div id="daily-plan-tab" class="tab-content active">
+            <div class="card">
+                <h2 class="text-2xl font-bold text-gray-700 mb-4 text-center">Selectează o Zi</h2>
+                <select id="daySelector" class="day-selector-style"></select>
+            </div>
+
+            <div id="mealPlanDisplay">
+                <!-- Conținutul planului de masă pentru ziua selectată va fi injectat aici -->
+            </div>
         </div>
+
+        <div id="full-plan-tab" class="tab-content">
+            <div class="card">
+                <h2 class="text-2xl font-bold text-gray-700 mb-4 text-center">Tabel Centralizat - Plan de Mese (15 Zile)</h2>
+                <div class="full-plan-table-container">
+                    <table class="full-plan-table">
+                        <thead>
+                            <tr>
+                                <th>Ziua</th>
+                                <th>Meniu</th>
+                                <th>Alimente și cantități</th>
+                                <th>Kcal</th>
+                                <th>Proteine (g)</th>
+                                <th>Carbohidrați (g)</th>
+                                <th>Grăsimi (g)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="fullPlanTableBody">
+                            <!-- Conținutul tabelului complet va fi injectat aici -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-8">
+            <button id="exportButton" class="export-button">Exportă Planul Complet (CSV)</button>
+        </div>
+
     </div>
 
     <script>
@@ -148,11 +184,11 @@
                 meals: [
                     { name: 'Mic Dejun', icon: '☀️', type: 'breakfast', food: 'Shake Herbalife: 2 linguri F1 + 2 linguri PDM, 250ml lapte de migdale.', kcal: 280, protein: 29, carbs: 22, fat: 7 },
                     { name: 'Gustare 1', icon: '🥣', type: 'snack', food: 'Terci de ovăz (50g) cu 150ml lapte migdale, 15g semințe de in, 50g fructe de pădure.', kcal: 250, protein: 8, carbs: 35, fat: 10 },
-                    { name: 'Prânz', icon: '🍝', type: 'lunch', food: '80g paste integrale cu sos de roșii și 100g linte roșie, 10ml ulei de măsline, 100g spanac proaspăt.', kcal: 560, protein: 24, carbs: 75, fat: 18 },
+                    { name: 'Prânz', icon: '🍝', type: 'lunch', food: '80g paste integrale cu sos de roșii și 100g tofu, 10ml ulei de măsline, 100g spanac proaspăt.', kcal: 550, protein: 25, carbs: 70, fat: 20 },
                     { name: 'Gustare 2', icon: '🍋', type: 'snack', food: '1 baton proteic Herbalife lămâie, 20g nuci caju, 30g stafide.', kcal: 290, protein: 13, carbs: 40, fat: 12 },
                     { name: 'Cină', icon: '🥗', type: 'dinner', food: 'Salată de năut (100g) cu 30g avocado, 10ml ulei de măsline, servită cu 80g pâine de secară.', kcal: 450, protein: 15, carbs: 50, fat: 25 }
                 ],
-                totals: { kcal: 1830, protein: 89, carbs: 222, fat: 72 }
+                totals: { kcal: 1820, protein: 90, carbs: 217, fat: 74 }
             },
             // Ziua 3
             {
@@ -265,6 +301,9 @@
         const daySelector = document.getElementById('daySelector');
         const mealPlanDisplay = document.getElementById('mealPlanDisplay');
         const exportButton = document.getElementById('exportButton');
+        const fullPlanTableBody = document.getElementById('fullPlanTableBody');
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
 
         function populateSelector() {
             mealPlanData.forEach(dayData => {
@@ -313,6 +352,39 @@
                 </div>
             `;
         }
+
+        function populateFullPlanTable() {
+            let tableHtml = '';
+            mealPlanData.forEach(dayData => {
+                tableHtml += `
+                    <tr>
+                        <td rowspan="${dayData.meals.length + 1}" class="font-bold text-lg bg-gray-50">${dayData.day}</td>
+                    </tr>
+                `;
+                dayData.meals.forEach(meal => {
+                    tableHtml += `
+                        <tr class="meal-row">
+                            <td>${meal.name}</td>
+                            <td>${meal.food}</td>
+                            <td>${meal.kcal}</td>
+                            <td>${meal.protein}</td>
+                            <td>${meal.carbs}</td>
+                            <td>${meal.fat.toFixed(1)}</td>
+                        </tr>
+                    `;
+                });
+                tableHtml += `
+                    <tr class="total-row">
+                        <td colspan="2" class="text-right">Total Ziua ${dayData.day}</td>
+                        <td>${dayData.totals.kcal.toFixed(0)}</td>
+                        <td>${dayData.totals.protein.toFixed(0)}</td>
+                        <td>${dayData.totals.carbs.toFixed(0)}</td>
+                        <td>${dayData.totals.fat.toFixed(1)}</td>
+                    </tr>
+                `;
+            });
+            fullPlanTableBody.innerHTML = tableHtml;
+        }
         
         function exportToCSV() {
             let csvContent = "data:text/csv;charset=utf-8,Ziua,Masa,Alimente,Calorii (kcal),Proteine (g),Carbohidrati (g),Grasimi (g)\n";
@@ -338,6 +410,23 @@
             document.body.removeChild(link);
         }
 
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetTab = button.dataset.tab;
+
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                tabContents.forEach(content => {
+                    if (content.id === `${targetTab}-tab`) {
+                        content.classList.add('active');
+                    } else {
+                        content.classList.remove('active');
+                    }
+                });
+            });
+        });
+
         daySelector.addEventListener('change', (e) => {
             showDay(e.target.value);
         });
@@ -347,6 +436,7 @@
         // Initial setup
         populateSelector();
         showDay(1); // Afișează ziua 1 la încărcare
+        populateFullPlanTable(); // Populează tabelul centralizat la încărcare
     });
     </script>
 </body>
