@@ -1,15 +1,11 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-    <meta charset="UTF-8">
+	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ReDefine 1.0</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Copyrights: dr.ing. Radu Pascu - 2025 -->
-    <!-- Chosen Palette: Warm Neutrals with Green and Blue Accents -->
-    <!-- Application Structure Plan: Am reproiectat aplicația single-page (SPA) pentru a include toate informațiile din raportul text, structurată pe tab-uri principale: "Introducere", "8xWellness", "Hipertrigliceridemie", "Plan de Acțiune", "Plan de Mese", "Mișcare & Sport" și "Recomandări cărți". Această arhitectură permite o navigare clară și intuitivă prin conținutul vast. Tab-ul "Introducere" oferă contextul general. Tab-urile "8xWellness" și "Hipertrigliceridemie" utilizează structuri de acordeon pentru a prezenta detaliile extinse, transformând textele dense în experiențe explorabile. "Plan de Acțiune" este acum un tab principal separat, cu propriul acordeon. Tab-ul "Plan de Mese" menține funcționalitatea interactivă de selecție a zilei și săptămânii. Toate elementele vizuale și interactive sunt construite cu HTML/Tailwind/JS. -->
-    <!-- Visualization & Content Choices: Goal: Informare și Context -> Metodă: Tab-uri (HTML/CSS/JS) pentru a organiza conținutul pe secțiuni tematice. Justificare: Permite utilizatorului să aleagă ce informație dorește să exploreze fără a fi copleșit. Goal: Explorare Detaliată (Wellness, Hipertrigliceridemie, Plan Acțiune) -> Metodă: Acordeon Interactiv (HTML/CSS/JS) pentru fiecare secțiune majoră. Justificare: Descompune informația complexă în segmente ușor de digerat, încurajând interacțiunea și aprofundarea. Goal: Prezentare Specifică (Nutriție) -> Metodă: Dropdown pentru selecția zilei și săptămânii, și carduri detaliate. Justificare: Menține o metodă eficientă de vizualizare a planului de mese zilnic și săptămânal. Goal: Resursă Suplimentară (Cărți) -> Metodă: Listă formatată în cadrul unui tab dedicat. Justificare: Oferă informații suplimentare relevante într-un format accesibil și ușor de parcurs. Toate elementele vizuale și interactive sunt construite cu HTML/Tailwind/JS. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         body {
@@ -37,11 +33,12 @@
             padding: 1rem;
             border-left: 4px solid;
             margin-bottom: 1rem;
+            border-radius: 0 8px 8px 0;
         }
-        .meal-card-breakfast { border-color: #FBBF24; }
-        .meal-card-snack { border-color: #60A5FA; }
-        .meal-card-lunch { border-color: #818CF8; }
-        .meal-card-dinner { border-color: #A78BFA; }
+        .meal-card-breakfast { border-color: #FBBF24; background-color: #FFFBEB; }
+        .meal-card-snack { border-color: #60A5FA; background-color: #EFF6FF; }
+        .meal-card-lunch { border-color: #818CF8; background-color: #EEF2FF; }
+        .meal-card-dinner { border-color: #A78BFA; background-color: #F5F3FF; }
         b { font-weight: 600; }
 
         /* Tabs styling */
@@ -50,8 +47,8 @@
             border-bottom: 1px solid #D1D5DB;
             margin-bottom: 1.5rem;
             justify-content: center;
-            flex-wrap: wrap; /* Allow tabs to wrap on smaller screens */
-            gap: 0.5rem; /* Space between wrapped tabs */
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
         .tab-button {
             padding: 0.75rem 1.5rem;
@@ -62,7 +59,7 @@
             color: #6B7280;
             transition: all 0.2s ease-in-out;
             border-bottom: 3px solid transparent;
-            margin-bottom: -1px;
+            margin-bottom: -2px;
         }
         .tab-button.active {
             color: #4f46e5;
@@ -71,14 +68,14 @@
         .tab-content { display: none; }
         .tab-content.active { display: block; }
         
-        /* Sub-tabs styling (for Meal Plan tab) */
+        /* Sub-tabs styling */
         .sub-tab-buttons {
             display: flex;
             justify-content: center;
             margin-bottom: 1.5rem;
             gap: 1rem;
             border-bottom: 1px solid #E5E7EB;
-            padding-bottom: 0.5rem;
+            padding-bottom: 1rem;
         }
         .sub-tab-button {
             padding: 0.5rem 1rem;
@@ -98,12 +95,8 @@
         .sub-tab-button:hover:not(.active) {
             background-color: #F3F4F6;
         }
-        .sub-tab-content {
-            display: none;
-        }
-        .sub-tab-content.active {
-            display: block;
-        }
+        .sub-tab-content { display: none; }
+        .sub-tab-content.active { display: block; }
 
         /* Accordion styling */
         .accordion-item {
@@ -142,7 +135,7 @@
         .accordion-button.open .accordion-icon {
             transform: rotate(45deg);
         }
-        /* Table styling for meal plan */
+        /* Table styling */
         .full-plan-table-container {
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
@@ -201,54 +194,46 @@
             overflow: hidden;
             background-color: #e5e7eb;
         }
-        .macro-bar-carbs { background-color: #cc0000; } /* Custom color for Carbs */
-        .macro-bar-protein { background-color: #FBBF24; } /* Custom color for Protein */
-        .macro-bar-fat { background-color: #5050F2; } /* Custom color for Fat */
+        .macro-bar-carbs { background-color: #ef4444; }
+        .macro-bar-protein { background-color: #f59e0b; }
+        .macro-bar-fat { background-color: #3b82f6; }
 
         /* Specific styles for tables within accordion content */
-        #hipertrigliceridemieAccordion table, #planActiuneAccordion table {
+        .info-table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 1rem;
             background-color: #ffffff;
             border-radius: 8px;
-            overflow: hidden; /* Ensures rounded corners apply to table */
+            overflow: hidden;
         }
-        #hipertrigliceridemieAccordion th, #hipertrigliceridemieAccordion td,
-        #planActiuneAccordion th, #planActiuneAccordion td {
+        .info-table th, .info-table td {
             border: 1px solid #E5E7EB;
             padding: 0.75rem;
             text-align: left;
             font-size: 0.9rem;
         }
-        #hipertrigliceridemieAccordion th, #planActiuneAccordion th {
+        .info-table th {
             background-color: #f3f4f6;
             font-weight: 600;
             color: #4b5563;
         }
-        #hipertrigliceridemieAccordion tr:nth-child(even), #planActiuneAccordion tr:nth-child(even) {
+        .info-table tr:nth-child(even) {
             background-color: #f9fafb;
         }
-        #hipertrigliceridemieAccordion ul, #planActiuneAccordion ul,
-        #planActiuneAccordion ol {
-            list-style-type: disc;
-            margin-left: 1.5rem;
+        .info-table ul, .info-table ol {
+            list-style-position: inside;
+            padding-left: 0.5rem;
+        }
+        .info-table ul li, .info-table ol li {
             margin-bottom: 0.5rem;
         }
-        #hipertrigliceridemieAccordion ul li, #planActiuneAccordion ul li,
-        #planActiuneAccordion ol li {
-            margin-bottom: 0.25rem;
-        }
-        #hipertrigliceridemieAccordion .list-circle, #planActiuneAccordion .list-circle {
+        .list-circle {
             list-style-type: circle;
             margin-left: 1rem;
         }
-        #planActiuneAccordion ol {
+        .info-table ol {
             list-style-type: decimal;
-            margin-left: 1.5rem;
-        }
-        #planActiuneAccordion ol li {
-            margin-bottom: 1rem;
         }
     </style>
 </head>
@@ -262,18 +247,18 @@
         </header>
 
         <div class="tab-buttons">
-            <button class="tab-button active" id="introducere-button" onclick="openMainTab('introducere')">🏠 Introducere</button>
-            <button class="tab-button" id="wellnessPiloni-button" onclick="openMainTab('wellnessPiloni')">🧘‍♀️ 8xWellness</button>
-            <button class="tab-button" id="hipertrigliceridemieInfo-button" onclick="openMainTab('hipertrigliceridemieInfo')">🩺 Hipertrigliceridemie</button>
-            <button class="tab-button" id="planActiune-button" onclick="openMainTab('planActiune')">📋 Plan de Acțiune</button>
-            <button class="tab-button" id="planMese-button" onclick="openMainTab('planMese')">🥑 Plan de Mese</button>
-            <button class="tab-button" id="planMiscareSport-button" onclick="openMainTab('planMiscareSport')">🏃‍♂️ Mișcare & Sport</button>
-            <button class="tab-button" id="recomandariCarti-button" onclick="openMainTab('recomandariCarti')">📚 Recomandări cărți</button>
+            <button class="tab-button active" id="introducere-button" onclick="openMainTab(event, 'introducere')">🏠 Introducere</button>
+            <button class="tab-button" id="wellnessPiloni-button" onclick="openMainTab(event, 'wellnessPiloni')">🧘‍♀️ 8xWellness</button>
+            <button class="tab-button" id="hipertrigliceridemieInfo-button" onclick="openMainTab(event, 'hipertrigliceridemieInfo')">🩺 Hipertrigliceridemie</button>
+            <button class="tab-button" id="planActiune-button" onclick="openMainTab(event, 'planActiune')">📋 Plan de Acțiune</button>
+            <button class="tab-button" id="planMese-button" onclick="openMainTab(event, 'planMese')">🥑 Plan de Mese</button>
+            <button class="tab-button" id="planMiscareSport-button" onclick="openMainTab(event, 'planMiscareSport')">🏃‍♂️ Mișcare & Sport</button>
+            <button class="tab-button" id="recomandariCarti-button" onclick="openMainTab(event, 'recomandariCarti')">📚 Recomandări cărți</button>
         </div>
 
         <div id="introducere" class="tab-content active">
             <div class="card">
-                <h2 class="text-2xl font-bold text-gray-700 mb-4">Înțelegerea provocării: hipertrigliceridemia și surplusul de greutate</h2>
+                <h2 class="text-2xl font-bold text-gray-700 mb-4">Înțelegerea provocării: hipertrigliceridemiei și surplusului de greutate</h2>
                 <p class="text-gray-600 mb-4">Acest plan este conceput pentru un bărbat de 35 de ani, medic stomatolog, cu hipertrigliceridemie severă, un indice de masă corporală (IMC) de 29 (indicând supraponderalitate) și un diametru abdominal de peste 100 cm, sugerând o acumulare semnificativă de grăsime viscerală. Aceste condiții impun o abordare cuprinzătoare și holistică, esențială pentru îmbunătățirea stării de sănătate.</p>
                 <p class="text-gray-600 mb-4">Hipertrigliceridemia, alături de surplusul de greutate și grăsimea viscerală, crește riscul de afecțiuni cardiovasculare, diabet de tip 2 și alte complicații metabolice. O abordare integrată, care vizează atât nutriția, cât și stilul de viață, este crucială pentru detoxifierea organismului, diminuarea nivelului de trigliceride și reducerea grăsimii viscerale.</p>
                 <h2 class="text-2xl font-bold text-gray-700 mb-4 mt-8">Recâștigă-ți vitalitatea: un parteneriat pentru transformare</h2>
@@ -289,10 +274,9 @@
 
         <div id="wellnessPiloni" class="tab-content">
             <div class="card p-0">
-                <h2 class="text-2xl font-bold text-gray-700 mb-4 p-6 text-center">8xWellness</h2>
-                <p class="text-gray-600 mb-4 p-6">Wellness-ul total este o abordare holistică a sănătății, care recunoaște interconectarea dintre minte, corp și spirit. Nu se referă doar la absența bolii, ci la o stare activă de bunăstare optimă și de împlinire în toate aspectele vieții. Pentru a atinge obiectivele de sănătate și a susține bunăstarea generală, este esențial să abordăm nu doar nutriția și mișcarea, ci și aspecte precum sănătatea mentală, relațiile sociale, dezvoltarea personală și mediul înconjurător. Acest plan vă ghidează pas cu pas în cultivarea fiecărui pilon al wellness-ului. Vom explora împreună cei 8 piloni esențiali ai wellness-ului, fiecare având un rol crucial în atingerea unei stări de echilibru și sănătate optimă.</p>
-                <div id="wellnessAccordion">
-                    </div>
+                <h2 class="text-2xl font-bold text-gray-700 mb-4 p-6 text-center">Wellness</h2>
+                <p class="text-gray-600 mb-4 px-6">Wellness-ul total este o abordare holistică a sănătății, care recunoaște interconectarea dintre minte, corp și spirit. Nu se referă doar la absența bolii, ci la o stare activă de bunăstare optimă și de împlinire în toate aspectele vieții. Pentru a atinge obiectivele de sănătate și a susține bunăstarea generală, este esențial să abordăm nu doar nutriția și mișcarea, ci și aspecte precum sănătatea mentală, relațiile sociale, dezvoltarea personală și mediul înconjurător. Acest plan vă ghidează pas cu pas în cultivarea fiecărui pilon al wellness-ului. Vom explora împreună cei 8 piloni esențiali ai wellness-ului, fiecare având un rol crucial în atingerea unei stări de echilibru și sănătate optimă.</p>
+                <div id="wellnessAccordion"></div>
             </div>
             <footer class="text-center mt-8 text-sm text-gray-500">
                 Copyrights: dr.ing. Radu Pascu - 2025
@@ -300,11 +284,10 @@
         </div>
 
         <div id="hipertrigliceridemieInfo" class="tab-content">
-            <div class="card">
-                <h2 class="text-2xl font-bold text-gray-700 mb-4 text-center">Hipertrigliceridemia severă: o analiză holistică - cauze fizice și emoționale</h2>
-                <p class="text-gray-600 mb-4 text-center">Trigliceridele (grăsimile) sunt principala formă de energie stocată de organism. Ele circulă în sânge pentru a fi utilizate imediat de celule sau depozitate în țesutul adipos. Când analizele tale de sânge indică valori care depășesc <b>1000 mg/dL</b>, intrăm în teritoriul <b>hipertrigliceridemiei severe</b>. La acest nivel, sângele tău își schimbă proprietățile fizice; devine lactescent, opac, similar ca aspect cu laptele. Vâscozitatea sângelui tău crește, iar microcirculația la nivelul organelor delicate este îngreunată.</p>
-                <div id="hipertrigliceridemieAccordion">
-                    </div>
+            <div class="card p-0">
+                <h2 class="text-2xl font-bold text-gray-700 mb-4 p-6 text-center">Hipertrigliceridemia severă: o analiză holistică - cauze fizice și emoționale</h2>
+                <p class="text-gray-600 mb-4 px-6 text-center">Trigliceridele (grăsimile) sunt principala formă de energie stocată de organism. Ele circulă în sânge pentru a fi utilizate imediat de celule sau depozitate în țesutul adipos. Când analizele tale de sânge indică valori care depășesc <b>1000 mg/dL</b>, intrăm în teritoriul <b>hipertrigliceridemiei severe</b>. La acest nivel, sângele tău își schimbă proprietățile fizice; devine lactescent, opac, similar ca aspect cu laptele. Vâscozitatea sângelui tău crește, iar microcirculația la nivelul organelor delicate este îngreunată.</p>
+                <div id="hipertrigliceridemieAccordion"></div>
             </div>
             <footer class="text-center mt-8 text-sm text-gray-500">
                 Copyrights: dr.ing. Radu Pascu - 2025
@@ -314,8 +297,7 @@
         <div id="planActiune" class="tab-content">
             <div class="card p-0">
                 <h2 class="text-2xl font-bold text-gray-700 mb-4 p-6 text-center">Plan de acțiune în 10 puncte: o strategie terapeutică pentru viață</h2>
-                <div id="planActiuneAccordion">
-                    </div>
+                <div id="planActiuneAccordion"></div>
             </div>
             <footer class="text-center mt-8 text-sm text-gray-500">
                 Copyrights: dr.ing. Radu Pascu - 2025
@@ -361,9 +343,9 @@
             </div>
 
             <div class="sub-tab-buttons">
-                <button class="sub-tab-button active" id="dailyPlanView-button" onclick="openSubTab('dailyPlanView')">Plan zilnic</button>
-                <button class="sub-tab-button" id="weeklyPlanView-button" onclick="openSubTab('weeklyPlanView')">Plan săptămânal</button>
-                <button class="sub-tab-button" id="fullTableView-button" onclick="openSubTab('fullTableView')">Tabel centralizat</button>
+                <button class="sub-tab-button active" id="dailyPlanView-button" onclick="openSubTab(event, 'dailyPlanView')">Plan zilnic</button>
+                <button class="sub-tab-button" id="weeklyPlanView-button" onclick="openSubTab(event, 'weeklyPlanView')">Plan săptămânal</button>
+                <button class="sub-tab-button" id="fullTableView-button" onclick="openSubTab(event, 'fullTableView')">Tabel centralizat</button>
             </div>
 
             <div id="dailyPlanView" class="sub-tab-content active">
@@ -378,10 +360,10 @@
                 <div class="card">
                     <h2 class="text-2xl font-bold text-gray-700 mb-4 text-center">Selectează o săptămână</h2>
                     <select id="weekSelector" class="mx-auto block w-full max-w-xs p-2 border rounded-md shadow-sm">
-                        <option value="1">Săptămâna 1</option>
-                        <option value="2">Săptămâna 2</option>
-                        <option value="3">Săptămâna 3</option>
-                        <option value="4">Săptămâna 4</option>
+                        <option value="1">Săptămâna 1 (Zilele 1-7)</option>
+                        <option value="2">Săptămâna 2 (Zilele 8-14)</option>
+                        <option value="3">Săptămâna 3 (Zilele 15-21)</option>
+                        <option value="4">Săptămâna 4 (Zilele 22-28)</option>
                     </select>
                 </div>
                 <div id="weeklyPlanDisplay"></div>
@@ -404,8 +386,7 @@
                                     <th>Fibre (g)</th>
                                 </tr>
                             </thead>
-                            <tbody id="fullPlanTableBody">
-                                </tbody>
+                            <tbody id="fullPlanTableBody"></tbody>
                         </table>
                     </div>
                 </div>
@@ -423,10 +404,10 @@
                     <div>
                         <h3 class="text-xl font-bold text-gray-800 mb-2">Obiective principale:</h3>
                         <ul class="list-disc list-inside space-y-1 text-gray-600">
-                            <li>Îmbunătățirea sănătății cardiovasculare.</li>
-                            <li>Accelerarea metabolismului și arderea grăsimilor (în special a celei viscerale).</li>
-                            <li>Creșterea masei musculare și a forței.</li>
-                            <li>Reducerea nivelului de stres.</li>
+                            <li><b>Îmbunătățirea sănătății cardiovasculare.</b></li>
+                            <li><b>Accelerarea metabolismului și arderea grăsimilor (în special a celei viscerale).</b></li>
+                            <li><b>Creșterea masei musculare și a forței.</b></li>
+                            <li><b>Reducerea nivelului de stres.</b></li>
                         </ul>
                     </div>
                     <div>
@@ -551,381 +532,272 @@
 
     </div>
 
-    <script>
+<script>
     // Main tab switching logic
-    function openMainTab(tabName) {
+    function openMainTab(evt, tabName) {
         let i, tabcontent, tablinks;
+        
         tabcontent = document.getElementsByClassName("tab-content");
         for (i = 0; i < tabcontent.length; i++) {
             tabcontent[i].style.display = "none";
-            tabcontent[i].classList.remove("active");
         }
+
         tablinks = document.getElementsByClassName("tab-button");
         for (i = 0; i < tablinks.length; i++) {
             tablinks[i].classList.remove("active");
         }
-        document.getElementById(tabName).style.display = "block";
-        document.getElementById(tabName).classList.add("active");
+
+        const activeTab = document.getElementById(tabName);
+        if (activeTab) {
+            activeTab.style.display = "block";
+        }
         
-        // Find the button associated with the tabName and activate it
-        const activeButton = document.getElementById(tabName + '-button');
-        if (activeButton) {
-            activeButton.classList.add('active');
+        if (evt.currentTarget) {
+            evt.currentTarget.classList.add('active');
         }
     }
 
-    // Sub-tab switching logic for Meal Plan tab
-    function openSubTab(subTabName) {
+    // Sub-tab switching logic
+    function openSubTab(evt, subTabName) {
         let i, subTabContents, subTabButtons;
+        
         subTabContents = document.querySelectorAll("#planMese .sub-tab-content");
         for (i = 0; i < subTabContents.length; i++) {
             subTabContents[i].style.display = "none";
             subTabContents[i].classList.remove("active");
         }
+
         subTabButtons = document.querySelectorAll("#planMese .sub-tab-button");
         for (i = 0; i < subTabButtons.length; i++) {
             subTabButtons[i].classList.remove("active");
         }
-        document.getElementById(subTabName).style.display = "block";
-        document.getElementById(subTabName).classList.add("active");
         
-        // Find the button associated with the subTabName and activate it
-        const activeSubButton = document.getElementById(subTabName + '-button');
-        if (activeSubButton) {
-            activeSubButton.classList.add('active');
+        const activeSubTab = document.getElementById(subTabName);
+        if (activeSubTab) {
+            activeSubTab.style.display = "block";
+            activeSubTab.classList.add("active");
         }
 
-        // If switching to daily or weekly view, ensure selectors are populated/shown
-        if (subTabName === 'dailyPlanView') {
-            daySelector.style.display = 'block';
-            mealPlanDisplay.style.display = 'block';
-            showDay(daySelector.value); // Show current selected day
-        } else {
-            daySelector.style.display = 'none';
-            mealPlanDisplay.style.display = 'none';
-        }
-        if (subTabName === 'weeklyPlanView') {
-            weekSelector.style.display = 'block';
-            weeklyPlanDisplay.style.display = 'block';
-            showWeek(weekSelector.value); // Show current selected week
-        } else {
-            weekSelector.style.display = 'none';
-            weeklyPlanDisplay.style.display = 'none';
+        if (evt.currentTarget) {
+            evt.currentTarget.classList.add('active');
         }
     }
 
-    // Global variables for elements
-    let daySelector;
-    let weekSelector;
-    let mealPlanDisplay;
-    let weeklyPlanDisplay;
-    let fullPlanTableBody;
-    let wellnessAccordion; /* Corrected: Changed from 'accordion' to 'wellnessAccordion' */
-    let hipertrigliceridemieAccordion;
-    let planActiuneAccordion;
+    document.addEventListener('DOMContentLoaded', function () {
+        
+        // --- DOM ELEMENT REFERENCES ---
+        const daySelector = document.getElementById('daySelector');
+        const weekSelector = document.getElementById('weekSelector');
+        const mealPlanDisplay = document.getElementById('mealPlanDisplay');
+        const weeklyPlanDisplay = document.getElementById('weeklyPlanDisplay');
+        const fullPlanTableBody = document.getElementById('fullPlanTableBody');
+        const wellnessAccordion = document.getElementById('wellnessAccordion'); /* Corrected: Changed from 'accordion' to 'wellnessAccordion' */
+        const hipertrigliceridemieAccordion = document.getElementById('hipertrigliceridemieAccordion');
+        const planActiuneAccordion = document.getElementById('planActiuneAccordion');
 
+        // --- DATA ---
+        const mealPlanData = [];
+        const wellnessData = [
+            { title: '🧘‍♀️ Wellness fizic', content: 'Reprezintă grija față de corpul nostru prin nutriție adecvată, mișcare regulată și odihnă suficientă. Este fundamentul pe care se construiește întreaga noastră stare de bine.' },
+            { title: '🧠 Wellness mental', content: 'Implică o minte activă, deschisă la noi idei și experiențe. Este despre învățare continuă, creativitate și curiozitate. O minte sănătoasă este esențială pentru a naviga provocările vieții.' },
+            { title: '❤️ Wellness emoțional', content: 'Se referă la conștientizarea și acceptarea propriilor emoții, precum și la capacitatea de a gestiona stresul și de a construi relații sănătoase. Este despre a fi în contact cu sentimentele noastre și a le exprima într-un mod constructiv.' },
+            { title: '🤝 Wellness social', content: 'Presupune construirea și menținerea unor relații sănătoase, de susținere, cu familia, prietenii și comunitatea. Conexiunile sociale puternice sunt un factor protector împotriva multor afecțiuni.' },
+            { title: '🌱 Wellness spiritual', content: 'Se referă la sentimentul de scop și sens în viață. Poate fi legat de credințe religioase, valori personale, meditație sau conexiunea cu natura. Este ancora noastră interioară.' },
+            { title: '🌍 Wellness de mediu', content: 'Implică recunoașterea impactului pe care mediul înconjurător îl are asupra sănătății noastre și asumarea responsabilității pentru protejarea lui. Un mediu curat și sigur este vital pentru o viață sănătoasă.' },
+            { title: '💼 Wellness ocupațional', content: 'Se referă la satisfacția și împlinirea pe care le obținem din munca noastră. Este despre a găsi un echilibru între viața profesională și cea personală și a ne folosi talentele într-un mod care ne aduce bucurie.' },
+            { title: '💰 Wellness financiar', content: 'Presupune o relație sănătoasă cu banii, gestionarea eficientă a resurselor financiare și planificarea pentru viitor. Stabilitatea financiară reduce stresul și contribuie la starea generală de bine.' },
+        ];
+        const hipertrigliceridemieData = [
+            { title: 'Cauze fizice și factori de risc', content: `<table class="info-table">
+                <thead><tr><th>Factor</th><th>Descriere</th></tr></thead>
+                <tbody>
+                    <tr><td><b>Genetica</b></td><td>Predispoziția familială poate juca un rol important.</td></tr>
+                    <tr><td><b>Dieta necorespunzătoare</b></td><td>Consumul excesiv de carbohidrați rafinați (pâine albă, paste, dulciuri), zahăr, fructoză și alcool.</td></tr>
+                    <tr><td><b>Obezitatea și grăsimea viscerală</b></td><td>Excesul de greutate, în special grăsimea acumulată în jurul organelor interne, este un factor major.</td></tr>
+                    <tr><td><b>Sedentarismul</b></td><td>Lipsa activității fizice regulate încetinește metabolismul și favorizează acumularea de grăsimi.</td></tr>
+                    <tr><td><b>Afecțiuni medicale</b></td><td>Diabetul de tip 2 necontrolat, hipotiroidismul, sindromul metabolic, bolile renale.</td></tr>
+                    <tr><td><b>Medicamente</b></td><td>Anumite diuretice, beta-blocante, corticosteroizi.</td></tr>
+                </tbody>
+            </table>` },
+            { title: 'Cauze emoționale și psihologice', content: `<table class="info-table">
+                <thead><tr><th>Factor</th><th>Descriere</th></tr></thead>
+                <tbody>
+                    <tr><td><b>Stresul cronic</b></td><td>Eliberarea constantă de cortizol ("hormonul stresului") poate crește producția de trigliceride în ficat.</td></tr>
+                    <tr><td><b>Lipsa somnului</b></td><td>Somnul insuficient sau de slabă calitate dereglează hormonii care controlează apetitul și metabolismul.</td></tr>
+                    <tr><td><b>Mâncatul emoțional</b></td><td>Utilizarea alimentelor (în special cele bogate în carbohidrați și grăsimi) pentru a gestiona emoții negative precum anxietatea, tristețea sau plictiseala.</td></tr>
+                </tbody>
+            </table>` },
+            { title: 'Riscuri asociate hipertrigliceridemiei severe', content: `<table class="info-table">
+                <thead><tr><th>Factor</th><th>Descriere</th></tr></thead>
+                <tbody>
+                    <tr><td><b>Pancreatită acută:</b></td><td> O inflamație bruscă și severă a pancreasului, care poate fi fatală.</td></tr>
+                    <tr><td><b>Boli cardiovasculare:</b></td><td> Risc crescut de ateroscleroză, infarct miocardic și accident vascular cerebral.</td></tr>
+                    <tr><td><b>Boli cardiovasculare:</b></td><td> Risc crescut de ateroscleroză, infarct miocardic și accident vascular cerebral.</td></tr>
+                    <tr><td><b>Ficat gras (steatoză hepatică):</b></td><td> Acumularea de grăsime în ficat, care poate evolua spre ciroză.</td></tr>
+                    <tr><td><b>Sindrom metabolic:</b></td><td> O constelație de factori de risc care cresc probabilitatea de a dezvolta boli de inimă, AVC și diabet.</td></tr>
+                </tbody>
+            </table>` },
+        ];
+        const planActiuneData = [
+            { title: '1. Angajament total și asumarea responsabilității', content: 'Primul pas este decizia fermă de a prelua controlul asupra sănătății. Acest plan nu este o "dietă" temporară, ci o restructurare a stilului de viață. Succesul depinde de angajamentul tău 100%.' },
+            { title: '2. Alimentație antiinflamatoare și săracă în carbohidrați simpli', content: 'Vom elimina complet zahărul, făinoasele albe și produsele procesate. Ne vom concentra pe alimente integrale, bogate în nutrienți: legume, proteine de calitate, grăsimi sănătoase și carbohidrați complecși din surse precum leguminoasele și cerealele integrale (în cantități controlate).' },
+            { title: '3. Aport optim de proteine și fibre', content: 'Proteinele (minim 140g/zi) și fibrele (minim 30g/zi) sunt esențiale pentru sațietate, menținerea masei musculare și sănătatea digestivă. Fiecare masă va fi echilibrată pentru a atinge aceste ținte.' },
+            { title: '4. Hidratare constantă', content: 'Consumul adecvat de apă (minim 2.5-3 litri pe zi) este vital pentru toate procesele metabolice, inclusiv pentru detoxifiere și arderea grăsimilor.' },
+            { title: '5. Mișcare zilnică și antrenament structurat', content: 'Vom integra atât mișcare zilnică (mers pe jos, urcat scări), cât și un program de antrenament structurat (aprox. 180 min/săptămână) care combină exerciții de forță (pentru creșterea masei musculare) cu antrenamente cardio (pentru sănătatea inimii).' },
+            { title: '6. Managementul stresului', content: 'Stresul cronic este un inamic al sănătății metabolice. Vom implementa tehnici de relaxare: exerciții de respirație, meditație ghidată, plimbări în natură. Obiectivul este să reducem nivelul de cortizol.' },
+            { title: '7. Prioritizarea somnului', content: 'Un somn de calitate (7-8 ore pe noapte) este non-negociabil. Somnul reglează hormonii foamei (grelina și leptina) și este esențial pentru recuperare și claritate mentală.' },
+            { title: '8. Suplimentare inteligentă și țintită', content: 'Vom folosi suplimente de înaltă calitate pentru a accelera procesul și a corecta deficiențele. Acestea includ: <ul class="list-disc list-inside ml-4 mt-2"><li><b>Omega-3 (EPA & DHA):</b> Esențiale pentru reducerea trigliceridelor și a inflamației.</li><li><b>Fibre solubile (Psyllium, Beta-glucani):</b> Ajută la controlul glicemiei și la eliminarea colesterolului.</li><li><b>Vitamine și minerale:</b> Pentru a susține funcționarea optimă a organismului în timpul procesului de slăbire.</li></ul>' },
+            { title: '9. Monitorizare și ajustare', content: 'Vom monitoriza progresul prin cântărire săptămânală, măsurători corporale lunare și analize de sânge periodice. Planul va fi ajustat în funcție de rezultate și de feedback-ul tău.' },
+            { title: '10. Educație continuă și dezvoltarea rezilienței', content: 'Scopul meu este să te împuternicesc cu cunoștințele necesare pentru a face alegeri sănătoase pe termen lung. Vei învăța să citești etichete, să înțelegi semnalele corpului tău și să navighezi situațiile sociale fără a-ți sabota progresul.' },
+        ];
 
-    // Data for Meal Plan (28 days) - Moved to global scope
-    const mealPlanData = [];
-
-    // Helper to calculate nutritional values for meals
-    function calculateNutrition(baseKcal, baseProtein, baseCarbs, baseFat, baseFiber, additions = []) {
-        let kcal = baseKcal;
-        let protein = baseProtein;
-        let carbs = baseCarbs;
-        let fat = baseFat;
-        let fiber = baseFiber;
-
-        additions.forEach(add => {
-            switch (add) {
-                case 'fibre_mar_ovaz_7g': // Herbalife Apple & Oat Fibre (7g) - 20 kcal, 0.5g protein, 5g carbs, 0g fat, 5g fiber
-                    kcal += 20; protein += 0.5; carbs += 5; fat += 0; fiber += 5;
-                    break;
-                case 'betaheart_7g': // Herbalife Beta Heart (7g) - 25 kcal, 2g protein, 3g carbs, 0.5g fat, 3g fiber
-                    kcal += 25; protein += 2; carbs += 3; fat += 0.5; fiber += 3;
-                    break;
-                case 'psyllium_5g': // Psyllium husk (5g) - 15 kcal, 0g protein, 4g carbs, 0g fat, 4g fiber
-                    kcal += 15; protein += 0; carbs += 4; fat += 0; fiber += 4;
-                    break;
-                case 'chia_10g': // Chia seeds (10g) - 48 kcal, 1.7g protein, 4.2g carbs, 3.1g fat, 3.4g fiber
-                    kcal += 48; protein += 1.7; carbs += 4.2; fat += 3.1; fiber += 3.4;
-                    break;
-                case 'ovăz_25g': // 25g fulgi de ovăz - 95 kcal, 3.4g protein, 17g carbs, 1.7g fat, 2.5g fiber
-                    kcal += 95; protein += 3.4; carbs += 17; fat += 1.7; fiber += 2.5;
-                    break;
-                case 'fructe_padure_50g': // 50g fructe de pădure - 25 kcal, 0.5g protein, 6g carbs, 0.2g fat, 2g fiber
-                    kcal += 25; protein += 0.5; carbs += 6; fat += 0.2; fiber += 2;
-                    break;
-                case 'banană_50g': // 50g banană - 45 kcal, 0.5g protein, 11.5g carbs, 0.1g fat, 1.5g fiber
-                    kcal += 45; protein += 0.5; carbs += 11.5; fat += 0.1; fiber += 1.5;
-                    break;
-                case 'nuci_mixte_15g': // 15g nuci mixte - 98 kcal, 3.5g protein, 3g carbs, 9g fat, 1.5g fiber
-                    kcal += 98; protein += 3.5; carbs += 3; fat += 9; fiber += 1.5;
-                    break;
-                case 'ulei_masline_5ml': // 5ml ulei de măsline - 45 kcal, 0g protein, 0g carbs, 5g fat, 0g fiber
-                    kcal += 45; protein += 0; carbs += 0; fat += 5; fiber += 0;
-                    break;
-                case 'iaurt_grecesc_50g': // 50g iaurt grecesc 2-3% - 35 kcal, 5g protein, 2g carbs, 1.5g fat, 0g fiber
-                    kcal += 35; protein += 5; carbs += 2; fat += 1.5; fiber += 0;
-                    break;
-                case 'chefir_100ml': // 100ml chefir - 50 kcal, 3.5g protein, 4.5g carbs, 2.5g fat, 0g fiber
-                    kcal += 50; protein += 3.5; carbs += 4.5; fat += 2.5; fiber += 0;
-                    break;
-                case 'branza_vaci_50g': // 50g brânză de vaci - 40 kcal, 7g protein, 1.5g carbs, 0.5g fat, 0g fiber
-                    kcal += 40; protein += 7; carbs += 1.5; fat += 0.5; fiber += 0;
-                    break;
-                case 'tofu_50g': // 50g tofu - 38 kcal, 4g protein, 1g carbs, 2.5g fat, 0.5g fiber
-                    kcal += 38; protein += 4; carbs += 1; fat += 2.5; fiber += 0.5;
-                    break;
-                case 'linte_50g_gatita': // 50g linte gătită - 58 kcal, 4.5g protein, 10g carbs, 0.2g fat, 4g fiber
-                    kcal += 58; protein += 4.5; carbs += 10; fat += 0.2; fiber += 4;
-                    break;
-                case 'naut_50g_gatit': // 50g năut gătit - 80 kcal, 4.5g protein, 13.5g carbs, 1.5g fat, 4g fiber
-                    kcal += 80; protein += 4.5; carbs += 13.5; fat += 1.5; fiber += 4;
-                    break;
-                case 'baton_proteic_herbalife': // Herbalife Protein Bar (approx values)
-                    kcal += 140; protein += 10; carbs += 15; fat += 5; fiber += 3;
-                    break;
-                case 'pdm_spoon': // One spoon of PDM (approx 14g / 2 scoops = 7g)
-                    kcal += 29; protein += 5; carbs += 1; fat += 0.5; fiber += 0;
-                    break;
-            }
-        });
-        return { kcal: kcal, protein: protein, carbs: carbs, fat: fat, fiber: fiber };
-    }
-
-    // Base shake nutrition (Herbalife F1 + PDM with 250ml water)
-    const shakeBase = { kcal: 180, protein: 18, carbs: 18, fat: 5, fiber: 3 }; // Approx for 2 scoops F1 + 2 scoops PDM with water
-
-    // Define meal templates for diversity based on new client's needs
-    const mealTemplates = {
-        breakfast: [
-            { food: 'Shake Herbalife (2 linguri F1 + 2 linguri PDM) cu apă, 1 lingură Fibre de măr și ovăz, 1 lingură Beta Heart.', base: shakeBase, additions: ['fibre_mar_ovaz_7g', 'betaheart_7g'] }, // ~225 kcal, 20.5g P, 26g C, 5.5g F, 11g Fiber
-            { food: 'Shake Herbalife (2 linguri F1 + 2 linguri PDM) cu apă, 1 lingură Fibre de măr și ovăz, 1 lingură Beta Heart, 5g tărâțe de psyllium.', base: shakeBase, additions: ['fibre_mar_ovaz_7g', 'betaheart_7g', 'psyllium_5g'] }, // ~240 kcal, 20.5g P, 30g C, 5.5g F, 15g Fiber
-            { food: 'Shake Herbalife (2 linguri F1 + 2 linguri PDM) cu apă, 1 lingură Fibre de măr și ovăz, 1 lingură Beta Heart, 10g semințe de chia.', base: shakeBase, additions: ['fibre_mar_ovaz_7g', 'betaheart_7g', 'chia_10g'] }, // ~273 kcal, 22.2g P, 30.2g C, 8.6g F, 14.4g Fiber
-            { food: 'Terci de ovăz (60g) cu apă, 180g iaurt grecesc 2-3%, 20g nuci mixte, 80g fructe de pădure.', kcal: 550, protein: 30, carbs: 65, fat: 22, fiber: 12 },
-            { food: 'Omletă din 4 ouă întregi cu 150g ciuperci și ardei, 3 felii pâine integrală (90g).', kcal: 500, protein: 35, carbs: 50, fat: 25, fiber: 9 },
-            { food: 'Iaurt grecesc 2-3% (250g) cu 50g fulgi de ovăz, 25g migdale, 100g măr ras.', kcal: 580, protein: 30, carbs: 65, fat: 28, fiber: 11 },
-        ],
-        snack1: [
-            { food: '1 măr mediu și 40g migdale.', kcal: 350, protein: 12, carbs: 35, fat: 28, fiber: 8 },
-            { food: '200g iaurt 2-3% cu 20g semințe de dovleac și 5g tărâțe de psyllium.', kcal: 280, protein: 18, carbs: 18, fat: 18, fiber: 8 },
-            { food: '1 banană mare și 30g nuci.', kcal: 350, protein: 8, carbs: 50, fat: 25, fiber: 8 },
-            { food: '250ml chefir și 15g semințe de chia.', kcal: 280, protein: 9, carbs: 20, fat: 15, fiber: 9 },
-            { food: '150g morcovi și 100g hummus.', kcal: 250, protein: 8, carbs: 30, fat: 12, fiber: 12 },
-            { food: 'Baton proteic Herbalife.', kcal: 140, protein: 10, carbs: 15, fat: 5, fiber: 3 },
-        ],
-        snack2: [
-            { food: '1 pară mare și 20g caju.', kcal: 280, protein: 6, carbs: 40, fat: 15, fiber: 8 },
-            { food: '250ml chefir, 1 lingură PDM, 15g semințe de floarea soarelui și 5g tărâțe de psyllium.', kcal: 280, protein: 13.5, carbs: 14.5, fat: 8, fiber: 8 }, // PDM spoon added
-            { food: 'Orez expandat (40g) cu 25g unt de arahide.', kcal: 320, protein: 10, carbs: 40, fat: 18, fiber: 4 },
-            { food: '150g fructe de pădure și 20g nuci braziliene.', kcal: 250, protein: 5, carbs: 20, fat: 18, fiber: 7 },
-            { food: 'Baton proteic Herbalife.', kcal: 140, protein: 10, carbs: 15, fat: 5, fiber: 3 },
-            { food: '150g brânză de vaci cu 20g semințe de in măcinate.', kcal: 220, protein: 25, carbs: 6, fat: 12, fiber: 6 },
-        ],
-        lunch: [ // Mix of animal and vegetal, focusing on lean and healthy
-            { food: 'Salată mare cu 180g piept de pui la grătar, mix de salată verde, roșii, castraveți, ardei, 20ml ulei de măsline, oțet balsamic.', kcal: 650, protein: 60, carbs: 30, fat: 40, fiber: 10 },
-            { food: 'Supă cremă de linte (400ml) conține 100g crutoane integrale și 20g semințe de dovleac.', kcal: 600, protein: 28, carbs: 80, fat: 25, fiber: 18 },
-            { food: 'Quinoa (120g uscată) cu 150g tofu copt, 250g legume la abur (broccoli, morcovi), 20ml ulei de măsline.', kcal: 750, protein: 35, carbs: 80, fat: 40, fiber: 20 },
-            { food: 'File de cod la cuptor (200g) cu 250g cartofi dulci copți și 200g fasole verde.', kcal: 700, protein: 50, carbs: 70, fat: 25, fiber: 15 },
-            { food: 'Wrap integral (120g) cu 150g humus, legume proaspete (ardei, castraveți, salată), 100g piept de curcan feliat.', kcal: 650, protein: 40, carbs: 70, fat: 28, fiber: 12 },
-            { food: 'Tocană de năut și legume (400g) cu 100g orez brun.', kcal: 600, protein: 28, carbs: 80, fat: 15, fiber: 20 },
-            { food: 'Salată cu ton în saramură (150g), 3 ouă fierte, mix de salată, roșii, castraveți, 20ml ulei de măsline.', kcal: 600, protein: 50, carbs: 25, fat: 35, fiber: 9 },
-            { food: 'Paste integrale (120g uscate) cu sos pesto (30g) și 150g ciuperci sotate.', kcal: 650, protein: 22, carbs: 75, fat: 30, fiber: 11 },
-            { food: 'Burger vegetarian (200g din fasole neagră) într-o chiflă integrală (120g), cu 100g cartofi dulci prăjiți în aer fryer, salată.', kcal: 750, protein: 30, carbs: 90, fat: 30, fiber: 25 },
-            { food: 'Piept de curcan (180g) la grătar cu 150g bulgur și 250g salată de varză roșie cu ulei de măsline.', kcal: 680, protein: 60, carbs: 60, fat: 25, fiber: 12 },
-        ],
-        dinner: [ // Focus on lean protein, legumes, and non-starchy vegetables
-            { food: 'Salată mare cu 150g mozzarella light, roșii cherry, busuioc proaspăt, 20ml ulei de măsline.', kcal: 500, protein: 30, carbs: 20, fat: 40, fiber: 8 },
-            { food: 'Fasole bătută (250g) cu ceapă roșie și 3 felii pâine de secară (90g).', kcal: 500, protein: 25, carbs: 60, fat: 15, fiber: 18 },
-            { food: 'Omletă din 5 ouă cu ciuperci și ardei, servită cu 100g brânză urdă.', kcal: 500, protein: 45, carbs: 20, fat: 30, fiber: 7 },
-            { food: 'Linte verde (250g gătită) cu legume la abur (broccoli, conopidă).', kcal: 400, protein: 30, carbs: 60, fat: 8, fiber: 15 },
-            { food: 'File de păstrăv la cuptor (180g) cu 250g legume la grătar (vinete, dovlecei).', kcal: 500, protein: 40, carbs: 25, fat: 30, fiber: 9 },
-            { food: 'Salată de quinoa (150g gătită) cu 120g tofu afumat, castraveți, roșii, dressing cu lămâie și 15ml ulei de măsline.', kcal: 550, protein: 30, carbs: 55, fat: 30, fiber: 12 },
-            { food: 'Chefir (300ml) cu 150g brânză proaspătă de vaci și 20g semințe de in.', kcal: 400, protein: 30, carbs: 20, fat: 25, fiber: 7 },
-            { food: 'Supă de legume (500ml) cu 150g năut și 3 felii pâine integrală (90g).', kcal: 480, protein: 25, carbs: 70, fat: 12, fiber: 18 },
-            { food: 'Chifteluțe vegetale (200g din linte) cu sos de roșii și 250g orez integral.', kcal: 600, protein: 30, carbs: 80, fat: 15, fiber: 22 },
-            { food: 'Fasole neagră (250g gătită) cu ardei gras, ceapă și 3 felii pâine integrală (90g).', kcal: 520, protein: 25, carbs: 75, fat: 10, fiber: 22 },
-            { food: 'Salată cu brânză telemea light (120g), roșii, castraveți, măsline, 15ml ulei de măsline.', kcal: 450, protein: 28, carbs: 20, fat: 35, fiber: 7 },
-            { food: 'Iaurt grecesc 2-3% (250g) cu 100g urdă, 20g nuci și 80g fructe de pădure.', kcal: 450, protein: 30, carbs: 30, fat: 25, fiber: 8 },
-        ]
-    };
-
-    // Generate 28 unique days
-    let breakfastIdx = 0;
-    let snack1Idx = 0;
-    let snack2Idx = 0;
-    let lunchIdx = 0;
-    let dinnerIdx = 0;
-
-    for (let i = 1; i <= 28; i++) {
-        const dayMeals = [];
-        let currentMeal;
-        let calculatedNutr;
-
-        // Breakfast
-        currentMeal = mealTemplates.breakfast[breakfastIdx % mealTemplates.breakfast.length];
-        if (currentMeal.base) { // If it's a shake with additions
-            calculatedNutr = calculateNutrition(currentMeal.base.kcal, currentMeal.base.protein, currentMeal.base.carbs, currentMeal.base.fat, currentMeal.base.fiber, currentMeal.additions);
-            dayMeals.push({ name: 'Mic dejun', icon: '☀️', type: 'breakfast', food: currentMeal.food, ...calculatedNutr });
-        } else { // Regular breakfast
-            dayMeals.push({ name: 'Mic dejun', icon: '☀️', type: 'breakfast', ...currentMeal });
+        // --- HELPER FUNCTIONS ---
+        function calculateNutrition(baseKcal, baseProtein, baseCarbs, baseFat, baseFiber, additions = []) {
+            let kcal = baseKcal, protein = baseProtein, carbs = baseCarbs, fat = baseFat, fiber = baseFiber;
+            additions.forEach(add => {
+                switch (add) {
+                    case 'fibre_mar_ovaz_7g': kcal += 20; protein += 0.5; carbs += 5; fat += 0; fiber += 5; break;
+                    case 'betaheart_7g': kcal += 25; protein += 2; carbs += 3; fat += 0.5; fiber += 3; break;
+                    case 'psyllium_5g': kcal += 15; protein += 0; carbs += 4; fat += 0; fiber += 4; break;
+                    case 'chia_10g': kcal += 48; protein += 1.7; carbs += 4.2; fat += 3.1; fiber += 3.4; break;
+                    case 'ovăz_25g': kcal += 95; protein += 3.4; carbs += 17; fat += 1.7; fiber += 2.5; break;
+                    case 'fructe_padure_50g': kcal += 25; protein += 0.5; carbs += 6; fat += 0.2; fiber += 2; break;
+                    case 'banană_50g': kcal += 45; protein += 0.5; carbs += 11.5; fat += 0.1; fiber += 1.5; break;
+                    case 'nuci_mixte_15g': kcal += 98; protein += 3.5; carbs += 3; fat += 9; fiber += 1.5; break;
+                    case 'ulei_masline_5ml': kcal += 45; protein += 0; carbs += 0; fat += 5; fiber += 0; break;
+                    case 'iaurt_grecesc_50g': kcal += 35; protein += 5; carbs += 2; fat += 1.5; fiber += 0; break;
+                    case 'chefir_100ml': kcal += 50; protein += 3.5; carbs += 4.5; fat += 2.5; fiber += 0; break;
+                    case 'branza_vaci_50g': kcal += 40; protein += 7; carbs += 1.5; fat += 0.5; fiber += 0; break;
+                    case 'tofu_50g': kcal += 38; protein += 4; carbs += 1; fat += 2.5; fiber += 0.5; break;
+                    case 'linte_50g_gatita': kcal += 58; protein += 4.5; carbs += 10; fat += 0.2; fiber += 4; break;
+                    case 'naut_50g_gatit': kcal += 80; protein += 4.5; carbs += 13.5; fat += 1.5; fiber += 4; break;
+                    case 'baton_proteic_herbalife': kcal += 140; protein += 10; carbs += 15; fat += 5; fiber += 3; break;
+                    case 'pdm_spoon': kcal += 29; protein += 5; carbs += 1; fat += 0.5; fiber += 0; break;
+                }
+            });
+            return { kcal, protein, carbs, fat, fiber };
         }
-        breakfastIdx++;
 
-        // Snack 1
-        currentMeal = mealTemplates.snack1[snack1Idx % mealTemplates.snack1.length];
-        dayMeals.push({ name: 'Gustare 1', icon: '🍎', type: 'snack', ...currentMeal });
-        snack1Idx++;
+        const shakeBase = { kcal: 180, protein: 18, carbs: 18, fat: 5, fiber: 3 };
+        const mealTemplates = {
+            breakfast: [ { food: 'Shake Herbalife (2 linguri F1 + 2 linguri PDM) cu apă, 1 lingură Fibre de măr și ovăz, 1 lingură Beta Heart.', base: shakeBase, additions: ['fibre_mar_ovaz_7g', 'betaheart_7g'] } ],
+            snack1: [
+                { food: '1 măr mediu și 40g migdale.', kcal: 200, protein: 6, carbs: 25, fat: 12, fiber: 5 }, { food: '200g iaurt 2-3% cu 20g semințe de dovleac și 5g tărâțe de psyllium.', kcal: 180, protein: 9, carbs: 14, fat: 9, fiber: 5 }, { food: '1 banană mare și 30g nuci.', kcal: 180, protein: 4, carbs: 25, fat: 9, fiber: 4 }, { food: '150ml chefir și 10g semințe de chia.', kcal: 140, protein: 5, carbs: 9, fat: 6, fiber: 3.5 }, { food: 'Morcovi (100g) și 50g hummus.', kcal: 120, protein: 4, carbs: 15, fat: 5, fiber: 5 }, { food: 'Baton proteic (ex. Herbalife, fără zahăr adăugat, bogat în fibre).', kcal: 140, protein: 10, carbs: 15, fat: 5, fiber: 3 },
+            ],
+            snack2: [
+                { food: '1 pară și 10g caju.', kcal: 150, protein: 3, carbs: 25, fat: 6, fiber: 4 }, { food: '150ml chefir, 1 lingură PDM, 15g semințe de floarea soarelui și 5g tărâțe de psyllium.', kcal: 160, protein: 6, carbs: 12, fat: 7, fiber: 4.5 }, { food: 'Orez expandat (20g) cu 15g unt de arahide.', kcal: 180, protein: 6, carbs: 20, fat: 10, fiber: 2 }, { food: 'O mână de fructe de pădure (50g) și 10g nuci braziliene.', kcal: 100, protein: 2, carbs: 10, fat: 8, fiber: 2.5 }, { food: 'Baton proteic (ex. Herbalife, fără zahăr adăugat, bogat în fibre).', kcal: 180, protein: 15, carbs: 15, fat: 7, fiber: 5 }, { food: '50g brânză de vaci cu 10g semințe de in măcinate.', kcal: 80, protein: 10, carbs: 2, fat: 3, fiber: 3 },
+            ],
+            lunch: [
+                { food: 'Salată mare cu 180g piept de pui la grătar, mix de salată verde, roșii, castraveți, ardei, 20ml ulei de măsline, oțet balsamic.', kcal: 650, protein: 60, carbs: 30, fat: 40, fiber: 10 }, { food: 'Supă cremă de linte (400ml) conține 100g crutoane integrale și 20g semințe de dovleac.', kcal: 600, protein: 28, carbs: 80, fat: 25, fiber: 18 }, { food: 'Quinoa (120g uscată) cu 150g tofu copt, 250g legume la abur (broccoli, morcovi), 20ml ulei de măsline.', kcal: 750, protein: 35, carbs: 80, fat: 40, fiber: 20 }, { food: 'File de cod la cuptor (200g) cu 250g cartofi dulci copți și 200g fasole verde.', kcal: 700, protein: 50, carbs: 70, fat: 25, fiber: 15 }, { food: 'Wrap integral (120g) cu 150g humus, legume proaspete (ardei, castraveți, salată), 100g piept de curcan feliat.', kcal: 650, protein: 40, carbs: 70, fat: 28, fiber: 12 }, { food: 'Tocană de năut și legume (400g) cu 100g orez brun.', kcal: 600, protein: 28, carbs: 80, fat: 15, fiber: 20 }, { food: 'Salată cu ton în saramură (150g), 3 ouă fierte, mix de salată, roșii, castraveți, 20ml ulei de măsline.', kcal: 600, protein: 50, carbs: 25, fat: 35, fiber: 9 }, { food: 'Paste integrale (120g uscate) cu sos pesto (30g) și 150g ciuperci sotate.', kcal: 650, protein: 22, carbs: 75, fat: 30, fiber: 11 }, { food: 'Burger vegetarian (200g din fasole neagră) într-o chiflă integrală (120g), cu 100g cartofi dulci prăjiți în aer fryer, salată.', kcal: 750, protein: 30, carbs: 90, fat: 30, fiber: 25 }, { food: 'Piept de curcan (180g) la grătar cu 150g bulgur și 250g salată de varză roșie cu ulei de măsline.', kcal: 680, protein: 60, carbs: 60, fat: 25, fiber: 12 },
+            ],
+            dinner: [
+                { food: 'Salată mare cu 150g mozzarella light, roșii cherry, busuioc proaspăt, 20ml ulei de măsline.', kcal: 500, protein: 30, carbs: 20, fat: 40, fiber: 8 }, { food: 'Fasole bătută (250g) cu ceapă roșie și 3 felii pâine de secară (90g).', kcal: 500, protein: 25, carbs: 60, fat: 15, fiber: 18 }, { food: 'Omletă din 5 ouă cu ciuperci și ardei, servită cu 100g brânză urdă.', kcal: 500, protein: 45, carbs: 20, fat: 30, fiber: 7 }, { food: 'Linte verde (250g gătită) cu legume la abur (broccoli, conopidă).', kcal: 400, protein: 30, carbs: 60, fat: 8, fiber: 15 }, { food: 'File de păstrăv la cuptor (180g) cu 250g legume la grătar (vinete, dovlecei).', kcal: 500, protein: 40, carbs: 25, fat: 30, fiber: 9 }, { food: 'Salată de quinoa (150g gătită) cu 120g tofu afumat, castraveți, roșii, dressing cu lămâie și 15ml ulei de măsline.', kcal: 550, protein: 30, carbs: 55, fat: 30, fiber: 12 }, { food: 'Chefir (300ml) cu 150g brânză proaspătă de vaci și 20g semințe de in.', kcal: 400, protein: 30, carbs: 20, fat: 25, fiber: 7 }, { food: 'Supă de legume (500ml) cu 150g năut și 3 felii pâine integrală (90g).', kcal: 480, protein: 25, carbs: 70, fat: 12, fiber: 18 }, { food: 'Chifteluțe vegetale (200g din linte) cu sos de roșii și 250g orez integral.', kcal: 600, protein: 30, carbs: 80, fat: 15, fiber: 22 }, { food: 'Fasole neagră (250g gătită) cu ardei gras, ceapă și 3 felii pâine integrală (90g).', kcal: 520, protein: 25, carbs: 75, fat: 10, fiber: 22 }, { food: 'Salată cu brânză telemea light (120g), roșii, castraveți, măsline, 15ml ulei de măsline.', kcal: 450, protein: 28, carbs: 20, fat: 35, fiber: 7 }, { food: 'Iaurt grecesc 2-3% (250g) cu 100g urdă, 20g nuci și 80g fructe de pădure.', kcal: 450, protein: 30, carbs: 30, fat: 25, fiber: 8 },
+            ]
+        };
 
-        // Lunch
-        currentMeal = mealTemplates.lunch[lunchIdx % mealTemplates.lunch.length];
-        dayMeals.push({ name: 'Prânz', icon: '🍝', type: 'lunch', ...currentMeal });
-        lunchIdx++;
-
-        // Snack 2
-        currentMeal = mealTemplates.snack2[snack2Idx % mealTemplates.snack2.length];
-        dayMeals.push({ name: 'Gustare 2', icon: '🍋', type: 'snack', ...currentMeal });
-        snack2Idx++;
-
-        // Dinner
-        currentMeal = mealTemplates.dinner[dinnerIdx % mealTemplates.dinner.length];
-        dayMeals.push({ name: 'Cină', icon: '🌙', type: 'dinner', ...currentMeal });
-        dinnerIdx++;
-
-        // Calculate totals for the day
-        let totalKcal = 0, totalProtein = 0, totalCarbs = 0, totalFat = 0, totalFiber = 0;
-        dayMeals.forEach(meal => {
-            totalKcal += meal.kcal;
-            totalProtein += meal.protein;
-            totalCarbs += meal.carbs;
-            totalFat += meal.fat;
-            totalFiber += meal.fiber;
-        });
-
-        mealPlanData.push({
-            day: i,
-            meals: dayMeals, // Keep original meals
-            totals: {
-                kcal: totalKcal, 
-                protein: totalProtein, 
-                carbs: totalCarbs, 
-                fat: totalFat, 
-                fiber: totalFiber 
-            }
-        });
-    }
-
-
-    // Functions for meal plan display
-    function populateDaySelector() {
-        daySelector.innerHTML = ''; // Clear previous options
+        // --- DATA GENERATION ---
         for (let i = 1; i <= 28; i++) {
-            const option = document.createElement('option');
-            option.value = i;
-            option.textContent = `Ziua ${i}`;
-            daySelector.appendChild(option);
+            const dayMeals = [];
+            let currentMeal, calculatedNutr;
+            currentMeal = mealTemplates.breakfast[0];
+            if (currentMeal.base) {
+                calculatedNutr = calculateNutrition(currentMeal.base.kcal, currentMeal.base.protein, currentMeal.base.carbs, currentMeal.base.fat, currentMeal.base.fiber, currentMeal.additions);
+                dayMeals.push({ name: 'Mic dejun', icon: '☀️', type: 'breakfast', food: currentMeal.food, ...calculatedNutr });
+            } else { dayMeals.push({ name: 'Mic dejun', icon: '☀️', type: 'breakfast', ...currentMeal }); }
+            dayMeals.push({ name: 'Gustare 1', icon: '🍎', type: 'snack', ...mealTemplates.snack1[(i - 1) % mealTemplates.snack1.length] });
+            dayMeals.push({ name: 'Prânz', icon: '🍝', type: 'lunch', ...mealTemplates.lunch[(i - 1) % mealTemplates.lunch.length] });
+            dayMeals.push({ name: 'Gustare 2', icon: '🍋', type: 'snack', ...mealTemplates.snack2[(i - 1) % mealTemplates.snack2.length] });
+            dayMeals.push({ name: 'Cină', icon: '🌙', type: 'dinner', ...mealTemplates.dinner[(i - 1) % mealTemplates.dinner.length] });
+            const totals = dayMeals.reduce((acc, meal) => {
+                acc.kcal += meal.kcal || 0; acc.protein += meal.protein || 0; acc.carbs += meal.carbs || 0; acc.fat += meal.fat || 0; acc.fiber += meal.fiber || 0; return acc;
+            }, { kcal: 0, protein: 0, carbs: 0, fat: 0, fiber: 0 });
+            mealPlanData.push({ day: i, meals: dayMeals, totals: totals });
         }
-    }
 
-    function showDay(dayNumber) {
-        const dayData = mealPlanData.find(d => d.day == dayNumber);
-        if (!dayData) return;
+        // --- RENDER FUNCTIONS ---
+        function populateDaySelector() {
+            if (!daySelector) return;
+            daySelector.innerHTML = '';
+            for (let i = 1; i <= 28; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = `Ziua ${i}`;
+                daySelector.appendChild(option);
+            }
+        }
 
-        mealPlanDisplay.innerHTML = `
-            <div class="card">
-                <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Plan pentru ziua ${dayData.day}</h3>
-                <div class="space-y-4">
-                    ${dayData.meals.map(meal => `
-                        <div class="meal-card meal-card-${meal.type}">
-                            <div class="flex items-center gap-4">
-                                <span class="text-3xl">${meal.icon}</span>
-                                <div>
-                                    <h4 class="font-bold text-lg text-gray-700">${meal.name}</h4>
-                                    <p class="text-gray-600">${meal.food}</p>
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-center text-sm mt-2 pt-2 border-t border-gray-200">
-                                <div><span class="font-semibold block">${(meal.kcal || 0).toFixed(0)}</span><span class="text-xs text-gray-500">Kcal</span></div>
-                                <div><span class="font-semibold block">${(meal.protein || 0).toFixed(1)} g</span><span class="text-xs text-gray-500">Proteine</span></div>
-                                <div><span class="font-semibold block">${(meal.carbs || 0).toFixed(1)} g</span><span class="text-xs text-gray-500">Carbohidrați</span></div>
-                                <div><span class="font-semibold block">${(meal.fat || 0).toFixed(1)} g</span><span class="text-xs text-gray-500">Grăsimi</span></div>
-                            </div>
-                        </div>
-                    `).join('')}
-                </div>
-                <div class="mt-6 p-4 bg-indigo-50 rounded-lg">
-                     <h4 class="font-bold text-lg text-center text-indigo-800 mb-2">Sumar nutrițional - ziua ${dayData.day}</h4>
-                     <div class="grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
-                        <div><b class="text-xl text-indigo-700 block">${(dayData.totals.kcal || 0).toFixed(0)}</b><span class="text-sm text-gray-600">Total Kcal</span></div>
-                        <div><b class="text-xl text-indigo-700 block">${(dayData.totals.protein || 0).toFixed(0)} g</b><span class="text-sm text-gray-600">Total Proteine</span></div>
-                        <div><b class="text-xl text-indigo-700 block">${(dayData.totals.carbs || 0).toFixed(0)} g</b><span class="text-sm text-gray-600">Total Carbohidrați</span></div>
-                        <div><b class="text-xl text-indigo-700 block">${(dayData.totals.fat || 0).toFixed(1)} g</b><span class="text-xs text-gray-600">Total Grăsimi</span></div>
-                        <div><b class="text-xl text-indigo-700 block">${(dayData.totals.fiber || 0).toFixed(1)} g</b><span class="text-xs text-gray-600">Total Fibre</span></div>
-                     </div>
-                </div>
-            </div>
-        `;
-    }
-
-    function showWeek(weekNumber) {
-        const startDay = (weekNumber - 1) * 7 + 1;
-        const endDay = weekNumber * 7;
-        const weeklyMeals = mealPlanData.slice(startDay - 1, endDay);
-
-        let weeklyHtml = `<div class="card"><h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Plan pentru săptămâna ${weekNumber}</h3>`;
-        weeklyMeals.forEach(dayData => {
-            weeklyHtml += `
-                <div class="mb-8">
-                    <h4 class="text-xl font-bold text-gray-700 mb-4">Ziua ${dayData.day}</h4>
+        function showDay(dayNumber) {
+            if (!mealPlanDisplay) return;
+            const dayData = mealPlanData.find(d => d.day == dayNumber);
+            if (!dayData) return;
+            mealPlanDisplay.innerHTML = `
+                <div class="card">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Plan pentru ziua ${dayData.day}</h3>
                     <div class="space-y-4">
                         ${dayData.meals.map(meal => `
                             <div class="meal-card meal-card-${meal.type}">
                                 <div class="flex items-center gap-4">
-                                    <span class="text-2xl">${meal.icon}</span>
+                                    <span class="text-3xl">${meal.icon}</span>
                                     <div>
-                                        <h5 class="font-bold text-md text-gray-700">${meal.name}</h5>
-                                        <p class="text-gray-600 text-sm">${meal.food}</p>
+                                        <h4 class="font-bold text-lg text-gray-700">${meal.name}</h4>
+                                        <p class="text-gray-600">${meal.food}</p>
                                     </div>
                                 </div>
-                                <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-center text-xs mt-2 pt-2 border-t border-gray-200">
+                                <div class="grid grid-cols-2 md:grid-cols-5 gap-2 text-center text-sm mt-2 pt-2 border-t border-gray-300/50">
                                     <div><span class="font-semibold block">${(meal.kcal || 0).toFixed(0)}</span><span class="text-xs text-gray-500">Kcal</span></div>
-                                    <div><span class="font-semibold block">${(meal.protein || 0).toFixed(1)} g</span><span class="text-xs text-gray-500">Prot.</span></div>
-                                    <div><span class="font-semibold block">${(meal.carbs || 0).toFixed(1)} g</span><span class="text-xs text-gray-500">Carb.</span></div>
-                                    <div><span class="font-semibold block">${(meal.fat || 0).toFixed(1)} g</span><span class="text-xs text-gray-500">Grăs.</span></div>
+                                    <div><span class="font-semibold block">${(meal.protein || 0).toFixed(1)} g</span><span class="text-xs text-gray-500">Proteine</span></div>
+                                    <div><span class="font-semibold block">${(meal.carbs || 0).toFixed(1)} g</span><span class="text-xs text-gray-500">Carbo.</span></div>
+                                    <div><span class="font-semibold block">${(meal.fat || 0).toFixed(1)} g</span><span class="text-xs text-gray-500">Grăsimi</span></div>
+                                    <div><b class="font-semibold block">${(meal.fiber || 0).toFixed(1)} g</b><span class="text-xs text-gray-500">Fibre</span></div>
                                 </div>
                             </div>
                         `).join('')}
                     </div>
-                    <div class="mt-4 p-3 bg-indigo-100 rounded-lg">
-                        <h5 class="font-bold text-md text-center text-indigo-800 mb-1">Sumar ziua ${dayData.day}</h5>
-                        <div class="grid grid-cols-2 md:grid-cols-5 gap-2 text-center text-sm">
-                            <div><b class="text-md text-indigo-700 block">${(dayData.totals.kcal || 0).toFixed(0)}</b><span class="text-xs text-gray-600">Total Kcal</span></div>
-                            <div><b class="text-md text-indigo-700 block">${(dayData.totals.protein || 0).toFixed(0)} g</b><span class="text-xs text-gray-600">Total Prot.</span></div>
-                            <div><b class="text-md text-indigo-700 block">${(dayData.totals.carbs || 0).toFixed(0)} g</b><span class="text-xs text-gray-600">Total Carb.</span></div>
-                            <div><b class="text-md text-indigo-700 block">${(dayData.totals.fat || 0).toFixed(1)} g</b><span class="text-xs text-gray-500">Total Grăs.</span></div>
-                            <div><b class="text-md text-indigo-700 block">${(dayData.totals.fiber || 0).toFixed(1)} g</b><span class="text-xs text-gray-600">Total Fibre</span></div>
+                    <div class="mt-6 p-4 bg-indigo-50 rounded-lg">
+                        <h4 class="font-bold text-lg text-center text-indigo-800 mb-2">Sumar nutrițional - ziua ${dayData.day}</h4>
+                        <div class="grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
+                            <div><b class="text-xl text-indigo-700 block">${(dayData.totals.kcal || 0).toFixed(0)}</b><span class="text-sm text-gray-600">Total Kcal</span></div>
+                            <div><b class="text-xl text-indigo-700 block">${(dayData.totals.protein || 0).toFixed(0)} g</b><span class="text-sm text-gray-600">Total Proteine</span></div>
+                            <div><b class="text-xl text-indigo-700 block">${(dayData.totals.carbs || 0).toFixed(0)} g</b><span class="text-sm text-gray-600">Total Carbo.</span></div>
+                            <div><b class="text-xl text-indigo-700 block">${(dayData.totals.fat || 0).toFixed(0)} g</b><span class="text-sm text-gray-600">Total Grăsimi</span></div>
+                            <div><b class="text-xl text-indigo-700 block">${(dayData.totals.fiber || 0).toFixed(0)} g</b><span class="text-sm text-gray-600">Total Fibre</span></div>
                         </div>
                     </div>
-                </div>
-            `;
-        });
-        weeklyHtml += `</div>`;
-        weeklyPlanDisplay.innerHTML = weeklyHtml;
-    }
+                </div>`;
+        }
+        
+        function showWeek(weekNumber) {
+            if (!weeklyPlanDisplay) return;
+            const startDay = (weekNumber - 1) * 7 + 1;
+            const endDay = weekNumber * 7;
+            const weekData = mealPlanData.slice(startDay - 1, endDay);
+            
+            weeklyPlanDisplay.innerHTML = `
+                <div class="card">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Plan pentru Săptămâna ${weekNumber} (Zilele ${startDay}-${endDay})</h3>
+                    <div class="space-y-6">
+                        ${weekData.map(dayData => `
+                            <div>
+                                <h4 class="text-xl font-semibold text-indigo-700 mb-2 border-b pb-1">Ziua ${dayData.day}</h4>
+                                <ul class="list-disc list-inside space-y-1 text-gray-600">
+                                    ${dayData.meals.map(meal => `<li><b>${meal.name}:</b> ${meal.food}</li>`).join('')}
+                                </ul>
+                                <div class="mt-2 text-right text-sm font-semibold text-gray-800">Total: ~${dayData.totals.kcal.toFixed(0)} kcal</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>`;
+        }
 
-
-    function populateFullPlanTable() {
-        let tableHtml = '';
-        mealPlanData.forEach(dayData => {
-            tableHtml += `
-                <tr>
-                    <td rowspan="${dayData.meals.length + 1}" class="font-bold text-lg bg-gray-50">Ziua ${dayData.day}</td>
-                </tr>
-            `;
-            dayData.meals.forEach(meal => {
-                tableHtml += `
-                    <tr class="meal-row">
+        function populateFullTable() {
+            if (!fullPlanTableBody) return;
+            fullPlanTableBody.innerHTML = '';
+            mealPlanData.forEach(dayData => {
+                dayData.meals.forEach((meal, index) => {
+                    const row = document.createElement('tr');
+                    row.className = 'meal-row';
+                    row.innerHTML = `
+                        ${index === 0 ? `<td rowspan="6"><b>${dayData.day}</b></td>` : ''}
                         <td>${meal.name}</td>
                         <td>${meal.food}</td>
                         <td>${(meal.kcal || 0).toFixed(0)}</td>
@@ -933,704 +805,92 @@
                         <td>${(meal.carbs || 0).toFixed(1)}</td>
                         <td>${(meal.fat || 0).toFixed(1)}</td>
                         <td>${(meal.fiber || 0).toFixed(1)}</td>
-                    </tr>
-                `;
-            });
-            tableHtml += `
-                <tr class="total-row">
-                    <td colspan="3" class="text-right">Total ziua ${dayData.day}</td>
+                    `;
+                    fullPlanTableBody.appendChild(row);
+                });
+                const totalRow = document.createElement('tr');
+                totalRow.className = 'total-row';
+                totalRow.innerHTML = `
+                    <td colspan="2">TOTAL ZI ${dayData.day}</td>
                     <td>${(dayData.totals.kcal || 0).toFixed(0)}</td>
-                    <td>${(dayData.totals.protein || 0).toFixed(0)}</td>
-                    <td>${(dayData.totals.carbs || 0).toFixed(0)}</td>
+                    <td>${(dayData.totals.protein || 0).toFixed(1)}</td>
+                    <td>${(dayData.totals.carbs || 0).toFixed(1)}</td>
                     <td>${(dayData.totals.fat || 0).toFixed(1)}</td>
                     <td>${(dayData.totals.fiber || 0).toFixed(1)}</td>
-                </tr>
-            `;
-        });
-        fullPlanTableBody.innerHTML = tableHtml;
-    }
-        
-    document.addEventListener('DOMContentLoaded', function () {
-        // Initialize global variables
-        daySelector = document.getElementById('daySelector');
-        weekSelector = document.getElementById('weekSelector');
-        mealPlanDisplay = document.getElementById('mealPlanDisplay');
-        weeklyPlanDisplay = document.getElementById('weeklyPlanDisplay');
-        fullPlanTableBody = document.getElementById('fullPlanTableBody');
-        wellnessAccordion = document.getElementById('wellnessAccordion'); /* Corrected: Changed from 'accordion' to 'wellnessAccordion' */
-        hipertrigliceridemieAccordion = document.getElementById('hipertrigliceridemieAccordion');
-        planActiuneAccordion = document.getElementById('planActiuneAccordion');
-
-
-        // Data for Wellness Accordion
-        const wellnessData = [
-            {
-                icon: "🥗",
-                title: "Nutriție conștientă și sustenabilă",
-                content: `
-                    <p class="mb-2">Acest pilon se concentrează pe o nutriție adaptată pentru a reduce trigliceridele, a sprijini detoxifierea și a gestiona greutatea. Este esențial să se prioritizeze alimentele integrale, bogate în fibre și nutrienți.</p>
-                    <h4 class="font-semibold text-gray-700 mb-1">Principii alimentare pentru reducerea trigliceridelor:</h4>
-                    <ul class="list-disc list-inside space-y-1 text-gray-600 mb-2">
-                        <li><b>Reducerea zaharurilor rafinate și a carbohidraților simpli:</b> Aceștia sunt principalii contributori la nivelurile ridicate de trigliceride. Eliminați băuturile îndulcite, dulciurile, produsele de patiserie și pâinea albă.</li>
-                        <li><b>Fibre solubile:</b> Consumați din abundență ovăz, orz, mere, citrice, morcovi, fasole și linte. Fibrele ajută la scăderea absorbției grăsimilor și zaharurilor.</li>
-                        <li><b>Grăsimi sănătoase:</b> Optați pentru grăsimi mononesaturate (avocado, ulei de măsline, nuci) și polinesaturate (semințe de in, chia, pește gras precum somon, macrou, sardine – bogate în Omega-3). Evitați grăsimea trans și limitați grăsimile saturate.</li>
-                        <li><b>Proteine slabe:</b> Includeți pește, carne slabă de pasăre (fără piele), leguminoase (fasole, linte, năut), tofu și ouă.</li>
-                        <li><b>Antioxidanți și fitochimicale:</b> Consumați o varietate de legume și fructe colorate (în special cele cu indice glicemic scăzut), care sprijină procesele de detoxifiere ale ficatului.</li>
-                        <li><b>Alcool:</b> Limitați sau evitați complet consumul de alcool, deoarece acesta poate crește semnificativ nivelul trigliceridelor.</li>
-                    </ul>
-                    <h4 class="font-semibold text-gray-700 mb-1">Frecvența meselor și gestionarea porțiilor:</h4>
-                    <p class="mb-2">Consumul a 3 mese principale și 2 gustări pe zi, în porții controlate, ajută la menținerea glicemiei stabile și previne supraîncărcarea metabolică.</p>
-                `
-            },
-            {
-                icon: "🏋️‍♀️",
-                title: "Activitate fizică adaptată și plăcută",
-                content: `
-                    <p class="mb-2">Mișcarea regulată este crucială pentru reducerea grăsimii viscerale, îmbunătățirea sensibilității la insulină și scăderea trigliceridelor, precum și pentru sănătatea cardiovasculară generală.</p>
-                    <h4 class="font-semibold text-gray-700 mb-1">Integrarea antrenamentului de forță și cardio:</h4>
-                    <ul class="list-disc list-inside space-y-1 text-gray-600 mb-2">
-                        <li><b>Antrenament cardio (aerobic):</b> Vizați cel puțin 150 de minute de activitate de intensitate moderată (mers alert, jogging, ciclism, înot) sau 75 de minute de activitate de intensitate viguroasă pe săptămână. Aceasta ajută la arderea caloriilor și la îmbunătățirea sănătății inimii.</li>
-                        <li><b>Antrenament de forță:</b> Includeți 2-3 sesiuni pe săptămână, vizând toate grupele musculare majore. Construirea masei musculare crește rata metabolică bazală și ajută la arderea grăsimilor.</li>
-                        <li><b>Reducerea sedentarismului:</b> Încercați să vă mișcați la fiecare oră, chiar și pentru câteva minute. Mersul pe jos, statul în picioare sau exercițiile ușoare pot face o diferență.</li>
-                    </ul>
-                    <h4 class="font-semibold text-gray-700 mb-1">Odihna și recuperarea:</h4>
-                    <p class="mb-2">Sunt la fel de importante ca antrenamentul. Supra-antrenamentul poate duce la accidentări și lipsă de progres. Recuperarea activă (plimbări ușoare, înot, yoga) este benefică în zilele libere.</p>
-                `
-            },
-            {
-                icon: "🧠",
-                title: "Gestionarea stresului și echilibrul emoțional",
-                content: `
-                    <p class="mb-2">Stresul cronic poate influența negativ nivelurile hormonale și metabolismul, contribuind la acumularea grăsimii viscerale și la creșterea trigliceridelor. Gestionarea eficientă a stresului este vitală.</p>
-                    <h4 class="font-semibold text-gray-700 mb-1">Tehnici practice de gestionare a stresului:</h4>
-                    <ul class="list-disc list-inside space-y-1 text-gray-600 mb-2">
-                        <li><b>Mindfulness și meditație:</b> Practicați zilnic 10-15 minute. Există numeroase aplicații și resurse online.</li>
-                        <li><b>Exerciții de respirație profundă:</b> Tehnici precum respirația diafragmatică (ex. 4-7-8) pot calma rapid sistemul nervos.</li>
-                        <li><b>Yoga sau Tai Chi:</b> Aceste practici combină mișcarea fizică cu relaxarea mentală.</li>
-                        <li><b>Gestionarea timpului:</b> O bună organizare a programului poate reduce presiunea și sentimentul de copleșire.</li>
-                        <li><b>Jurnalul emoțional:</b> Scrieți despre gândurile și emoțiile dumneavoastră pentru a le procesa mai eficient.</li>
-                    </ul>
-                    <h4 class="font-semibold text-gray-700 mb-1">Suport psiho-emoțional:</h4>
-                    <p class="mb-2">Dacă stresul sau emoțiile sunt copleșitoare, apelați la un psiholog sau psihoterapeut. Terapia cognitiv-comportamentală (TCC) poate oferi strategii eficiente de coping.</p>
-                `
-            },
-            {
-                icon: "😴",
-                title: "Somn reparator și igienă a somnului",
-                content: `
-                    <p class="mb-2">Calitatea somnului influențează direct echilibrul hormonal, reglarea apetitului și metabolismul lipidelor. Somnul insuficient poate duce la creșterea trigliceridelor și la acumularea grăsimii viscerale.</p>
-                    <h4 class="font-semibold text-gray-700 mb-1">Importanța somnului de calitate:</h4>
-                    <p class="mb-2">Vizați 7-9 ore de somn neîntrerupt pe noapte. Somnul adecvat ajută la reglarea hormonilor foamei (grelina și leptina) și la îmbunătățirea sensibilității la insulină.</p>
-                    <h4 class="font-semibold text-gray-700 mb-1">Igiena somnului:</h4>
-                    <ul class="list-disc list-inside space-y-1 text-gray-600 mb-2">
-                        <li><b>Rutină:</b> Mergeți la culcare și treziți-vă la aceleași ore în fiecare zi, chiar și în weekend.</li>
-                        <li><b>Mediu:</b> Asigurați-vă că dormitorul este întunecat, liniștit și răcoros.</li>
-                        <li><b>Evitați stimulentele:</b> Reduceți consumul de cafeină și alcool, mai ales seara. Evitați mesele grele înainte de culcare.</li>
-                        <li><b>Limitați ecranele:</b> Opriți ecranele (telefon, tabletă, laptop, televizor) cu cel puțin o oră înainte de culcare.</li>
-                    </ul>
-                `
-            },
-            {
-                icon: "❤️",
-                title: "Conexiuni sociale și relații sănătoase",
-                content: `
-                    <p class="mb-2">Relațiile sociale pozitive pot reduce stresul și pot oferi suport emoțional, contribuind la o stare generală de bine.</p>
-                    <h4 class="font-semibold text-gray-700 mb-1">Investiți în relații:</h4>
-                    <p class="mb-2">Petreceți timp de calitate cu familia și prietenii. Mențineți legătura cu persoanele care vă susțin și vă inspiră.</p>
-                    <h4 class="font-semibold text-gray-700 mb-1">Comunicați deschis:</h4>
-                    <p class="mb-2">Exersați comunicarea asertivă și onestă. Învățați să vă exprimați nevoile și sentimentele în mod constructiv.</p>
-                    <h4 class="font-semibold text-gray-700 mb-1">Stabiliți limite sănătoase:</h4>
-                    <p class="mb-2">Învățați să spuneți "nu" atunci când este necesar pentru a vă proteja timpul și energia, mai ales într-o profesie solicitantă precum stomatologia.</p>
-                `
-            },
-            {
-                icon: "📚",
-                title: "Dezvoltare personală continuă și învățare",
-                content: `
-                    <p class="mb-2">Stimularea intelectuală și creșterea personală sunt esențiale pentru un profesionist precum un medic stomatolog, contribuind la un sentiment de scop și împlinire.</p>
-                    <h4 class="font-semibold text-gray-700 mb-1">Învățare continuă:</h4>
-                    <p class="mb-2">Rămâneți la curent cu cele mai noi cercetări și tehnici din domeniul medical. Citiți cărți, urmăriți webinarii, ascultați podcasturi relevante pentru profesia și interesele dumneavoastră.</p>
-                    <h4 class="font-semibold text-gray-700 mb-1">Dezvoltarea de noi abilități:</h4>
-                    <p class="mb-2">Explorați noi domenii de interes, chiar și în afara stomatologiei. Un nou hobby sau un curs online pot oferi o perspectivă proaspătă și pot reduce epuizarea profesională.</p>
-                    <h4 class="font-semibold text-gray-700 mb-1">Reflecție și autoevaluare:</h4>
-                    <p class="mb-2">Acordați-vă timp pentru a reflecta asupra progresului personal și profesional. Stabiliți obiective SMART (specifice, măsurabile, realizabile, relevante și încadrate în timp) pentru a vă ghida dezvoltarea.</p>
-                `
-            },
-            {
-                icon: "🏡",
-                title: "Mediu personal și spațiu de viață armonios",
-                content: `
-                    <p class="mb-2">Mediul în care trăim și lucrăm ne influențează semnificativ starea de spirit, nivelul de stres și energia.</p>
-                    <h4 class="font-semibold text-gray-700 mb-1">Organizați-vă spațiul:</h4>
-                    <p class="mb-2">Un cabinet stomatologic curat și organizat, la fel ca și spațiul personal, poate reduce stresul și crește eficiența. Dezinfectați și organizați-vă regulat mediul de lucru și de acasă.</p>
-                    <h4 class="font-semibold text-gray-700 mb-1">Adăugați elemente naturale:</h4>
-                    <p class="mb-2">Introduceți plante sau elemente din natură în cabinet și acasă. Acestea pot îmbunătăți calitatea aerului și pot crea o atmosferă mai relaxantă.</p>
-                    <h4 class="font-semibold text-gray-700 mb-1">Timp în natură:</h4>
-                    <p class="mb-2">Petreceți timp în aer liber, în parcuri, păduri sau lângă apă. Contactul cu natura reduce stresul, îmbunătățește starea de spirit și oferă o pauză de la mediul clinic.</p>
-                `
-            },
-            {
-                icon: "🎯",
-                title: "Scop și valori personale",
-                content: `
-                    <p class="mb-2">A avea un scop clar și a trăi în aliniere cu valorile personale aduce sens și împlinire, prevenind epuizarea profesională și personală.</p>
-                    <h4 class="font-semibold text-gray-700 mb-1">Identificați-vă valorile:</h4>
-                    <p class="mb-2">Clarificați ce este cu adevărat important pentru dumneavoastră în viață și în profesie (ex. integritate, empatie, excelență, contribuție socială, echilibru). Asigurați-vă că practica dumneavoastră stomatologică reflectă aceste valori.</p>
-                    <h4 class="font-semibold text-gray-700 mb-1">Definiți-vă scopul:</h4>
-                    <p class="mb-2">Ce vă motivează în profesie și în viața personală? Cum doriți să contribuiți? Un scop bine definit poate oferi direcție și reziliență în fața provocărilor.</p>
-                    <h4 class="font-semibold text-gray-700 mb-1">Practicați recunoștința:</h4>
-                    <p class="mb-2">Zilnic, gândiți-vă la 3-5 lucruri pentru care sunteți recunoscător, atât în viața personală, cât și în cea profesională. Această practică poate îmbunătăți starea de spirit și perspectiva asupra vieții, ajutând la combaterea stresului și a cinismului.</p>
-                `
-            }
-        ];
-
-        wellnessAccordion = document.getElementById('wellnessAccordion'); /* Assigned here */
-        wellnessData.forEach((item, index) => {
-            const itemElement = document.createElement('div');
-            itemElement.className = 'accordion-item';
-            itemElement.innerHTML = `
-                <button class="accordion-button">
-                    <span class="flex items-center gap-4">
-                        <span class="text-2xl">${item.icon}</span>
-                        <span>${item.title}</span>
-                    </span>
-                    <span class="accordion-icon text-2xl font-light text-gray-500">+</span>
-                </button>
-                <div class="accordion-content">
-                    ${item.content}
-                </div>
-            `;
-            wellnessAccordion.appendChild(itemElement);
-        });
-
-        const wellnessAccordionButtons = document.querySelectorAll('#wellnessAccordion .accordion-button');
-        wellnessAccordionButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const content = button.nextElementSibling;
-                const isOpen = button.classList.contains('open');
-
-                wellnessAccordionButtons.forEach(btn => {
-                    btn.classList.remove('open');
-                    btn.nextElementSibling.classList.remove('open');
-                    btn.nextElementSibling.style.maxHeight = null;
-                    btn.nextElementSibling.style.padding = '0 1.5rem';
-                });
-
-                if (!isOpen) {
-                    button.classList.add('open');
-                    content.classList.add('open');
-                    content.style.maxHeight = content.scrollHeight + "px";
-                }
+                `;
+                fullPlanTableBody.appendChild(totalRow);
             });
-        });
+        }
 
-        // Data for Hipertrigliceridemie Accordion
-        const hipertrigliceridemieData = [
-            {
-                title: "Perspectiva fizică: înțelegerea hipertrigliceridemiei severe",
-                content: `
-                    <p class="text-gray-600 mb-4">Trigliceridele sunt un tip de grăsime (lipide) care se găsesc în sânge. Ele provin din alimentele pe care le consumăm și sunt stocate în celulele adipoase pentru a fi utilizate ulterior ca sursă de energie. Hipertrigliceridemia înseamnă că nivelul trigliceridelor din sânge este prea ridicat. Când nivelurile depășesc 1000 mg/dL (11.3 mmol/L), afecțiunea este considerată <b>severă</b> și reprezintă o urgență medicală, din cauza riscului crescut de complicații acute și cronice.</p>
-                    <ul class="list-disc list-inside space-y-1 text-gray-600 mb-4">
-                        <li><b>Niveluri normale:</b> Sub 150 mg/dL (1.7 mmol/L).</li>
-                        <li><b>Niveluri severe:</b> Peste 1000 mg/dL (11.3 mmol/L).</li>
-                        <li><b>Risc major:</b> Pancreatită acută.</li>
-                    </ul>
-                    <h4 class="font-semibold text-gray-700 mb-2">Simptome și complicații</h4>
-                    <p class="text-gray-600 mb-2">Hipertrigliceridemia severă poate fi asimptomatică până la apariția complicațiilor grave. Simptomele pot fi acute sau cronice.</p>
-                    <h5 class="font-semibold text-gray-700 mb-1 ml-4">A. Simptome acute:</h5>
-                    <ul class="list-disc list-inside space-y-1 text-gray-600 ml-8 mb-2">
-                        <li><b>Pancreatită acută:</b> Aceasta este cea mai gravă complicație și o urgență medicală. Simptomele includ durere abdominală severă (adesea iradiind spre spate), greață, vomă, febră, tahicardie.</li>
-                        <li><b>Lipemia retinalis:</b> Retină cu aspect lăptos, vizibilă la examenul oftalmologic, din cauza nivelurilor extrem de ridicate de trigliceride din vasele de sânge retiniene.</li>
-                        <li><b>Eruptive xanthomas:</b> Mici umflături gălbui-roșiatice pe piele, în special pe fese, coate și genunchi.</li>
-                    </ul>
-                    <h5 class="font-semibold text-gray-700 mb-1 ml-4">B. Complicații cronice:</h5>
-                    <ul class="list-disc list-inside space-y-1 text-gray-600 ml-8">
-                        <li><b>Boli cardiovasculare:</b> Crește riscul de ateroscleroză, boală coronariană, infarct miocardic și accident vascular cerebral, chiar și independent de colesterolul LDL.</li>
-                        <li><b>Steatoză hepatică (ficat gras):</b> Acumularea de grăsime în ficat, care poate progresa spre steatohepatită, fibroză, ciroză.</li>
-                        <li><b>Rezistență la insulină și diabet de tip 2:</b> Există o legătură bidirecțională; hipertrigliceridemia poate agrava rezistența la insulină.</li>
-                        <li><b>Sindrom metabolic.</b></li>
-                    </ul>
-                    <h4 class="font-semibold text-gray-700 mb-2 mt-6">Consecința supremă: pancreatita acută necrotico-hemoragică</h4>
-                    <p class="text-gray-600 mb-2">Deși hipertrigliceridemia cronică este un factor de risc cardiovascular major, pericolul cel mai iminent și devastator este <b>pancreatita acută</b>. Aceasta nu este o simplă inflamație. Este un proces violent de <b>autodigestie</b>, în care pancreasul, organul responsabil pentru producerea enzimelor digestive esențiale (lipaza, amilaza, proteaza), începe să se digere pe sine însuși. Această condiție este o urgență medicală majoră, cu o rată de mortalitate semnificativă. (Referință: <i>Plan hipertrigliceridemie.docx</i>)</p>
-                    <h5 class="font-semibold text-gray-700 mb-1 ml-4">Mecanismul de declanșare – o "toxicitate directă" la nivel celular:</h5>
-                    <ul class="list-disc list-inside space-y-1 text-gray-600 ml-8">
-                        <li><b>Suprasaturarea și "scurgerea" enzimatică:</b> Vasele de sânge extrem de fine (capilarele) care irigă pancreasul devin supra-încărcate cu particule grase numite chilomicroni. În acest mediu, enzima produsă de pancreas, lipaza pancreatică, începe să descompună trigliceridele direct în aceste capilare.</li>
-                        <li><b>Eliberarea de acizi grași liberi toxici:</b> Această descompunere eliberează o avalanșă de acizi grași liberi într-o concentrație care depășește cu mult capacitatea albuminei de a-i neutraliza. În stare liberă și concentrație mare, acești acizi grași acționează ca un detergent coroziv la nivel celular. Ei perforează și destabilizează membranele celulelor acinare pancreatice.</li>
-                        <li><b>Cascada inflamatorie și autodigestia:</b> Odată ce membranele celulare sunt compromise, enzimele digestive (în special tripsina) se activează prematur în interiorul pancreasului. Se declanșează o cascadă inflamatorie masivă, atrăgând celule imunitare care, în încercarea de a curăța țesutul lezat, amplifică distrugerea. Pancreasul începe, literalmente, să fie digerat din interior.</li>
-                        <li><b>Ischemia (sufocarea țesutului):</b> Sângele îngroșat și vâscos blochează capilarele, reducând drastic aportul de oxigen către țesutul pancreatic. Această ischemie agravează necroza (moartea țesutului), completând tabloul unei urgențe medicale extreme.</li>
-                    </ul>
-                    <p class="text-gray-600 mt-4">Obiectivul nostru comun și imediat este să dezamorsăm această "bombă metabolică". Planul de mai jos este conceput special pentru a face exact acest lucru: o intervenție agresivă și multifactorială pentru a reduce drastic și rapid nivelul trigliceridelor și pentru a îți proteja pancreasul și viața!</p>
-                `
-            },
-            {
-                title: "Cauze și factori de risc",
-                content: `
-                    <p class="text-gray-600 mb-4">Cauzele hipertrigliceridemiei severe pot fi primare (genetice) sau secundare (dobândite), adesea o combinație a ambelor.</p>
-                    <h4 class="font-semibold text-gray-700 mb-2">A. Cauze primare (genetice):</h4>
-                    <ul class="list-disc list-inside space-y-1 text-gray-600 ml-4 mb-4">
-                        <li>Deficiențe sau mutații genetice care afectează enzimele implicate în metabolismul trigliceridelor (ex: lipoprotein lipaza, apolipoproteina C-II).</li>
-                        <li>Hiperlipidemia familială combinată.</li>
-                    </ul>
-                    <h4 class="font-semibold text-gray-700 mb-2">B. Cauze secundare (dobândite):</h4>
-                    <ul class="list-disc list-inside space-y-1 text-gray-600 ml-4 mb-4">
-                        <li><b>Dietă:</b> Consumul excesiv de carbohidrați rafinați (în special fructoză), zaharuri adăugate, grăsimi saturate și trans, și alcool.</li>
-                        <li><b>Obezitate și exces ponderal:</b> Un factor de risc major, în special grăsimea viscerală.</li>
-                        <li><b>Diabet zaharat de tip 2 necontrolat:</b> Nivelurile ridicate de glucoză și rezistența la insulină duc la o producție crescută de trigliceride.</li>
-                        <li><b>Consum excesiv de alcool:</b> Alcoolul este metabolizat în ficat, stimulând producția de trigliceride.</li>
-                        <li><b>Anumite medicamente:</b> Beta-blocante, diuretice tiazidice, corticosteroizi, estrogeni orali, unele medicamente antiretrovirale.</li>
-                        <li><b>Afecțiuni medicale:</b>
-                            <ul class="list-circle list-inside ml-8">
-                                <li>Hipotiroidism necontrolat.</li>
-                                <li>Boli renale cronice (sindrom nefrotic).</li>
-                                <li>Boli hepatice (ciroză, hepatită).</li>
-                                <li>Sarcină.</li>
-                            </ul>
-                        </li>
-                        <li><b>Sedentarismul.</b></li>
-                    </ul>
-                    <p class="text-gray-600 mb-2">Pentru informații suplimentare, puteți explora resurse despre: Analize medicale necesare, Plan de acțiune în 10 pași, Fito-tratament și Rețete smoothie.</p>
-                `
-            },
-            {
-                title: "🩺 Ghid Analize – Hipertrigliceridemie Severă",
-                content: `
-                    <h4 class="font-semibold text-gray-700 mb-2">Profil lipidic</h4>
-                    <div class="overflow-x-auto mb-4">
-                        <table class="w-full text-sm text-left text-gray-500">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-                                <tr>
-                                    <th scope="col" class="px-6 py-3">Analiză</th>
-                                    <th scope="col" class="px-6 py-3">Valori normale</th>
-                                    <th scope="col" class="px-6 py-3">Semnificație</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="bg-white border-b">
-                                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Trigliceride</td>
-                                    <td class="px-6 py-4">&lt; 150 mg/dl</td>
-                                    <td class="px-6 py-4">&gt; 500 = risc sever metabolic și pancreatită</td>
-                                </tr>
-                                <tr class="bg-white border-b">
-                                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Colesterol total</td>
-                                    <td class="px-6 py-4">120–200 mg/dl</td>
-                                    <td class="px-6 py-4">Valori mari nu înseamnă automat risc</td>
-                                </tr>
-                                <tr class="bg-white border-b">
-                                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">LDL ("rău")</td>
-                                    <td class="px-6 py-4">&lt; 130 mg/dl</td>
-                                    <td class="px-6 py-4">Valori crescute + inflamație = risc ateroscleroză</td>
-                                </tr>
-                                <tr class="bg-white border-b">
-                                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">HDL ("bun")</td>
-                                    <td class="px-6 py-4">&gt; 40 mg/dl</td>
-                                    <td class="px-6 py-4">Sub 40 → risc crescut cardiovascular</td>
-                                </tr>
-                                <tr class="bg-white border-b">
-                                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">VLDL</td>
-                                    <td class="px-6 py-4">5–30 mg/dl</td>
-                                    <td class="px-6 py-4">Crește odată cu trigliceridele</td>
-                                </tr>
-                                <tr class="bg-white">
-                                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">TG / HDL ratio</td>
-                                    <td class="px-6 py-4">&lt; 2</td>
-                                    <td class="px-6 py-4">&gt; 2,5 indică insulinorezistență</td>
-                                </tr>
-                            </tbody>
-                        </table>
+        function createAccordion(container, data) {
+            if (!container) return;
+            container.innerHTML = data.map((item, index) => `
+                <div class="accordion-item">
+                    <h2>
+                        <button type="button" class="accordion-button" aria-expanded="false">
+                            <span class="flex items-center gap-4">
+                                <span class="text-2xl">${item.icon || ''}</span>
+                                <span>${item.title}</span>
+                            </span>
+                            <span class="accordion-icon text-2xl font-light text-indigo-500">+</span>
+                        </button>
+                    </h2>
+                    <div class="accordion-content">
+                        <div class="prose max-w-none">${item.content}</div>
                     </div>
-
-                    <h4 class="font-semibold text-gray-700 mb-2 mt-6">Glicemie & insulină</h4>
-                    <div class="overflow-x-auto mb-4">
-                        <table class="w-full text-sm text-left text-gray-500">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-                                <tr>
-                                    <th scope="col" class="px-6 py-3">Analiză</th>
-                                    <th scope="col" class="px-6 py-3">Valori normale</th>
-                                    <th scope="col" class="px-6 py-3">Semnificație</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="bg-white border-b">
-                                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Glicemie à jeun</td>
-                                    <td class="px-6 py-4">70–99 mg/dl</td>
-                                    <td class="px-6 py-4">100–125 = prediabet, &gt;126 = diabet</td>
-                                </tr>
-                                <tr class="bg-white border-b">
-                                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Insulină bazală</td>
-                                    <td class="px-6 py-4">2–12 µU/mL</td>
-                                    <td class="px-6 py-4">&gt; 12 = posibilă insulinorezistență</td>
-                                </tr>
-                                <tr class="bg-white border-b">
-                                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">HbA1c</td>
-                                    <td class="px-6 py-4">&lt; 5.7%</td>
-                                    <td class="px-6 py-4">&gt; 5.7 = glicemie crescută în ultimele 3 luni</td>
-                                </tr>
-                                <tr class="bg-white">
-                                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">HOMA-IR</td>
-                                    <td class="px-6 py-4">&lt; 2</td>
-                                    <td class="px-6 py-4">Index de rezistență la insulină</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <h4 class="font-semibold text-gray-700 mb-2 mt-6">Ficat & funcție hepatică</h4>
-                    <div class="overflow-x-auto mb-4">
-                        <table class="w-full text-sm text-left text-gray-500">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-                                <tr>
-                                    <th scope="col" class="px-6 py-3">Analiză</th>
-                                    <th scope="col" class="px-6 py-3">Valori normale</th>
-                                    <th scope="col" class="px-6 py-3">Semnificație</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="bg-white border-b">
-                                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">GPT (ALT)</td>
-                                    <td class="px-6 py-4">10–40 U/L</td>
-                                    <td class="px-6 py-4">Enzimă hepatică – crește în steatoză</td>
-                                </tr>
-                                <tr class="bg-white border-b">
-                                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">GOT (AST)</td>
-                                    <td class="px-6 py-4">10–40 U/L</td>
-                                    <td class="px-6 py-4">Enzimă hepatică – crește în inflamație</td>
-                                </tr>
-                                <tr class="bg-white border-b">
-                                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">GGT</td>
-                                    <td class="px-6 py-4">10–50 U/L</td>
-                                    <td class="px-6 py-4">Crește în ficat gras, alcool, intoxicații</td>
-                                </tr>
-                                <tr class="bg-white border-b">
-                                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Bilirubină totală</td>
-                                    <td class="px-6 py-4">0.1–1.2 mg/dl</td>
-                                    <td class="px-6 py-4">Valori mari → probleme biliare sau hepatice</td>
-                                </tr>
-                                <tr class="bg-white">
-                                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Fosfatază alcalină</td>
-                                    <td class="px-6 py-4">30–120 U/L</td>
-                                    <td class="px-6 py-4">Crește în colestază (blocaj biliar)</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <h4 class="font-semibold text-gray-700 mb-2 mt-6">Inflamație & stres oxidativ</h4>
-                    <div class="overflow-x-auto mb-4">
-                        <table class="w-full text-sm text-left text-gray-500">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-                                <tr>
-                                    <th scope="col" class="px-6 py-3">Analiză</th>
-                                    <th scope="col" class="px-6 py-3">Valori normale</th>
-                                    <th scope="col" class="px-6 py-3">Semnificație</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="bg-white border-b">
-                                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">PCR hs</td>
-                                    <td class="px-6 py-4">&lt; 1 mg/L</td>
-                                    <td class="px-6 py-4">Inflamație cronică – risc cardiovascular</td>
-                                </tr>
-                                <tr class="bg-white border-b">
-                                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Fibrinogen</td>
-                                    <td class="px-6 py-4">200–400 mg/dl</td>
-                                    <td class="px-6 py-4">Inflamație sistemică, risc trombotic</td>
-                                </tr>
-                                <tr class="bg-white">
-                                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Homocisteină</td>
-                                    <td class="px-6 py-4">&lt; 10 µmol/L</td>
-                                    <td class="px-6 py-4">Valori mari = deficit B6, B12, acid folic</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <h4 class="font-semibold text-gray-700 mb-2 mt-6">Hormonali (opțional, în context metabolic)</h4>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-sm text-left text-gray-500">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-                                <tr>
-                                    <th scope="col" class="px-6 py-3">Analiză</th>
-                                    <th scope="col" class="px-6 py-3">Valori normale</th>
-                                    <th scope="col" class="px-6 py-3">Semnificație</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="bg-white border-b">
-                                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">TSH</td>
-                                    <td class="px-6 py-4">0.5–4.5 µIU/mL</td>
-                                    <td class="px-6 py-4">Hipotiroidismul crește TG</td>
-                                </tr>
-                                <tr class="bg-white border-b">
-                                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Cortizol matinal</td>
-                                    <td class="px-6 py-4">5–25 µg/dl</td>
-                                    <td class="px-6 py-4">Stres cronic → lipogeneză</td>
-                                </tr>
-                                <tr class="bg-white border-b">
-                                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Testosteron total</td>
-                                    <td class="px-6 py-4">350–950 ng/dl (bărbați)</td>
-                                    <td class="px-6 py-4">Valori mici = metabolism încetinit</td>
-                                </tr>
-                                <tr class="bg-white">
-                                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">SHBG / DHEA-S</td>
-                                    <td class="px-6 py-4">variabil</td>
-                                    <td class="px-6 py-4">Profil metabolic global hormonal</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                `
-            },
-            {
-                title: "Perspectiva holistică: mesajul acumulării și al stagnării",
-                content: `
-                    <p class="text-gray-600 mb-4">Din perspectivă holistică, hipertrigliceridemia severă, ca o acumulare excesivă de grăsime în sânge, este adesea interpretată ca o "stocare" sau "îngrădire" a ceva la nivel emoțional sau energetic. Simbolizează o lipsă de fluiditate, o rigiditate și o tendință de a "reține" în loc de a "elibera".</p>
-                    <h4 class="font-semibold text-gray-700 mb-2">Semnificația acumulării excesive de grăsime</h4>
-                    <ul class="list-disc list-inside space-y-1 text-gray-600 ml-4">
-                        <li><b>Stocarea emoțiilor nerezolvate:</b> Grăsimea poate simboliza emoții sau traume pe care le "ținem" în noi, refuzând să le eliberăm. Poate fi furie reprimată, tristețe profundă, resentimente cronice, vinovăție sau frică intensă, în special frica de viitor și de insecuritate.</li>
-                        <li><b>Nevoia de protecție și "provizii":</b> Excesul de grăsime poate fi o "barieră" fizică sau energetică pe care corpul o creează pentru a se proteja de o amenințare percepută, de durere emoțională sau de influențe externe. Este o modalitate de a te "îngrădi" sau de a te "izola". Poate fi și o nevoie subconștientă de a acumula "provizii" pentru un viitor incert, o lipsă de încredere în abundența vieții.</li>
-                        <li><b>Dificultatea de a "curge" și de a "elibera":</b> Nivelurile ridicate de trigliceride în sânge (fluid) sugerează o lipsă de fluiditate, o stagnare. Aceasta se poate traduce emoțional printr-o rezistență la schimbare, o dificultate de a renunța la vechi tipare, credințe sau relații care nu mai servesc. Este o tendință de a "reține" controlul sau emoțiile.</li>
-                        <li><b>Dezechilibre în chakra rădăcină (Muladhara) și plexul solar (Manipura):</b>
-                            <ul class="list-circle list-inside ml-8">
-                                <li><b>Muladhara (rădăcină):</b> Asociată cu siguranța, stabilitatea, supraviețuirea și relația cu pământul. Un dezechilibru aici poate manifesta frica de lipsuri și o nevoie de a acumula.</li>
-                                <li><b>Manipura (plex solar):</b> Asociată cu puterea personală, controlul, digestia (fizică și emoțională) și metabolismul. Un dezechilibru poate indica o nevoie excesivă de control sau o dificultate în a "digera" experiențele de viață, ducând la acumulări.</li>
-                            </ul>
-                        </li>
-                        <li><b>Lipsa de "dulceață" în viață:</b> Paradoxal, o dietă bogată în zaharuri poate reflecta o căutare subconștientă a "dulceții" sau a bucuriei în viață, care nu este găsită pe plan emoțional, ducând la compensare prin alimentație.</li>
-                    </ul>
-                `
-            },
-            {
-                title: "Calea spre echilibru: o abordare holistică integrată",
-                content: `
-                    <p class="text-gray-600 mb-4">Abordarea hipertrigliceridemiei severe necesită o intervenție medicală imediată și o abordare holistică integrată, care să vizeze atât aspectele fizice, cât și pe cele emoționale și energetice. Este esențial ca această abordare să fie complementară și să nu înlocuiască tratamentul medical convențional.</p>
-                    <h4 class="font-semibold text-gray-700 mb-2">Suport fizic și nutrițional (intervenție de urgență și pe termen lung)</h4>
-                    <ul class="list-disc list-inside space-y-1 text-gray-600 ml-4 mb-4">
-                        <li><b>Urgență medicală:</b> Nivelurile >1000 mg/dL necesită intervenție medicală imediată pentru a preveni pancreatita acută. Aceasta poate include spitalizare, administrarea intravenoasă de insulină (chiar și la non-diabetici) și/sau afereză.</li>
-                        <li><b>Restricție dietetică drastică:</b>
-                            <ul class="list-circle list-inside ml-8">
-                                <li><b>Grăsimi:</b> Reducere drastică a aportului total de grăsimi (sub 10-15% din calorii), în special grăsimi saturate, trans și colesterol. Evitarea uleiurilor rafinate și a prăjelilor.</li>
-                                <li><b>Carbohidrați simpli și zaharuri:</b> Eliminarea totală a zaharurilor adăugate, fructozei (inclusiv sucuri de fructe, siropuri), dulciurilor rafinate, băuturilor îndulcite.</li>
-                                <li><b>Alcool:</b> Eliminare completă și permanentă.</li>
-                                <li><b>Carbohidrați complecși:</b> Consum cu moderație, alegând surse bogate în fibre (cereale integrale, leguminoase, legume).</li>
-                                <li><b>Proteine slabe:</b> Carne slabă, pește (nu gras inițial), leguminoase.</li>
-                            </ul>
-                        </li>
-                        <li><b>Fibre solubile:</b> Creșterea aportului de fibre solubile (ovăz, orz, leguminoase, mere, citrice) pentru a reduce absorbția grăsimilor și colesterolului.</li>
-                        <li><b>Acizi grași Omega-3 (EPA/DHA):</b> Sub supraveghere medicală, doze mari de Omega-3 pot reduce semnificativ trigliceridele.</li>
-                        <li><b>Niacină (Vitamina B3):</b> Sub formă de acid nicotinic, poate reduce trigliceridele și crește HDL, dar necesită supraveghere medicală din cauza efectelor secundare.</li>
-                        <li><b>Alte suplimente (sub îndrumare):</b> Berberină (pentru metabolismul lipidelor), crom (pentru sensibilitatea la insulină), antioxidanți (vitamina C, E, seleniu).</li>
-                    </ul>
-                    <h4 class="font-semibold text-gray-700 mb-2">Eliberare emoțională și echilibrare energetică</h4>
-                    <ul class="list-disc list-inside space-y-1 text-gray-600 ml-4">
-                        <li><b>Jurnalism terapeutic:</b> Scrie despre fricile legate de viitor, insecuritate, nevoia de control, resentimente și emoții pe care le "stochezi". Identifică tiparele de "acumulare" emoțională.</li>
-                        <li><b>Terapie și coaching:</b> Lucrul cu un terapeut pentru a procesa traumele nerezolvate, a elibera frica subconștientă și a dezvolta strategii de coping sănătoase. Explorarea relației cu "lipsa" și "abundența".</li>
-                        <li><b>Meditație și vizualizare:</b> Meditații de eliberare a tensiunii și a fricii. Vizualizarea sângelui curgând liber și pur, a grăsimii dizolvându-se și fiind eliminată. Meditații pentru chakra rădăcină (Muladhara) pentru siguranță și împământare, și pentru plexul solar (Manipura) pentru a "digera" emoțiile și a-ți asuma puterea personală.</li>
-                        <li><b>Practici de fluiditate:</b> Dans, Qi Gong, Tai Chi, înot – orice activitate care promovează mișcarea fluidă și eliberarea stagnării fizice și energetice.</li>
-                        <li><b>Afirmații pozitive:</b> Formularea și repetarea de afirmații precum: "Sunt în siguranță și protejat/ă. Eliberez cu ușurință tot ce nu-mi mai servește. Mă încred în fluxul vieții și în abundența sa. Corpul meu este fluid și curat."</li>
-                        <li><b>Lucrul cu elementul Pământ și Apă:</b> Echilibrarea energiilor asociate cu acumularea (Pământ) și fluiditatea (Apă). Conștientizarea modului în care te "hrănești" (fizic și emoțional).</li>
-                    </ul>
-                `
-            },
-            {
-                title: "Stil de viață și managementul stresului",
-                content: `
-                    <p class="text-gray-600 mb-4">Stresul cronic poate agrava dezechilibrele metabolice. Practici precum yoga, respirația profundă, mindfulness reduc nivelul de cortizol și susțin echilibrul hormonal.</p>
-                    <ul class="list-disc list-inside space-y-1 text-gray-600 ml-4">
-                        <li><b>Activitate fizică regulată:</b> Exercițiile fizice (în special cele aerobice, după stabilizarea inițială) ajută la arderea trigliceridelor, la îmbunătățirea sensibilității la insulină și la reducerea grăsimii viscerale. Începeți gradual și sub supraveghere medicală.</li>
-                        <li><b>Somn odihnitor:</b> Asigurarea unui somn de 7-8 ore pe noapte este crucială pentru regenerarea celulară, echilibrul hormonal și metabolic.</li>
-                        <li><b>Evitarea toxinelor:</b> Reducerea expunerii la aditivi alimentari, pesticide, metale grege, care pot suprasolicita ficatul și perturba metabolismul.</li>
-                    </ul>
-                    <div class="disclaimer text-sm text-red-700 bg-red-50 p-4 rounded-lg border border-red-300 mt-6">
-                        <b>Declinarea responsabilității:</b> Informațiile prezentate aici sunt doar cu scop educațional și informativ și nu constituie sfaturi medicale. <i>Hipertrigliceridemia severă (>1000 mg/dL)</i> este o urgență medicală care necesită evaluare și tratament imediat de către un medic specialist, pentru a preveni complicații grave precum pancreatita acută. Nu trebuie să vă bazați doar pe aceste informații pentru a diagnostica sau trata o afecțiune. Consultați întotdeauna un medic sau un specialist calificat pentru orice problemă de sănătate. Abordările holistice sunt complementare și nu înlocuiesc tratamentul medical convențional.
-                    </div>
-                `
-            }
-        ];
-
-        hipertrigliceridemieData.forEach((item, index) => {
-            const itemElement = document.createElement('div');
-            itemElement.className = 'accordion-item';
-            itemElement.innerHTML = `
-                <button class="accordion-button">
-                    <span class="flex items-center gap-4">
-                        <span class="text-2xl">💡</span>
-                        <span>${item.title}</span>
-                    </span>
-                    <span class="accordion-icon text-2xl font-light text-gray-500">+</span>
-                </button>
-                <div class="accordion-content">
-                    ${item.content}
                 </div>
-            `;
-            hipertrigliceridemieAccordion.appendChild(itemElement);
-        });
+            `).join('');
 
-        const hiperAccordionButtons = document.querySelectorAll('#hipertrigliceridemieAccordion .accordion-button');
-        hiperAccordionButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const content = button.nextElementSibling;
-                const isOpen = button.classList.contains('open');
+            container.querySelectorAll('.accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.parentElement.nextElementSibling;
+                    const isExpanded = button.getAttribute('aria-expanded') === 'true';
 
-                hiperAccordionButtons.forEach(btn => {
-                    btn.classList.remove('open');
-                    btn.nextElementSibling.classList.remove('open');
-                    btn.nextElementSibling.style.maxHeight = null;
-                    btn.nextElementSibling.style.padding = '0 1.5rem';
+                    // Optional: Close all other accordions
+                    container.querySelectorAll('.accordion-button').forEach(btn => {
+                        if (btn !== button) {
+                            btn.classList.remove('open');
+                            btn.setAttribute('aria-expanded', 'false');
+                            btn.parentElement.nextElementSibling.classList.remove('open');
+                            btn.parentElement.nextElementSibling.style.maxHeight = null;
+                            btn.parentElement.nextElementSibling.style.padding = '0 1.5rem';
+                        }
+                    });
+
+                    button.setAttribute('aria-expanded', !isExpanded);
+                    button.classList.toggle('open');
+                    content.classList.toggle('open');
+                    
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = null;
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                    }
                 });
-
-                if (!isOpen) {
-                    button.classList.add('open');
-                    content.classList.add('open');
-                    content.style.maxHeight = content.scrollHeight + "px";
-                }
             });
-        });
+        }
 
-        // Data for Plan Actiune Accordion (New main tab)
-        const planActiuneData = [
-            {
-                icon: '1️⃣',
-                title: "Toleranță zero pentru zahăr și carbohidrați rafinați",
-                content: `
-                    <p class="mb-2">Acesta este pilonul central, non-negociabil. Ficatul tău funcționează ca o "fabrică" metabolică. Când este inundat cu zahăr (în special fructoză din sucuri, dulciuri, sirop de porumb) și carbohidrați cu absorbție rapidă (făină albă, orez alb), activează la maximum procesul de <b>lipogeneză de novo</b> – producția de noi trigliceride. Trebuie să închidem această fabrică.</p>
-                    <p><b>Acțiune concretă:</b> Eliminarea totală a băuturilor îndulcite, produselor de patiserie, dulciurilor, mierii, siropurilor, pâinii albe, pastelor din făină albă, orezului alb și a cerealelor de mic dejun cu zahăr – toți carbohidrații simpli.</p>
-                `
-            },
-            {
-                icon: '2️⃣',
-                title: "Eliminarea completă a alcoolului",
-                content: `
-                    <p class="mb-2">Alcoolul este un inamic direct și puternic. Acționează pe trei căi: este dens caloric, stimulează direct producția hepatică de trigliceride și are un efect toxic direct asupra pancreasului, sensibilizându-l la alte agresiuni. În contextul unei hipertrigliceridemiei severe, nu există "consum moderat".</p>
-                    <p><b>Acțiune concretă:</b> Renunțarea totală la orice formă/cantitate de băutură alcoolică (bere, vin, spirtoase).</p>
-                `
-            },
-            {
-                icon: '3️⃣',
-                title: "Prioritizarea proteinelor de calitate (ținta: 1.2 - 1.6 g/kg corp)",
-                content: `
-                    <p class="mb-2">Proteinele vor fi fundamentul sațietății tale. Au cel mai mare efect termic (consumă calorii pentru a fi digerate) și stabilizează glicemia. Înlocuind carbohidrații cu proteine, reducem materia primă pentru producția de trigliceride.</p>
-                    <p><b>Acțiune concretă:</b> Fiecare masă principală va conține o sursă de proteină slabă: piept de pui/curcan fără piele, pește alb sau gras, ouă, leguminoase (linte, năut, fasole), tofu, iaurt grecesc slab, brânză de vaci slabă. Este recomandat și chiar obligatoriu să luăm în calcul un supliment proteic de calitate (izolat proteic din zer sau surse vegetale) pentru a atinge ținta zilnică.</p>
-                `
-            },
-            {
-                icon: '4️⃣',
-                title: "Umplerea farfuriei cu fibre (ținta: peste 30-40 g/zi)",
-                content: `
-                    <p class="mb-2">Fibrele, în special cele solubile, sunt un instrument strategic. Ele formează un gel în intestin care încetinește absorbția zaharurilor, previne vârfurile de insulină și se leagă de grăsimi și colesterol, ajutând la eliminarea lor.</p>
-                    <p><b>Acțiune concretă:</b> Consumul masiv de legume non-amidonoase și a cruciferelor (broccoli, conopidă, spanac, kale, varză, ardei, castraveți), includerea zilnică a leguminoaselor, a rădăcinoaselor, a suplimentelor de fibre, a semințelor de psyllium, in sau chia.</p>
-                `
-            },
-            {
-                icon: '5️⃣',
-                title: "Terapia cu acizi grași omega-3 (EPA & DHA)",
-                content: `
-                    <p class="mb-2">Aceasta este o intervenție cu grad farmaceutic. Numeroase studii clinice și ghiduri medicale (inclusiv American Heart Association) recomandă doze terapeutice de omega-3 pentru hipertrigliceridemia severă. Acestea acționează prin inhibarea sintezei și asamblării trigliceridelor în ficat.</p>
-                    <p><b>Acțiune concretă:</b> Consum de pește gras (somon sălbatic, macrou, hering, sardine) de 3-4 ori pe săptămână. Suplimentar, vom introduce un supliment de omega-3 cu biodisponibilitate crescută, concentrat în EPA și DHA, într-o doză zilnică de <b>2-4 grame de EPA+DHA combinat</b>, doză ce va fi ajustată în funcție de răspunsul biochimic.</p>
-                `
-            },
-            {
-                icon: '6️⃣',
-                title: "Construirea meselor în jurul plantelor verzi",
-                content: `
-                    <p class="mb-2">Legumele cu frunze verzi și cele crucifere trebuie să devină baza farfuriei tale. Au o densitate calorică mică și o densitate nutritivă uriașă. Oferă volum, sațietate, fibre și fitonutrienți cu rol antiinflamator.</p>
-                    <p><b>Acțiune concretă:</b> Cel puțin jumătate din farfuria de la prânz și cină va fi ocupată de salate, legume la abur sau la grătar. Smoothie-urile vor fi predominant verzi (spanac, castravete, apio), nu pe bază de fructe.</p>
-                `
-            },
-            {
-                icon: '7️⃣',
-                title: "Renunțarea la alimentele ultra-procesate",
-                content: `
-                    <p class="mb-2">Acestea nu sunt alimente, ci produse industriale, proiectate pentru a fi hiper-palatabile. Sunt vectorii principali pentru zahăr, sare, grăsimi trans, uleiuri vegetale rafinate pro-inflamatorii (omega-6 în exces) și aditivi chimici.</p>
-                    <p><b>Acțiune concretă:</b> Va trebui să înveți să citești etichetele. Dacă lista de ingrediente este lungă și conține termeni pe care nu îi recunoști, produsul nu are ce căuta în coșul de cumpărături. Gătește acasă din ingrediente integrale.</p>
-                `
-            },
-            {
-                icon: '8️⃣',
-                title: "Integrarea exercițiilor fizice ca medicament",
-                content: `
-                    <p class="mb-2">Activitatea fizică este un instrument independent și extrem de potent. Are un dublu mecanism de acțiune: utilizarea trigliceridelor ca sursă de combustibil și creșterea masei musculare.</p>
-                    <p><b>Acțiune concretă:</b> Îți sttabilesc un program progresiv, țintind un minim de 150 de minute de activitate cardio de intensitate moderată pe săptămână, la care vom putea adăuga 2-3 sesiuni de antrenament de forță.</p>
-                `
-            },
-            {
-                icon: '9️⃣',
-                title: "Managementul greutății corporale ca obiectiv cheie",
-                content: `
-                    <p class="mb-2">Fiecare kilogram pierdut, în special din grăsimea viscerală (cea din jurul organelor), se traduce printr-o îmbunătățire a sensibilității la insulină și o scădere a producției de trigliceride. O scădere de 5-10% din greutatea corporală poate reduce trigliceridele cu 20-30%. Acest punct nu este o acțiune separată, ci rezultatul direct al implementării corecte a punctelor 1-8.</p>
-                    <p><b>Acțiune concretă:</b> Vom monitoriza greutatea săptămânal.</p>
-                `
-            },
-            {
-                icon: '🔟',
-                title: "Angajament, monitorizare și parteneriat",
-                content: `
-                    <p class="mb-2">Acest plan necesită un angajament total. Rolul meu este să te ghidez, să te sprijin, să ajustăm planul în funcție de răspunsul organismului tău și să îți ofer suportul necesar.</p>
-                    <p><b>Acțiune concretă:</b> Vom avea întâlniri regulate (minim 30 de întâlniri față în față aici în club în următoarele două luni, la care adăugăm și orele de sport și mișcare) pentru a evalua progresul. Vom repeta analizele de sânge (profilul lipidic) la intervale stabilite (de obicei la 6-8 săptămâni inițial) pentru a măsura obiectiv eficiența intervenției și pentru a face ajustările fine necesare.</p>
-                `
-            }
-        ];
-
-        planActiuneData.forEach((item, index) => {
-            const itemElement = document.createElement('div');
-            itemElement.className = 'accordion-item';
-            itemElement.innerHTML = `
-                <button class="accordion-button">
-                    <span class="flex items-center gap-4">
-                        <span class="text-2xl">${item.icon}</span>
-                        <span>${item.title}</span>
-                    </span>
-                    <span class="accordion-icon text-2xl font-light text-gray-500">+</span>
-                </button>
-                <div class="accordion-content">
-                    ${item.content}
-                </div>
-            `;
-            planActiuneAccordion.appendChild(itemElement);
-        });
-
-        const planActiuneButtons = document.querySelectorAll('#planActiuneAccordion .accordion-button');
-        planActiuneButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const content = button.nextElementSibling;
-                const isOpen = button.classList.contains('open');
-
-                planActiuneButtons.forEach(btn => {
-                    btn.classList.remove('open');
-                    btn.nextElementSibling.classList.remove('open');
-                    btn.nextElementSibling.style.maxHeight = null;
-                    btn.nextElementSibling.style.padding = '0 1.5rem';
-                });
-
-                if (!isOpen) {
-                    button.classList.add('open');
-                    content.classList.add('open');
-                    content.style.maxHeight = content.scrollHeight + "px";
-                }
-            });
-        });
-
-        // Initialize global variables
-        daySelector = document.getElementById('daySelector');
-        weekSelector = document.getElementById('weekSelector');
-        mealPlanDisplay = document.getElementById('mealPlanDisplay');
-        weeklyPlanDisplay = document.getElementById('weeklyPlanDisplay');
-        fullPlanTableBody = document.getElementById('fullPlanTableBody');
-        wellnessAccordion = document.getElementById('wellnessAccordion'); /* Corrected: Changed from 'accordion' to 'wellnessAccordion' */
-        hipertrigliceridemieAccordion = document.getElementById('hipertrigliceridemieAccordion');
-        planActiuneAccordion = document.getElementById('planActiuneAccordion');
-
-
-        // Initial setup
+        // --- INITIALIZATION ---
         populateDaySelector();
-        showDay(1); // Show day 1 by default
-        populateFullPlanTable(); // Populate the full table once
-        showWeek(1); // Show week 1 by default
+        populateFullTable();
+        createAccordion(wellnessAccordion, wellnessData);
+        createAccordion(hipertrigliceridemieAccordion, hipertrigliceridemieData);
+        createAccordion(planActiuneAccordion, planActiuneData);
 
-        // Initialize the first main tab on load
-        openMainTab('introducere'); 
-        // Initialize the first sub-tab for meal plan
-        // This will be called when the 'planMese' tab is opened
+        if (daySelector) {
+            daySelector.addEventListener('change', (e) => showDay(e.target.value));
+            showDay(1); // Show day 1 by default
+        }
+        if (weekSelector) {
+            weekSelector.addEventListener('change', (e) => showWeek(e.target.value));
+            showWeek(1); // Show week 1 by default
+        }
+        
+        // Set default main tab and sub-tab
+        openMainTab({ currentTarget: document.getElementById('introducere-button') }, 'introducere');
+        openSubTab({ currentTarget: document.getElementById('dailyPlanView-button') }, 'dailyPlanView');
     });
-    </script>
+</script>
+
 </body>
 </html>
