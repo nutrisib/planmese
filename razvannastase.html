@@ -3,163 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ReDefine 1.0 (Optimizat)</title>
+    <title>ReDefine 2.0 - Plan de Creștere în Greutate</title>
+    
+    <!-- Link către fișierul de stiluri CSS -->
+    <link rel="stylesheet" href="style.css">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Copyrights: dr.ing. Radu Pascu - 2025 -->
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #F8F7F4;
-            color: #333333;
-        }
-        .main-container { max-width: 900px; margin: 2rem auto; padding: 1rem; }
-        .card { background-color: #FFFFFF; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); padding: 1.5rem; margin-bottom: 1.5rem; border: 1px solid #E5E7EB; }
-        .meal-card { display: flex; flex-direction: column; gap: 1rem; padding: 1rem; border-left: 4px solid; margin-bottom: 1rem; border-radius: 0 8px 8px 0; }
-        .meal-card-breakfast { border-color: #FBBF24; background-color: #FFFBEB; }
-        .meal-card-snack { border-color: #60A5FA; background-color: #EFF6FF; }
-        .meal-card-lunch { border-color: #818CF8; background-color: #EEF2FF; }
-        .meal-card-dinner { border-color: #A78BFA; background-color: #F5F3FF; }
-        b { font-weight: 600; }
-        .tab-buttons { display: flex; border-bottom: 1px solid #D1D5DB; margin-bottom: 1.5rem; justify-content: center; flex-wrap: wrap; gap: 0.5rem; }
-        .tab-button { padding: 0.75rem 1.5rem; border: none; background-color: transparent; cursor: pointer; font-weight: 600; color: #6B7280; transition: all 0.2s ease-in-out; border-bottom: 3px solid transparent; margin-bottom: -2px; }
-        .tab-button.active { color: #4f46e5; border-bottom-color: #4f46e5; }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
-        .sub-tab-buttons { display: flex; justify-content: center; margin-bottom: 1.5rem; gap: 1rem; border-bottom: 1px solid #E5E7EB; padding-bottom: 1rem; }
-        .sub-tab-button { padding: 0.5rem 1rem; border-radius: 8px; border: 1px solid #D1D5DB; background-color: white; cursor: pointer; font-weight: 500; color: #4B5563; transition: all 0.2s ease-in-out; }
-        .sub-tab-button.active { background-color: #4f46e5; color: white; border-color: #4f46e5; }
-        .sub-tab-button:hover:not(.active) { background-color: #F3F4F6; }
-        .sub-tab-content { display: none; }
-        .sub-tab-content.active { display: block; }
-        .accordion-item { border-bottom: 1px solid #e5e7eb; }
-        .accordion-button { width: 100%; padding: 1rem; display: flex; justify-content: space-between; align-items: center; background-color: #fff; border: none; text-align: left; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: background-color 0.2s ease; }
-        .accordion-button:hover { background-color: #f9fafb; }
-        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out, padding 0.3s ease-out; background-color: #f9fafb; padding: 0 1.5rem; }
-        .accordion-content.open { padding: 1.5rem; }
-        .accordion-icon { transition: transform 0.3s ease; }
-        .accordion-button.open .accordion-icon { transform: rotate(45deg); }
-        .full-plan-table-container { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-        .full-plan-table { width: 100%; border-collapse: collapse; margin-top: 1rem; min-width: 800px; }
-        .full-plan-table th, .full-plan-table td { border: 1px solid #E5E7EB; padding: 0.75rem; text-align: left; vertical-align: top; font-size: 0.875rem; }
-        .full-plan-table th { background-color: #F3F4F6; font-weight: 600; color: #4B5563; }
-        .full-plan-table tr:nth-child(even) { background-color: #F9FAFB; }
-        .full-plan-table .meal-row td:first-child { font-weight: 500; }
-        .full-plan-table .total-row td { font-weight: 700; background-color: #EEF2FF; color: #4338CA; }
-        .print-button { display: inline-block; padding: 0.75rem 1.5rem; background-color: #48bb78; color: white; text-align: center; border-radius: 8px; text-decoration: none; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background-color 0.3s ease; border: none; }
-        .print-button:hover { background-color: #3f9e65; }
-        .macro-bar-container { display: flex; width: 100%; height: 1.5rem; border-radius: 8px; overflow: hidden; background-color: #e5e7eb; }
-        .macro-bar-carbs { background-color: #ef4444; }
-        .macro-bar-protein { background-color: #f59e0b; }
-        .macro-bar-fat { background-color: #3b82f6; }
-        .info-table { width: 100%; border-collapse: collapse; margin-top: 1rem; background-color: #ffffff; border-radius: 8px; overflow: hidden; }
-        .info-table th, .info-table td { border: 1px solid #E5E7EB; padding: 0.75rem; text-align: left; font-size: 0.9rem; }
-        .info-table th { background-color: #f3f4f6; font-weight: 600; color: #4b5563; }
-        .info-table tr:nth-child(even) { background-color: #f9fafb; }
-        .info-table ul, .info-table ol { list-style-position: inside; padding-left: 0.5rem; }
-        .info-table ul li, .info-table ol li { margin-bottom: 0.5rem; }
-        .list-circle { list-style-type: circle; margin-left: 1rem; }
-        .info-table ol { list-style-type: decimal; }
-    </style>
+
+    <!-- Link către fișierul JavaScript (la finalul body pentru performanță) -->
 </head>
 <body class="antialiased">
 
     <div class="main-container">
         
         <header class="text-center mb-8">
-            <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">ReDefine 1.0</h1>
-            <p class="text-lg text-gray-600">Program de redefinire corporală - o abordare holistică pentru sănătate și bunăstare</p>
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">ReDefine 2.0</h1>
+            <p class="text-lg text-gray-600">Plan de creștere în greutate și tonifiere musculară</p>
         </header>
 
         <div class="tab-buttons">
             <button class="tab-button active" data-tab="introducere">🏠 Introducere</button>
-            <button class="tab-button" data-tab="wellnessPiloni">🧘‍♀️ 8xWellness</button>
-            <button class="tab-button" data-tab="hipertrigliceridemieInfo">🩺 Hipertrigliceridemie</button>
-            <button class="tab-button" data-tab="planActiune">📋 Plan de Acțiune</button>
+            <button class="tab-button" data-tab="infoIngrasare">💡 Ghid pentru Creștere în Greutate</button>
             <button class="tab-button" data-tab="planMese">🥑 Plan de Mese</button>
-            <button class="tab-button" data-tab="planMiscareSport">🏃‍♂️ Mișcare & Sport</button>
+            <button class="tab-button" data-tab="planMiscareSport">🏃‍♀️ Plan de Mișcare</button>
             <button class="tab-button" data-tab="recomandariCarti">📚 Recomandări cărți</button>
         </div>
 
         <div id="introducere" class="tab-content active">
             <div class="card">
-                <h2 class="text-2xl font-bold text-gray-700 mb-4">Înțelegerea provocării: hipertrigliceridemiei și surplusului de greutate</h2>
-                <p class="text-gray-600 mb-4">Acest plan este conceput pentru un bărbat de 35 de ani, medic stomatolog, cu hipertrigliceridemie severă, un indice de masă corporală (IMC) de 29 (indicând supraponderalitate) și un diametru abdominal de peste 100 cm, sugerând o acumulare semnificativă de grăsime viscerală. Aceste condiții impun o abordare cuprinzătoare și holistică, esențială pentru îmbunătățirea stării de sănătate.</p>
-                <p class="text-gray-600 mb-4">Hipertrigliceridemia, alături de surplusul de greutate și grăsimea viscerală, crește riscul de afecțiuni cardiovasculare, diabet de tip 2 și alte complicații metabolice. O abordare integrată, care vizează atât nutriția, cât și stilul de viață, este crucială pentru detoxifierea organismului, diminuarea nivelului de trigliceride și reducerea grăsimii viscerale.</p>
-                <h2 class="text-2xl font-bold text-gray-700 mb-4 mt-8">Recâștigă-ți vitalitatea: un parteneriat pentru transformare</h2>
-                <p class="text-gray-600 mb-4">Acesta este drumul pe care trebuie să pornim. Este un drum solicitant, dar la capătul lui se află nu doar un număr mai mic pe buletinul de analize, ci recâștigarea controlului asupra sănătății tale și eliminarea unui risc vital. Este șansa ta de a te elibera de povara îngrijorării și de a redescoperi bucuria unei vieți pline de energie și claritate.</p>
-                <p class="text-gray-600 mb-4">Imaginează-ți: o dimineață în care te trezești plin/ă de vitalitate, fără "ceața mentală", cu o energie care te propulsează prin zi. O seară în care te poți relaxa cu adevărat, știind că ai făcut tot ce a depins de tine pentru sănătatea ta. Această transformare nu este doar fizică; este o eliberare emoțională, o reconectare cu propria putere interioară, cu acel sentiment de siguranță și control pe care poate l-ai pierdut.</p>
-                <p class="text-gray-600 mb-4">Eu sunt aici să te susțin la fiecare pas. Îți ofer nu doar un plan, ci un parteneriat. Am cunoștințele științifice, experiența practică și instrumentele necesare (inclusiv <b>suplimente premium</b> selectate cu grijă pentru biodisponibilitate maximă și eficiență, care vor amplifica rezultatele acestui plan) pentru a te ghida în această călătorie. Fiecare întâlnire, fiecare ajustare a planului, fiecare sfat este dedicat succesului tău. Nu ești singur/ă în această luptă.</p>
-                <p class="text-gray-600">Investește în sănătatea ta acum. Știi că ești important pentru familia ta. Mai mult, ești un tânăr tătic. Lasă-mă să te ajut să dezamorsezi această "bombă metabolică" și să construim împreună o fundație solidă pentru o sănătate durabilă și o viață împlinită. Contactează-mă astăzi pentru a începe această transformare vitală. Meriți să trăiești la potențialul tău maxim!</p>
+                <h2 class="text-2xl font-bold text-gray-700 mb-4">Construiește-ți puterea: o nouă viziune asupra corpului tău</h2>
+                <p class="text-gray-600 mb-4">Acest plan este dedicat unei tinere studente de 20 de ani, cu o greutate de 40 kg, care își dorește să câștige în greutate într-un mod sănătos, construind masă musculară și tonifiindu-și corpul. Obiectivul nu este doar un număr pe cântar, ci dobândirea unei noi forțe, vitalități și a unei încrederi depline în propria persoană.</p>
+                <p class="text-gray-600 mb-4">Dificultatea de a câștiga în greutate (constituție ectomorfă) necesită o abordare la fel de structurată și inteligentă ca un plan de slăbire. Cheia este un surplus caloric controlat, bazat pe alimente dense nutritiv, combinat cu un program de antrenament de forță care să semnalizeze corpului să construiască mușchi, nu doar să depună grăsime.</p>
+                <h2 class="text-2xl font-bold text-gray-700 mb-4 mt-8">O călătorie către forță și încredere</h2>
+                <p class="text-gray-600 mb-4">Acest program este mai mult decât un plan alimentar și de sport; este o invitație la a-ți redescoperi și construi puterea interioară și exterioară. Fiecare masă este o cărămidă, fiecare antrenament este fundația. Vei învăța să-ți hrănești corpul pentru performanță și creștere, nu doar pentru subzistență.</p>
+                <p class="text-gray-600">Imaginează-ți cum te vei simți având mai multă energie la cursuri, forța de a-ți depăși limitele în sala de sport și, cel mai important, încrederea care vine odată ce realizezi de ce ești capabilă. Ești în controlul acestei transformări, iar eu sunt aici pentru a-ți oferi harta și uneltele necesare. Hai să construim împreună cea mai puternică versiune a ta!</p>
             </div>
             <footer class="text-center mt-8 text-sm text-gray-500">
                 Copyrights: dr.ing. Radu Pascu - 2025
             </footer>
         </div>
 
-        <div id="wellnessPiloni" class="tab-content">
+        <div id="infoIngrasare" class="tab-content">
             <div class="card p-0">
-                <h2 class="text-2xl font-bold text-gray-700 mb-4 p-6 text-center">Wellness</h2>
-                <p class="text-gray-600 mb-4 px-6">Wellness-ul total este o abordare holistică a sănătății, care recunoaște interconectarea dintre minte, corp și spirit. Nu se referă doar la absența bolii, ci la o stare activă de bunăstare optimă și de împlinire în toate aspectele vieții. Pentru a atinge obiectivele de sănătate și a susține bunăstarea generală, este esențial să abordăm nu doar nutriția și mișcarea, ci și aspecte precum sănătatea mentală, relațiile sociale, dezvoltarea personală și mediul înconjurător. Acest plan vă ghidează pas cu pas în cultivarea fiecărui pilon al wellness-ului. Vom explora împreună cei 8 piloni esențiali ai wellness-ului, fiecare având un rol crucial în atingerea unei stări de echilibru și sănătate optimă.</p>
-                <div id="wellnessAccordion"></div>
+                <h2 class="text-2xl font-bold text-gray-700 mb-4 p-6 text-center">Ghid pentru Creșterea Sănătoasă în Greutate</h2>
+                <p class="text-gray-600 mb-4 px-6">A fi subponderal poate prezenta propriul set de provocări, atât fizice, cât și emoționale. O greutate corporală foarte scăzută (sugerată de un Indice de Masă Corporală sub 18.5) nu este doar o problemă estetică, ci poate afecta funcționarea optimă a organismului. Acest ghid explică de ce este important să abordăm această problemă și cum o putem face corect.</p>
+                <div id="ingrasareAccordion"></div>
             </div>
             <footer class="text-center mt-8 text-sm text-gray-500">
                 Copyrights: dr.ing. Radu Pascu - 2025
             </footer>
         </div>
-
-        <div id="hipertrigliceridemieInfo" class="tab-content">
-            <div class="card p-0">
-                <h2 class="text-2xl font-bold text-gray-700 mb-4 p-6 text-center">Hipertrigliceridemia severă: o analiză holistică - cauze fizice și emoționale</h2>
-                <p class="text-gray-600 mb-4 px-6 text-center">Trigliceridele (grăsimile) sunt principala formă de energie stocată de organism. Ele circulă în sânge pentru a fi utilizate imediat de celule sau depozitate în țesutul adipos. Când analizele tale de sânge indică valori care depășesc <b>1000 mg/dL</b>, intrăm în teritoriul <b>hipertrigliceridemiei severe</b>. La acest nivel, sângele tău își schimbă proprietățile fizice; devine lactescent, opac, similar ca aspect cu laptele. Vâscozitatea sângelui tău crește, iar microcirculația la nivelul organelor delicate este îngreunată.</p>
-                <div id="hipertrigliceridemieAccordion"></div>
-            </div>
-            <footer class="text-center mt-8 text-sm text-gray-500">
-                Copyrights: dr.ing. Radu Pascu - 2025
-            </footer>
-        </div>
-
-        <div id="planActiune" class="tab-content">
-            <div class="card p-0">
-                <h2 class="text-2xl font-bold text-gray-700 mb-4 p-6 text-center">Plan de acțiune în 10 puncte: o strategie terapeutică pentru viață</h2>
-                <div id="planActiuneAccordion"></div>
-            </div>
-            <footer class="text-center mt-8 text-sm text-gray-500">
-                Copyrights: dr.ing. Radu Pascu - 2025
-            </footer>
-        </div>
-
+        
         <div id="planMese" class="tab-content">
             <div class="card">
-                <h2 class="text-2xl font-bold text-gray-700 mb-4 text-center">Obiective și principii nutriționale</h2>
-                <p class="mb-4 text-gray-700 text-center">Acest plan alimentar vizează un aport de aproximativ <b>1900 kcal/zi</b>, fiind conceput pentru detoxifiere și diminuarea trigliceridelor.</p>
+                <h2 class="text-2xl font-bold text-gray-700 mb-4 text-center">Obiective și principii nutriționale pentru creștere</h2>
+                <p class="mb-4 text-gray-700 text-center">Acest plan alimentar vizează un aport de aproximativ <b>1900 kcal/zi</b>, cu un aport proteic constant pentru a susține creșterea în masă musculară.</p>
                 <div class="grid md:grid-cols-2 gap-6">
                     <div>
                         <ul class="list-disc list-inside space-y-2 text-gray-600">
-                            <li><b>Obiectiv:</b> Detoxifiere, diminuare trigliceride, reducerea grăsimii viscerale.</li>
+                            <li><b>Obiectiv:</b> Creștere în greutate prin masă musculară.</li>
                             <li><b>Aport caloric țintă:</b> ~1900 kcal/zi.</li>
-                            <li><b>Aport proteic țintă:</b> Minim 140 g/zi.</li>
-                             <li><b>Aport grăsimi țintă:</b> Minim 60 g/zi.</li>
-                            <li><b>Aport fibre țintă:</b> Minim 30 g/zi.</li>
+                            <li><b>Aport proteic țintă:</b> ~100 g/zi.</li>
+                            <li><b>Aport grăsimi sănătoase:</b> ~50 g/zi.</li>
+                             <li><b>Aport carbohidrați țintă:</b> ~263 g/zi.</li>
                             <li><b>Frecvența meselor:</b> 3 mese principale + 2 gustări.</li>
-                            <li><b>Alimente cheie:</b> Leguminoase, nuci, semințe, ulei de măsline, pește gras, legume, fructe de pădure.</li>
-                            <li><b>Restricții:</b> Zaharuri, fructe dulci, produse procesate, grăsimi trans/saturate, alcool, mezeluri.</li>
                         </ul>
                     </div>
                     <div>
                         <h3 class="font-semibold text-gray-700 mb-2">Distribuția macronutrienților (țintă)</h3>
                         <div class="space-y-2">
                             <div>
-                                <div class="flex justify-between mb-1"><span class="text-sm font-medium text-red-700">Carbohidrați complecși (aprox. 30%)</span></div>
-                                <div class="macro-bar-container"><div class="macro-bar-carbs" style="width: 30%"></div></div>
+                                <div class="flex justify-between mb-1"><span class="text-sm font-medium text-red-700">Carbohidrați (~55%)</span></div>
+                                <div class="macro-bar-container"><div class="macro-bar-carbs" style="width: 55%"></div></div>
                             </div>
                             <div>
-                                <div class="flex justify-between mb-1"><span class="text-sm font-medium text-amber-700">Proteine (aprox. 40%)</span></div>
-                                <div class="macro-bar-container"><div class="macro-bar-protein" style="width: 40%"></div></div>
+                                <div class="flex justify-between mb-1"><span class="text-sm font-medium text-amber-700">Proteine (~21%)</span></div>
+                                <div class="macro-bar-container"><div class="macro-bar-protein" style="width: 21%"></div></div>
                             </div>
                             <div>
-                                <div class="flex justify-between mb-1"><span class="text-sm font-medium text-blue-700">Grăsimi sănătoase (aprox. 30%)</span></div>
-                                <div class="macro-bar-container"><div class="macro-bar-fat" style="width: 30%"></div></div>
+                                <div class="flex justify-between mb-1"><span class="text-sm font-medium text-blue-700">Grăsimi (~24%)</span></div>
+                                <div class="macro-bar-container"><div class="macro-bar-fat" style="width: 24%"></div></div>
                             </div>
                         </div>
                     </div>
@@ -222,76 +146,49 @@
 
         <div id="planMiscareSport" class="tab-content">
              <div class="card">
-                <h2 class="text-2xl font-bold text-gray-700 mb-4 text-center">Plan de mișcare și sport (aprox. 180 min/săptămână)</h2>
-                <p class="text-gray-600 mb-4">Acest plan de mișcare este conceput pentru a susține reducerea trigliceridelor, diminuarea grăsimii viscerale și îmbunătățirea sănătății cardiovasculare. Este important să adaptați intensitatea la nivelul dumneavoastră actual de fitness și să consultați un medic înainte de a începe orice program nou de exerciții, mai ales având în vedere condițiile medicale existente.</p>
+                <h2 class="text-2xl font-bold text-gray-700 mb-4 text-center">Plan de Mișcare pentru Tonifiere și Creștere în Masă Musculară</h2>
+                <p class="text-gray-600 mb-4">Acest plan este conceput pentru a stimula creșterea masei musculare (hipertrofie), esențială pentru o îngrășare sănătoasă și o tonifiere armonioasă. Ne vom concentra pe exerciții de forță, cu progresie treptată în greutăți.</p>
                 <div class="space-y-6">
                     <div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">Obiective principale:</h3>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Principii de bază:</h3>
                         <ul class="list-disc list-inside space-y-1 text-gray-600">
-                            <li><b>Îmbunătățirea sănătății cardiovasculare.</b></li>
-                            <li><b>Accelerarea metabolismului și arderea grăsimilor (în special a celei viscerale).</b></li>
-                            <li><b>Creșterea masei musculare și a forței.</b></li>
-                            <li><b>Reducerea nivelului de stres.</b></li>
+                            <li><b>Supraîncărcarea progresivă:</b> Pentru a crește, mușchii trebuie provocați. Asta înseamnă să crești treptat greutatea, numărul de repetări sau de seturi.</li>
+                            <li><b>Forma corectă > Greutatea:</b> Execuția corectă este crucială pentru a activa mușchii potriviți și a preveni accidentările. Începe cu greutăți mici pentru a învăța mișcarea.</li>
+                            <li><b>Conexiunea minte-mușchi:</b> Concentrează-te pe mușchiul pe care îl lucrezi în timpul fiecărei repetări.</li>
+                            <li><b>Odihna este vitală:</b> Mușchii cresc în perioadele de repaus, nu în timpul antrenamentului. Asigură-te că dormi suficient (7-9 ore).</li>
                         </ul>
                     </div>
                     <div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">Recomandări generale:</h3>
-                        <ul class="list-disc list-inside space-y-1 text-gray-600">
-                            <li><b>Consistență:</b> Cel mai important aspect este regularitatea.</li>
-                            <li><b>Încălzire:</b> Întotdeauna începeți cu 5-10 minute de încălzire ușoară (mers alert, jogging ușor, rotații articulare).</li>
-                            <li><b>Răcire:</b> Terminați cu 5-10 minute de răcire și stretching ușor.</li>
-                            <li><b>Hidratare:</b> Beți apă înainte, în timpul și după exerciții.</li>
-                            <li><b>Ascultați-vă corpul:</b> Nu forțați dacă simțiți durere. Odihna este la fel de importantă ca și exercițiul.</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">Exemplu de plan săptămânal (aprox. 180 min):</h3>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Structura săptămânală (3 zile de antrenament):</h3>
+                         <p class="text-gray-600 mb-2">Acest program se bazează pe 3 antrenamente pe săptămână, permițând suficient timp pentru recuperare. Poți alege zilele care ți se potrivesc, de ex: Luni, Miercuri, Vineri.</p>
                         <ul class="list-disc list-inside space-y-2 text-gray-600">
-                            <li><b>Luni: Antrenament de forță (45 min)</b>
+                            <li><b>Ziua 1: Tren Inferior (Picioare & Fesieri)</b>
                                 <ul class="list-circle list-inside ml-4">
-                                    <li>Exerciții compuse: genuflexiuni, flotări (pe genunchi dacă este necesar), tracțiuni la helcometru, ramat cu gantera.</li>
-                                    <li>3 seturi a 8-12 repetări pentru fiecare exercițiu.</li>
-                                    <li>Concentrați-vă pe formă corectă.</li>
+                                    <li>Genuflexiuni cu bara (sau gantere): 4 seturi x 8-12 repetări</li>
+                                    <li>Fandări cu gantere: 3 seturi x 10-12 repetări pe picior</li>
+                                    <li>Ridicări de bazin (Hip Thrust) cu bara: 4 seturi x 10-15 repetări</li>
+                                    <li>Presă pentru picioare (dacă ai acces): 3 seturi x 10-15 repetări</li>
+                                    <li>Flexii pentru femurali: 3 seturi x 12-15 repetări</li>
                                 </ul>
                             </li>
-                            <li><b>Marți: Cardio moderat (30 min)</b>
+                            <li><b>Ziua 2: Tren Superior (Spate, Umeri, Piept)</b>
                                 <ul class="list-circle list-inside ml-4">
-                                    <li>Mers alert pe bandă, ciclism staționar sau înot.</li>
-                                    <li>Mențineți o intensitate la care puteți susține o conversație, dar sunteți ușor gâfâit.</li>
+                                    <li>Ramat cu gantera: 3 seturi x 8-12 repetări pe braț</li>
+                                    <li>Tracțiuni la helcometru (cu priză largă): 3 seturi x 10-12 repetări</li>
+                                    <li>Împins la piept cu gantere (pe bancă orizontală sau înclinată): 3 seturi x 8-12 repetări</li>
+                                    <li>Presă militară cu gantere (din șezut): 3 seturi x 8-12 repetări</li>
+                                    <li>Ridicări laterale cu gantere pentru umeri: 3 seturi x 12-15 repetări</li>
                                 </ul>
                             </li>
-                            <li><b>Miercuri: Odihnă activă / Mobilitate (30 min)</b>
+                             <li><b>Ziua 3: Full Body & Brațe</b>
                                 <ul class="list-circle list-inside ml-4">
-                                    <li>Yoga blândă, stretching profund, plimbare ușoară în parc.</li>
-                                    <li>Ajută la recuperare și flexibilitate.</li>
+                                    <li>Îndreptări românești cu gantere: 3 seturi x 10-12 repetări</li>
+                                    <li>Flotări (pe genunchi sau standard): 3 seturi x câte repetări poți</li>
+                                    <li>Flexii pentru biceps cu gantere: 3 seturi x 10-12 repetări</li>
+                                    <li>Extensii pentru triceps deasupra capului: 3 seturi x 10-12 repetări</li>
+                                    <li>Scândură (Plank): 3 seturi x 30-60 secunde</li>
                                 </ul>
                             </li>
-                            <li><b>Joi: Antrenament de forță (45 min)</b>
-                                <ul class="list-circle list-inside ml-4">
-                                    <li>Exerciții compuse: îndreptări românești (cu greutate mică inițial), presă militară cu gantere, fandări, abdomene.</li>
-                                    <li>3 seturi a 8-12 repetări.</li>
-                                </ul>
-                            </li>
-                            <li><b>Vineri: Cardio intensitate moderată-mare (30 min)</b>
-                                <ul class="list-circle list-inside ml-4">
-                                    <li>Alergare ușoară, eliptică sau antrenament pe intervale (ex: 1 min intens, 2 min ușor, repetat).</li>
-                                    <li>Încercați să creșteți ritmul cardiac.</li>
-                                </ul>
-                            </li>
-                            <li><b>Sâmbătă: Activitate recreativă (60 min)</b>
-                                <ul class="list-circle list-inside ml-4">
-                                    <li>Drumeție, ciclism în aer liber, tenis, baschet sau orice activitate care vă face plăcere și vă menține activ.</li>
-                                </ul>
-                            </li>
-                            <li><b>Duminică: Odihnă completă.</b></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">Progresie și adaptare:</h3>
-                        <ul class="list-disc list-inside space-y-1 text-gray-600">
-                            <li>Pe măsură ce vă simțiți mai puternic, creșteți treptat greutățile, durata antrenamentelor cardio sau intensitatea.</li>
-                            <li>Dacă timpul este o problemă, puteți împărți sesiunile mai lungi în sesiuni mai scurte (ex. două sesiuni de 15 minute de cardio).</li>
-                            <li>Varietatea este cheia pentru a menține motivația și pentru a lucra diferite grupe musculare.</li>
                         </ul>
                     </div>
                 </div>
@@ -303,49 +200,28 @@
 
         <div id="recomandariCarti" class="tab-content">
             <div class="card">
-                <h2 class="text-2xl font-bold text-gray-700 mb-4 text-center">Recomandări cărți pentru dezvoltare personală</h2>
-                <p class="text-gray-600 mb-6 text-center">O selecție de titluri adecvate unui medic stomatolog de 35 de ani, proaspăt tătic. Cărțile selectate abordează teme relevante pentru dezvoltarea personală, leadership, gândire strategică, echilibru profesional și viața de familie. LECTURĂ PLĂCUTĂ</p>
+                <h2 class="text-2xl font-bold text-gray-700 mb-4 text-center">Recomandări de Cărți pentru Încredere și Dezvoltare</h2>
+                <p class="text-gray-600 mb-6 text-center">O selecție de titluri pentru o tânără studentă, menite să ofere unelte pentru creșterea încrederii în sine, navigarea interacțiunilor sociale și dezvoltare personală.</p>
                 <div class="space-y-6">
                     <div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">1. Cele 7 deprinderi ale persoanelor extrem de eficiente <span class="font-normal text-gray-600">de Stephen Covey</span></h3>
-                        <p class="text-gray-600">Un ghid fundamental pentru productivitate, leadership și principii etice, esențial pentru orice profesionist care dorește să-și maximizeze eficiența și impactul.</p>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">1. Curajul de a fi vulnerabil <span class="font-normal text-gray-600">de Brené Brown</span></h3>
+                        <p class="text-gray-600">O carte fundamentală care redefinește curajul. Brown argumentează că vulnerabilitatea nu este o slăbiciune, ci calea către o viață autentică, conexiuni reale și curaj. Perfectă pentru a depăși teama de a te deschide în fața celorlalți.</p>
                     </div>
                     <div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">2. Gânduri rapide, gânduri lente <span class="font-normal text-gray-600">de Daniel Kahneman</span></h3>
-                        <p class="text-gray-600">O lucrare esențială despre procesele de gândire, deciziile și erorile cognitive, extrem de relevantă pentru un medic care ia decizii complexe zilnic.</p>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">2. Liniștea: Puterea introvertiților într-o lume care nu mai poate tăcea <span class="font-normal text-gray-600">de Susan Cain</span></h3>
+                        <p class="text-gray-600">Această carte este o celebrare a introvertiților. Te va ajuta să înțelegi că stilul tău retras este o superputere, nu un defect, și îți va oferi strategii pentru a prospera într-o lume zgomotoasă, fără a te preface cine nu ești.</p>
                     </div>
                     <div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">3. De la bine la excelent <span class="font-normal text-gray-600">de Jim Collins</span></h3>
-                        <p class="text-gray-600">Analizează ce diferențiază companiile excelente de cele bune, oferind principii aplicabile și în dezvoltarea unei practici medicale de succes.</p>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">3. Mindset: Noua psihologie a succesului <span class="font-normal text-gray-600">de Carol S. Dweck</span></h3>
+                        <p class="text-gray-600">Dweck explică diferența dintre o mentalitate fixă și una de creștere. Este o lectură esențială pentru a înțelege că abilitățile (inclusiv cele sociale) pot fi dezvoltate prin efort și perseverență, ajutându-te să abordezi provocările cu mai mult optimism.</p>
                     </div>
                     <div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">4. Arta de a gândi limpede <span class="font-normal text-gray-600">de Rolf Dobelli</span></h3>
-                        <p class="text-gray-600">Explorează cele mai comune erori de gândire și cum să le evităm, ajutând la luarea unor decizii mai bune în viața personală și profesională.</p>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">4. Cum să ne facem prieteni și să influențăm oamenii <span class="font-normal text-gray-600">de Dale Carnegie</span></h3>
+                        <p class="text-gray-600">Deși titlul poate suna manipulator, cartea este un ghid clasic și plin de respect despre principiile comunicării umane. Oferă sfaturi practice și atemporale despre cum să asculți, să porți o conversație și să construiești relații autentice.</p>
                     </div>
                     <div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">5. Atomic Habits <span class="font-normal text-gray-600">de James Clear</span></h3>
-                        <p class="text-gray-600">Un ghid practic pentru construirea obiceiurilor bune și eliminarea celor proaste, esențial pentru implementarea unui stil de viață sănătos și a disciplinei profesionale.</p>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">6. Corpul își amintește tot <span class="font-normal text-gray-600">de Bessel van der Kolk</span></h3>
-                        <p class="text-gray-600">Deși este o carte despre traumă, oferă o perspectivă profundă asupra legăturii minte-corp și a impactului experiențelor asupra fiziologiei, relevantă pentru un medic care interacționează cu pacienți și diverse condiții umane.</p>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">7. Inteligența emoțională 2.0 <span class="font-normal text-gray-600">de Travis Bradberry și Jean Greaves</span></h3>
-                        <p class="text-gray-600">O continuare practică a conceptului de inteligență emoțională, cu strategii concrete pentru dezvoltarea acesteia, utilă în interacțiunea cu pacienții și echipa.</p>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">8. Sapiens: Scurtă istorie a omenirii <span class="font-normal text-gray-600">de Yuval Noah Harari</span></h3>
-                        <p class="text-gray-600">Oferă o perspectivă amplă asupra evoluției umane și a societăților, stimulând gândirea critică și înțelegerea contextului larg în care operează medicina.</p>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Cărți pentru proaspeți tătici:</h3>
-                    <div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">9. The Expectant Father: The Ultimate Guide for Dads-to-Be <span class="font-normal text-gray-600">de Armin A. Brott și Jennifer Ash</span></h3>
-                        <p class="text-gray-600">Un ghid complet care acoperă toate aspectele sarcinii și primului an al bebelușului din perspectiva tatălui, oferind informații practice și sprijin emoțional.</p>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">10. Be Prepared: A Practical Handbook for New Dads <span class="font-normal text-gray-600">de Gary Greenberg</span></h3>
-                        <p class="text-gray-600">Un manual amuzant și practic, plin de sfaturi utile și ilustrații, care pregătește viitorii și proaspeții tătici pentru realitățile vieții cu un nou-născut.</p>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">5. Arta subtilă a nepăsării <span class="font-normal text-gray-600">de Mark Manson</span></h3>
+                        <p class="text-gray-600">O abordare contra-intuitivă, dar extrem de utilă, a dezvoltării personale. Manson te învață să nu-ți mai faci griji pentru lucrurile nesemnificative și să-ți concentrezi energia pe ceea ce contează cu adevărat pentru tine. Ideală pentru a reduce anxietatea socială legată de părerea celorlalți.</p>
                     </div>
                 </div>
             </div>
@@ -356,389 +232,6 @@
 
     </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        
-        // --- GENERIC TAB SWITCHING LOGIC ---
-        function handleTabSwitch(options) {
-            const { button, buttonSelector, contentSelector, container } = options;
-            if (!button) return;
-            const tabId = button.dataset.tab;
-
-            container.querySelectorAll(buttonSelector).forEach(btn => btn.classList.remove('active'));
-            container.querySelectorAll(contentSelector).forEach(content => {
-                content.classList.remove('active');
-                content.style.display = 'none';
-            });
-
-            button.classList.add('active');
-            const activeContent = container.querySelector(`#${tabId}`);
-            if (activeContent) {
-                activeContent.classList.add('active');
-                activeContent.style.display = 'block';
-            }
-        }
-
-        // --- DOM ELEMENT REFERENCES ---
-        const mainContainer = document.querySelector('.main-container');
-        const planMeseContainer = document.getElementById('planMese');
-        const daySelector = document.getElementById('daySelector');
-        const weekSelector = document.getElementById('weekSelector');
-        const mealPlanDisplay = document.getElementById('mealPlanDisplay');
-        const weeklyPlanDisplay = document.getElementById('weeklyPlanDisplay');
-        const fullPlanTableBody = document.getElementById('fullPlanTableBody');
-        const wellnessAccordion = document.getElementById('wellnessAccordion');
-        const hipertrigliceridemieAccordion = document.getElementById('hipertrigliceridemieAccordion');
-        const planActiuneAccordion = document.getElementById('planActiuneAccordion');
-        
-        // --- EVENT LISTENERS ---
-        mainContainer.querySelectorAll('.tab-button').forEach(button => {
-            button.addEventListener('click', () => handleTabSwitch({ button, buttonSelector: '.tab-button', contentSelector: '.tab-content', container: mainContainer }));
-        });
-
-        if (planMeseContainer) {
-            planMeseContainer.querySelectorAll('.sub-tab-button').forEach(button => {
-                button.addEventListener('click', () => handleTabSwitch({ button, buttonSelector: '.sub-tab-button', contentSelector: '.sub-tab-content', container: planMeseContainer }));
-            });
-        }
-        
-        // --- ACCORDION & STATIC DATA ---
-        const wellnessData = [
-            { icon: '🧘‍♀️', title: 'Wellness fizic', content: 'Reprezintă grija față de corpul nostru prin nutriție adecvată, mișcare regulată și odihnă suficientă. Este fundamentul pe care se construiește întreaga noastră stare de bine.' },
-            { icon: '🧠', title: 'Wellness mental', content: 'Implică o minte activă, deschisă la noi idei și experiențe. Este despre învățare continuă, creativitate și curiozitate. O minte sănătoasă este esențială pentru a naviga provocările vieții.' },
-            { icon: '❤️', title: 'Wellness emoțional', content: 'Se referă la conștientizarea și acceptarea propriilor emoții, precum și la capacitatea de a gestiona stresul și de a construi relații sănătoase. Este despre a fi în contact cu sentimentele noastre și a le exprima într-un mod constructiv.' },
-            { icon: '🤝', title: 'Wellness social', content: 'Presupune construirea și menținerea unor relații sănătoase, de susținere, cu familia, prietenii și comunitatea. Conexiunile sociale puternice sunt un factor protector împotriva multor afecțiuni.' },
-            { icon: '🌱', title: 'Wellness spiritual', content: 'Se referă la sentimentul de scop și sens în viață. Poate fi legat de credințe religioase, valori personale, meditație sau conexiunea cu natura. Este ancora noastră interioară.' },
-            { icon: '🌍', title: 'Wellness de mediu', content: 'Implică recunoașterea impactului pe care mediul înconjurător îl are asupra sănătății noastre și asumarea responsabilității pentru protejarea lui. Un mediu curat și sigur este vital pentru o viață sănătoasă.' },
-            { icon: '💼', title: 'Wellness ocupațional', content: 'Se referă la satisfacția și împlinirea pe care le obținem din munca noastră. Este despre a găsi un echilibru între viața profesională și cea personală și a ne folosi talentele într-un mod care ne aduce bucurie.' },
-            { icon: '�', title: 'Wellness financiar', content: 'Presupune o relație sănătoasă cu banii, gestionarea eficientă a resurselor financiare și planificarea pentru viitor. Stabilitatea financiară reduce stresul și contribuie la starea generală de bine.' },
-        ];
-        const hipertrigliceridemieData = [
-            { title: 'Cauze fizice și factori de risc', content: `<table class="info-table"><thead><tr><th>Factor</th><th>Descriere</th></tr></thead><tbody><tr><td><b>Genetica</b></td><td>Predispoziția familială poate juca un rol important.</td></tr><tr><td><b>Dieta necorespunzătoare</b></td><td>Consumul excesiv de carbohidrați rafinați (pâine albă, paste, dulciuri), zahăr, fructoză și alcool.</td></tr><tr><td><b>Obezitatea și grăsimea viscerală</b></td><td>Excesul de greutate, în special grăsimea acumulată în jurul organelor interne, este un factor major.</td></tr><tr><td><b>Sedentarismul</b></td><td>Lipsa activității fizice regulate încetinește metabolismul și favorizează acumularea de grăsimi.</td></tr><tr><td><b>Afecțiuni medicale</b></td><td>Diabetul de tip 2 necontrolat, hipotiroidismul, sindromul metabolic, bolile renale.</td></tr><tr><td><b>Medicamente</b></td><td>Anumite diuretice, beta-blocante, corticosteroizi.</td></tr></tbody></table>` },
-            { title: 'Cauze emoționale și psihologice', content: `<table class="info-table"><thead><tr><th>Factor</th><th>Descriere</th></tr></thead><tbody><tr><td><b>Stresul cronic</b></td><td>Eliberarea constantă de cortizol ("hormonul stresului") poate crește producția de trigliceride în ficat.</td></tr><tr><td><b>Lipsa somnului</b></td><td>Somnul insuficient sau de slabă calitate dereglează hormonii care controlează apetitul și metabolismul.</td></tr><tr><td><b>Mâncatul emoțional</b></td><td>Utilizarea alimentelor (în special cele bogate în carbohidrați și grăsimi) pentru a gestiona emoții negative precum anxietatea, tristețea sau plictiseala.</td></tr></tbody></table>` },
-            { title: 'Riscuri asociate hipertrigliceridemiei severe', content: `<table class="info-table"><thead><tr><th>Factor</th><th>Descriere</th></tr></thead><tbody><tr><td><b>Pancreatită acută:</b></td><td> O inflamație bruscă și severă a pancreasului, care poate fi fatală.</td></tr><tr><td><b>Boli cardiovasculare:</b></td><td> Risc crescut de ateroscleroză, infarct miocardic și accident vascular cerebral.</td></tr><tr><td><b>Ficat gras (steatoză hepatică):</b></td><td> Acumularea de grăsime în ficat, care poate evolua spre ciroză.</td></tr><tr><td><b>Sindrom metabolic:</b></td><td> O constelație de factori de risc care cresc probabilitatea de a dezvolta boli de inimă, AVC și diabet.</td></tr></tbody></table>` },
-        ];
-        const planActiuneData = [
-            { title: '1. Angajament total și asumarea responsabilității', content: 'Primul pas este decizia fermă de a prelua controlul asupra sănătății. Acest plan nu este o "dietă" temporară, ci o restructurare a stilului de viață. Succesul depinde de angajamentul tău 100%.' },
-            { title: '2. Alimentație antiinflamatoare și săracă în carbohidrați simpli', content: 'Vom elimina complet zahărul, făinoasele albe și produsele procesate. Ne vom concentra pe alimente integrale, bogate în nutrienți: legume, proteine de calitate, grăsimi sănătoase și carbohidrați complecși din surse precum leguminoasele și cerealele integrale (în cantități controlate).' },
-            { title: '3. Aport optim de proteine și fibre', content: 'Proteinele (minim 140g/zi) și fibrele (minim 30g/zi) sunt esențiale pentru sațietate, menținerea masei musculare și sănătatea digestivă. Fiecare masă va fi echilibrată pentru a atinge aceste ținte.' },
-            { title: '4. Hidratare constantă', content: 'Consumul adecvat de apă (minim 2.5-3 litri pe zi) este vital pentru toate procesele metabolice, inclusiv pentru detoxifiere și arderea grăsimilor.' },
-            { title: '5. Mișcare zilnică și antrenament structurat', content: 'Vom integra atât mișcare zilnică (mers pe jos, urcat scări), cât și un program de antrenament structurat (aprox. 180 min/săptămână) care combină exerciții de forță (pentru creșterea masei musculare) cu antrenamente cardio (pentru sănătatea inimii).' },
-            { title: '6. Managementul stresului', content: 'Stresul cronic este un inamic al sănătății metabolice. Vom implementa tehnici de relaxare: exerciții de respirație, meditație ghidată, plimbări în natură. Obiectivul este să reducem nivelul de cortizol.' },
-            { title: '7. Prioritizarea somnului', content: 'Un somn de calitate (7-8 ore pe noapte) este non-negociabil. Somnul reglează hormonii foamei (grelina și leptina) și este esențial pentru recuperare și claritate mentală.' },
-            { title: '8. Suplimentare inteligentă și țintită', content: 'Vom folosi suplimente de înaltă calitate pentru a accelera procesul și a corecta deficiențele. Acestea includ: <ul class="list-disc list-inside ml-4 mt-2"><li><b>Omega-3 (EPA & DHA):</b> Esențiale pentru reducerea trigliceridelor și a inflamației.</li><li><b>Fibre solubile (Psyllium, Beta-glucani):</b> Ajută la controlul glicemiei și la eliminarea colesterolului.</li><li><b>Vitamine și minerale:</b> Pentru a susține funcționarea optimă a organismului în timpul procesului de slăbire.</li></ul>' },
-            { title: '9. Monitorizare și ajustare', content: 'Vom monitoriza progresul prin cântărire săptămânală, măsurători corporale lunare și analize de sânge periodice. Planul va fi ajustat în funcție de rezultate și de feedback-ul tău.' },
-            { title: '10. Educație continuă și dezvoltarea rezilienței', content: 'Scopul meu este să te împuternicesc cu cunoștințele necesare pentru a face alegeri sănătoase pe termen lung. Vei învăța să citești etichete, să înțelegi semnalele corpului tău și să navighezi situațiile sociale fără a-ți sabota progresul.' },
-        ];
-
-        // --- MEAL PLAN ENGINE ---
-        
-        let mealPlanData = [];
-
-        function generateMealPlan() {
-            // --- NUTRITIONAL TARGETS ---
-            const KCAL_TARGET = 1900;
-            const PROTEIN_MIN = 140;
-            const FAT_MIN = 60;
-            const FIBER_MIN = 30;
-            const KCAL_TOLERANCE = 50; // Allow total kcal to be 1900 +/- 50
-
-            // --- FIXED & DYNAMIC MEALS DATABASE ---
-            const breakfast = {
-                name: 'Mic dejun',
-                icon: '☀️',
-                type: 'breakfast',
-                food: 'Shake Herbalife (2 linguri F1 + 2 linguri PDM) cu apă, 1 lingură Fibre de măr și ovăz, 1 lingură Beta Heart.',
-                kcal: 225, protein: 20.5, carbs: 26, fat: 5.5, fiber: 11
-            };
-
-            const lunches = [
-                { food: '200g piept de pui la grătar cu 150g quinoa (crudă) și salată mare de legume (roșii, castraveți, ardei) cu 10ml ulei de măsline.', kcal: 730, protein: 65, carbs: 58, fat: 28, fiber: 15 },
-                { food: '200g somon la cuptor cu 250g cartofi dulci copți și 150g broccoli la abur.', kcal: 750, protein: 48, carbs: 55, fat: 39, fiber: 13 },
-                { food: 'Tocană de linte (150g linte uscată) cu legume (morcov, ceapă, ardei) și 100g orez brun (crud).', kcal: 720, protein: 43, carbs: 125, fat: 5, fiber: 28 },
-                { food: '220g piept de curcan la grătar cu 250g mămăligă (din 60g mălai) și salată de varză cu 10ml ulei de măsline.', kcal: 650, protein: 60, carbs: 55, fat: 22, fiber: 10 },
-                { food: 'Salată mare cu 250g năut (conservă), 150g tofu, 30g nuci, semințe de dovleac (15g) și dressing de iaurt (100g).', kcal: 750, protein: 45, carbs: 55, fat: 40, fiber: 22 },
-            ];
-
-            const snacksWithBar = [
-                { food: '1 Baton proteic Herbalife și un măr verde (150g).', kcal: 220, protein: 11, carbs: 30, fat: 5, fiber: 7 },
-                { food: '1 Baton proteic Herbalife și 150g iaurt grecesc 2%.', kcal: 240, protein: 25, carbs: 20, fat: 7, fiber: 3 },
-                { food: '1 Baton proteic Herbalife și 20g migdale.', kcal: 255, protein: 14, carbs: 19, fat: 13, fiber: 5 },
-            ];
-
-            const otherSnacks = [
-                { food: '150g iaurt grecesc 2% cu 20g semințe de chia și 50g afine.', kcal: 250, protein: 21, carbs: 16, fat: 13, fiber: 9 },
-                { food: '30g migdale crude și 100g fructe de pădure.', kcal: 220, protein: 7, carbs: 15, fat: 16, fiber: 6 },
-                { food: '2 ouă fierte tari și un ardei gras roșu.', kcal: 190, protein: 14, carbs: 7, fat: 11, fiber: 3 },
-                { food: '100g brânză de vaci 2% cu 10g semințe de in și castravete.', kcal: 140, protein: 15, carbs: 5, fat: 7, fiber: 4 },
-            ];
-
-            const dinners = [
-                { food: '220g file de păstrăv la cuptor cu 250g sparanghel și lămâie, cu 10ml ulei de măsline.', kcal: 540, protein: 50, carbs: 10, fat: 35, fiber: 5 },
-                { food: 'Salată Caprese cu 150g mozzarella light, 2 roșii mari și busuioc proaspăt, cu 10ml ulei de măsline.', kcal: 420, protein: 30, carbs: 15, fat: 28, fiber: 4 },
-                { food: 'Supă cremă de linte roșie (din 100g linte uscată) cu 50g crutoane integrale.', kcal: 450, protein: 28, carbs: 75, fat: 4, fiber: 18 },
-                { food: '250g tofu la grătar cu 200g ciuperci sote, usturoi și 10ml ulei de măsline.', kcal: 410, protein: 30, carbs: 15, fat: 27, fiber: 6 },
-                { food: 'Omletă din 4 ouă cu 100g brânză de vaci 2% și salată verde asortată.', kcal: 480, protein: 40, carbs: 8, fat: 32, fiber: 2 },
-                { food: '200g file de cod la cuptor cu salată de fasole verde (200g), usturoi și 10ml ulei de măsline.', kcal: 400, protein: 45, carbs: 15, fat: 18, fiber: 8 },
-            ];
-
-            // --- COMBINATION ENGINE ---
-            const validDailyPlans = [];
-            for (const lunch of lunches) {
-                for (const snack1 of snacksWithBar) {
-                    for (const snack2 of otherSnacks) {
-                        for (const dinner of dinners) {
-                            // Combination 1: Bar is snack 1
-                            let combo1 = [lunch, snack1, snack2, dinner];
-                            let totals1 = {
-                                kcal: breakfast.kcal + combo1.reduce((sum, meal) => sum + meal.kcal, 0),
-                                protein: breakfast.protein + combo1.reduce((sum, meal) => sum + meal.protein, 0),
-                                fat: breakfast.fat + combo1.reduce((sum, meal) => sum + meal.fat, 0),
-                                fiber: breakfast.fiber + combo1.reduce((sum, meal) => sum + meal.fiber, 0),
-                            };
-                            if (totals1.kcal >= KCAL_TARGET - KCAL_TOLERANCE && totals1.kcal <= KCAL_TARGET + KCAL_TOLERANCE && totals1.protein >= PROTEIN_MIN && totals1.fat >= FAT_MIN && totals1.fiber >= FIBER_MIN) {
-                                validDailyPlans.push([breakfast, { ...snack1, name: 'Gustare 1', icon: '🍎', type: 'snack' }, { ...lunch, name: 'Prânz', icon: '🍝', type: 'lunch' }, { ...snack2, name: 'Gustare 2', icon: '🍋', type: 'snack' }, { ...dinner, name: 'Cină', icon: '🌙', type: 'dinner' }]);
-                            }
-
-                            // Combination 2: Bar is snack 2
-                            let combo2 = [lunch, snack2, snack1, dinner];
-                             let totals2 = {
-                                kcal: breakfast.kcal + combo2.reduce((sum, meal) => sum + meal.kcal, 0),
-                                protein: breakfast.protein + combo2.reduce((sum, meal) => sum + meal.protein, 0),
-                                fat: breakfast.fat + combo2.reduce((sum, meal) => sum + meal.fat, 0),
-                                fiber: breakfast.fiber + combo2.reduce((sum, meal) => sum + meal.fiber, 0),
-                            };
-                             if (totals2.kcal >= KCAL_TARGET - KCAL_TOLERANCE && totals2.kcal <= KCAL_TARGET + KCAL_TOLERANCE && totals2.protein >= PROTEIN_MIN && totals2.fat >= FAT_MIN && totals2.fiber >= FIBER_MIN) {
-                                validDailyPlans.push([breakfast, { ...snack2, name: 'Gustare 1', icon: '🍎', type: 'snack' }, { ...lunch, name: 'Prânz', icon: '🍝', type: 'lunch' }, { ...snack1, name: 'Gustare 2', icon: '🍋', type: 'snack' }, { ...dinner, name: 'Cină', icon: '🌙', type: 'dinner' }]);
-                            }
-                        }
-                    }
-                }
-            }
-            
-            // --- RANDOM PLAN GENERATION FOR 28 DAYS ---
-            if (validDailyPlans.length === 0) {
-                console.error("Nu s-au găsit combinații de mese valide. Verificați baza de date și țintele.");
-                mealPlanData = [];
-                return;
-            }
-
-            const generatedPlans = [];
-            for (let i = 1; i <= 28; i++) {
-                const randomPlanMeals = validDailyPlans[Math.floor(Math.random() * validDailyPlans.length)];
-                
-                const totals = randomPlanMeals.reduce((acc, meal) => {
-                    acc.kcal += meal.kcal || 0;
-                    acc.protein += meal.protein || 0;
-                    acc.fat += meal.fat || 0;
-                    acc.fiber += meal.fiber || 0;
-                    return acc;
-                }, { kcal: 0, protein: 0, fat: 0, fiber: 0 });
-                
-                // Final carb calculation
-                const proteinKcal = totals.protein * 4;
-                const fatKcal = totals.fat * 9;
-                const carbKcal = totals.kcal - proteinKcal - fatKcal;
-                totals.carbs = carbKcal / 4;
-                
-                // Add carbs to individual meals proportionally
-                const finalMeals = randomPlanMeals.map(meal => {
-                    const mealCarbKcal = (meal.kcal - (meal.protein * 4) - (meal.fat * 9));
-                    return {...meal, carbs: mealCarbKcal > 0 ? mealCarbKcal / 4 : 0};
-                });
-
-                generatedPlans.push({ day: i, meals: finalMeals, totals: totals });
-            }
-            mealPlanData = generatedPlans;
-        }
-
-
-        // --- RENDER FUNCTIONS (unchanged logic, they just display data) ---
-        function populateDaySelector() {
-            if (!daySelector) return;
-            daySelector.innerHTML = '';
-            for (let i = 1; i <= 28; i++) {
-                const option = document.createElement('option');
-                option.value = i;
-                option.textContent = `Ziua ${i}`;
-                daySelector.appendChild(option);
-            }
-        }
-
-        function showDay(dayNumber) {
-            if (!mealPlanDisplay) return;
-            const dayData = mealPlanData.find(d => d.day == dayNumber);
-            if (!dayData) {
-                mealPlanDisplay.innerHTML = `<div class="card text-center text-red-500">Planul pentru ziua ${dayNumber} nu a putut fi generat.</div>`;
-                return;
-            }
-            mealPlanDisplay.innerHTML = `
-                <div class="card">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Plan pentru ziua ${dayData.day}</h3>
-                    <div class="space-y-4">
-                        ${dayData.meals.map(meal => `
-                            <div class="meal-card meal-card-${meal.type}">
-                                <div class="flex items-center gap-4">
-                                    <span class="text-3xl">${meal.icon}</span>
-                                    <div>
-                                        <h4 class="font-bold text-lg text-gray-700">${meal.name}</h4>
-                                        <p class="text-gray-600">${meal.food}</p>
-                                    </div>
-                                </div>
-                                <div class="grid grid-cols-2 md:grid-cols-5 gap-2 text-center text-sm mt-2 pt-2 border-t border-gray-300/50">
-                                    <div><span class="font-semibold block">${(meal.kcal || 0).toFixed(0)}</span><span class="text-xs text-gray-500">Kcal</span></div>
-                                    <div><span class="font-semibold block">${(meal.protein || 0).toFixed(1)} g</span><span class="text-xs text-gray-500">Proteine</span></div>
-                                    <div><span class="font-semibold block">${(meal.carbs || 0).toFixed(1)} g</span><span class="text-xs text-gray-500">Carbo.</span></div>
-                                    <div><span class="font-semibold block">${(meal.fat || 0).toFixed(1)} g</span><span class="text-xs text-gray-500">Grăsimi</span></div>
-                                    <div><b class="font-semibold block">${(meal.fiber || 0).toFixed(1)} g</b><span class="text-xs text-gray-500">Fibre</span></div>
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-                    <div class="mt-6 p-4 bg-indigo-50 rounded-lg">
-                        <h4 class="font-bold text-lg text-center text-indigo-800 mb-2">Sumar nutrițional - ziua ${dayData.day}</h4>
-                        <div class="grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
-                            <div><b class="text-xl text-indigo-700 block">${(dayData.totals.kcal || 0).toFixed(0)}</b><span class="text-sm text-gray-600">Total Kcal</span></div>
-                            <div><b class="text-xl text-indigo-700 block">${(dayData.totals.protein || 0).toFixed(0)} g</b><span class="text-sm text-gray-600">Total Proteine</span></div>
-                            <div><b class="text-xl text-indigo-700 block">${(dayData.totals.carbs || 0).toFixed(0)} g</b><span class="text-sm text-gray-600">Total Carbo.</span></div>
-                            <div><b class="text-xl text-indigo-700 block">${(dayData.totals.fat || 0).toFixed(0)} g</b><span class="text-sm text-gray-600">Total Grăsimi</span></div>
-                            <div><b class="text-xl text-indigo-700 block">${(dayData.totals.fiber || 0).toFixed(0)} g</b><span class="text-sm text-gray-600">Total Fibre</span></div>
-                        </div>
-                    </div>
-                </div>`;
-        }
-        
-        function showWeek(weekNumber) {
-            if (!weeklyPlanDisplay) return;
-            const startDay = (weekNumber - 1) * 7 + 1;
-            const endDay = weekNumber * 7;
-            const weekData = mealPlanData.slice(startDay - 1, endDay);
-            
-            weeklyPlanDisplay.innerHTML = `
-                <div class="card">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Plan pentru Săptămâna ${weekNumber} (Zilele ${startDay}-${endDay})</h3>
-                    <div class="space-y-6">
-                        ${weekData.map(dayData => {
-                            if (!dayData) return '<div>Plan indisponibil pentru o zi.</div>';
-                            return `
-                            <div>
-                                <h4 class="text-xl font-semibold text-indigo-700 mb-2 border-b pb-1">Ziua ${dayData.day}</h4>
-                                <ul class="list-disc list-inside space-y-1 text-gray-600">
-                                    ${dayData.meals.map(meal => `<li><b>${meal.name}:</b> ${meal.food}</li>`).join('')}
-                                </ul>
-                                <div class="mt-2 text-right text-sm font-semibold text-gray-800">Total: ~${dayData.totals.kcal.toFixed(0)} kcal</div>
-                            </div>
-                        `}).join('')}
-                    </div>
-                </div>`;
-        }
-
-        function populateFullTable() {
-            if (!fullPlanTableBody) return;
-            fullPlanTableBody.innerHTML = '';
-            mealPlanData.forEach(dayData => {
-                if(!dayData) return;
-                dayData.meals.forEach((meal, index) => {
-                    const row = document.createElement('tr');
-                    row.className = 'meal-row';
-                    row.innerHTML = `
-                        ${index === 0 ? `<td rowspan="5"><b>${dayData.day}</b></td>` : ''}
-                        <td>${meal.name}</td>
-                        <td>${meal.food}</td>
-                        <td>${(meal.kcal || 0).toFixed(0)}</td>
-                        <td>${(meal.protein || 0).toFixed(1)}</td>
-                        <td>${(meal.carbs || 0).toFixed(1)}</td>
-                        <td>${(meal.fat || 0).toFixed(1)}</td>
-                        <td>${(meal.fiber || 0).toFixed(1)}</td>
-                    `;
-                    fullPlanTableBody.appendChild(row);
-                });
-                const totalRow = document.createElement('tr');
-                totalRow.className = 'total-row';
-                totalRow.innerHTML = `
-                    <td colspan="2">TOTAL ZI ${dayData.day}</td>
-                    <td>${(dayData.totals.kcal || 0).toFixed(0)}</td>
-                    <td>${(dayData.totals.protein || 0).toFixed(1)}</td>
-                    <td>${(dayData.totals.carbs || 0).toFixed(1)}</td>
-                    <td>${(dayData.totals.fat || 0).toFixed(1)}</td>
-                    <td>${(dayData.totals.fiber || 0).toFixed(1)}</td>
-                `;
-                fullPlanTableBody.appendChild(totalRow);
-            });
-        }
-
-        function createAccordion(container, data) {
-            if (!container) return;
-            container.innerHTML = data.map((item) => `
-                <div class="accordion-item">
-                    <h2>
-                        <button type="button" class="accordion-button" aria-expanded="false">
-                            <span class="flex items-center gap-4">
-                                <span class="text-2xl">${item.icon || ''}</span>
-                                <span>${item.title}</span>
-                            </span>
-                            <span class="accordion-icon text-2xl font-light text-indigo-500">+</span>
-                        </button>
-                    </h2>
-                    <div class="accordion-content">
-                        <div class="prose max-w-none">${item.content}</div>
-                    </div>
-                </div>
-            `).join('');
-
-            container.querySelectorAll('.accordion-button').forEach(button => {
-                button.addEventListener('click', () => {
-                    const content = button.parentElement.nextElementSibling;
-                    const isExpanded = button.getAttribute('aria-expanded') === 'true';
-
-                    container.querySelectorAll('.accordion-button').forEach(btn => {
-                        if (btn !== button) {
-                            btn.classList.remove('open');
-                            btn.setAttribute('aria-expanded', 'false');
-                            const otherContent = btn.parentElement.nextElementSibling;
-                            otherContent.classList.remove('open');
-                            otherContent.style.maxHeight = null;
-                        }
-                    });
-
-                    button.classList.toggle('open');
-                    button.setAttribute('aria-expanded', String(!isExpanded));
-                    content.classList.toggle('open');
-                    content.style.maxHeight = content.classList.contains('open') ? content.scrollHeight + "px" : null;
-                });
-            });
-        }
-        
-        // --- INITIALIZATION ---
-        
-        // Generate the 28-day meal plan first
-        generateMealPlan();
-
-        // Then populate UI elements
-        populateDaySelector();
-        populateFullTable();
-        createAccordion(wellnessAccordion, wellnessData);
-        createAccordion(hipertrigliceridemieAccordion, hipertrigliceridemieData);
-        createAccordion(planActiuneAccordion, planActiuneData);
-
-        if (daySelector) {
-            daySelector.addEventListener('change', (e) => showDay(e.target.value));
-        }
-        if (weekSelector) {
-            weekSelector.addEventListener('change', (e) => showWeek(e.target.value));
-        }
-        
-        // Set initial state
-        handleTabSwitch({ button: mainContainer.querySelector('.tab-button[data-tab="introducere"]'), buttonSelector: '.tab-button', contentSelector: '.tab-content', container: mainContainer });
-        if (planMeseContainer) {
-            handleTabSwitch({ button: planMeseContainer.querySelector('.sub-tab-button[data-tab="dailyPlanView"]'), buttonSelector: '.sub-tab-button', contentSelector: '.sub-tab-content', container: planMeseContainer });
-        }
-        
-        // Show default day/week
-        showDay(1);
-        showWeek(1);
-    });
-</script>
-
+    <script src="script.js" defer></script>
 </body>
 </html>
