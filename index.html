@@ -1,1 +1,181 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghid holistic</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            background-color: #e9ecef;
+            color: #343a40;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 40px 20px;
+            box-sizing: border-box;
+        }
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            margin: auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        h1 {
+            color: #2a6a8c; /* Culoare similară cu headerul infograficelor */
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.8em;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.05);
+        }
+        h2 {
+            color: #3f51b5; /* Un albastru mai puțin strident */
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 12px;
+            margin-top: 50px;
+            font-size: 1.8em;
+            font-weight: 600;
+            text-align: center;
+        }
+        .intro-text {
+            text-align: center;
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 40px;
+        }
+        .section-category {
+            margin-bottom: 60px;
+        }
+        .columns-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .column {
+            flex: 1;
+            min-width: 380px;
+            padding: 0 15px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        @media (min-width: 768px) {
+            ul {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        li {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 12px 20px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            align-items: center;
+        }
+        li:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+        a {
+            color: #1a73e8; /* Un albastru de link, puțin mai profund */
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        a:hover {
+            color: #0d47a1; /* Un albastru mai închis la hover */
+            text-decoration: none;
+        }
+        .chemical-symbol {
+            font-size: 1.2em; /* Simbol mai mic */
+            font-weight: 700;
+            color: #4a7c92; /* O culoare gri-albastru, mai puțin stridentă */
+            margin-right: 12px;
+            width: 35px; /* Lățime fixă pentru simbol */
+            text-align: center;
+        }
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            font-size: 0.9em;
+            color: #777;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+        .copyright {
+            margin-top: 15px;
+            font-size: 0.8em;
+            color: #6c757d;
+        }
+        @media (max-width: 767px) {
+            .column {
+                min-width: unset;
+                width: 100%;
+                padding: 0;
+            }
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Ghid holistic de lucru</h1>
+        <p class="intro-text">Bun venit pe ghidul detaliat al nutrienților esențiali, abordați dintr-o perspectivă fizică și holistică. Aici vei găsi informații aprofundate despre rolul fiecărui element în organism și cele mai bune surse alimentare pentru a-ți asigura necesarul zilnic.</p>
 
+        <div class="section-category">
+            <h2>🩺 Cazuistică</h2>
+            <div class="columns-container">
+                <div class="column">
+                    <ul>
+                        <li><a href="razvan.html"> Razvan</a></li>
+                        <li><a href="alexiajercan.html"> Alexai Jercan</a></li>
+                        
+                    </ul>
+                </div>
+                <div class="column">
+                    <ul>
+                        <li><a href="blank.html"> Client 3</a></li>
+                        <li><a href="blank.html"> Client 4</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <p><i>Acest ghid este o resursă informativă și nu înlocuiește sfaturile medicale profesionale. Consultați întotdeauna un specialist pentru nevoi individuale de sănătate.</i></p>
+            <p><i>Informațiile din acest ghid sunt extrase din tratate de nutriție, fiziologie și medicină holistică, precum și din publicații științifice de referință.</i></p>
+            <p class="copyright">Copyright &copy; dr.ing. Radu Pascu - 2025</p>
+        </footer>
+    </div>
+</body>
+</html>
