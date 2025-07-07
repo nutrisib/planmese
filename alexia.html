@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ReDefine 2.0 - Plan de Creștere în Greutate ver.funcțională</title>
+    <title>ReDefine 2.0 - Plan de Creștere în Greutate</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Copyrights: dr.ing. Radu Pascu - 2025 -->
     <style>
@@ -71,6 +71,7 @@
 
         <div class="tab-buttons">
             <button class="tab-button active" data-tab="introducere">🏠 Introducere</button>
+            <button class="tab-button" data-tab="wellnessPiloni">🧘‍♀️ 8xWellness</button>
             <button class="tab-button" data-tab="infoIngrasare">💡 Ghid pentru Creștere în Greutate</button>
             <button class="tab-button" data-tab="planMese">🥑 Plan de Mese</button>
             <button class="tab-button" data-tab="planMiscareSport">🏃‍♀️ Plan de Mișcare</button>
@@ -85,6 +86,17 @@
                 <h2 class="text-2xl font-bold text-gray-700 mb-4 mt-8">O călătorie către forță și încredere</h2>
                 <p class="text-gray-600 mb-4">Acest program este mai mult decât un plan alimentar și de sport; este o invitație la a-ți redescoperi și construi puterea interioară și exterioară. Fiecare masă este o cărămidă, fiecare antrenament este fundația. Vei învăța să-ți hrănești corpul pentru performanță și creștere, nu doar pentru subzistență.</p>
                 <p class="text-gray-600">Imaginează-ți cum te vei simți având mai multă energie la cursuri, forța de a-ți depăși limitele în sala de sport și, cel mai important, încrederea care vine odată ce realizezi de ce ești capabilă. Ești în controlul acestei transformări, iar eu sunt aici pentru a-ți oferi harta și uneltele necesare. Hai să construim împreună cea mai puternică versiune a ta!</p>
+            </div>
+            <footer class="text-center mt-8 text-sm text-gray-500">
+                Copyrights: dr.ing. Radu Pascu - 2025
+            </footer>
+        </div>
+
+        <div id="wellnessPiloni" class="tab-content">
+            <div class="card p-0">
+                <h2 class="text-2xl font-bold text-gray-700 mb-4 p-6 text-center">Cei 8 Piloni ai Stării de Bine (Wellness)</h2>
+                <p class="text-gray-600 mb-4 px-6">Wellness-ul este o abordare holistică a sănătății, care recunoaște interconectarea dintre minte, corp și spirit. Pentru a atinge o stare de echilibru și vitalitate, este esențial să cultivăm fiecare dintre acești piloni.</p>
+                <div id="wellnessAccordion"></div>
             </div>
             <footer class="text-center mt-8 text-sm text-gray-500">
                 Copyrights: dr.ing. Radu Pascu - 2025
@@ -308,6 +320,7 @@
         const mealPlanDisplay = document.getElementById('mealPlanDisplay');
         const weeklyPlanDisplay = document.getElementById('weeklyPlanDisplay');
         const fullPlanTableBody = document.getElementById('fullPlanTableBody');
+        const wellnessAccordion = document.getElementById('wellnessAccordion');
         const ingrasareAccordion = document.getElementById('ingrasareAccordion');
         
         mainContainer.querySelectorAll('.tab-button').forEach(button => {
@@ -319,6 +332,17 @@
                 button.addEventListener('click', () => handleTabSwitch({ button, buttonSelector: '.sub-tab-button', contentSelector: '.sub-tab-content', container: planMeseContainer }));
             });
         }
+        
+        const wellnessData = [
+            { icon: '🧘‍♀️', title: 'Wellness fizic', content: 'Reprezintă grija față de corpul nostru prin nutriție adecvată, mișcare regulată și odihnă suficientă. Este fundamentul pe care se construiește întreaga noastră stare de bine.' },
+            { icon: '🧠', title: 'Wellness mental', content: 'Implică o minte activă, deschisă la noi idei și experiențe. Este despre învățare continuă, creativitate și curiozitate. O minte sănătoasă este esențială pentru a naviga provocările vieții.' },
+            { icon: '❤️', title: 'Wellness emoțional', content: 'Se referă la conștientizarea și acceptarea propriilor emoții, precum și la capacitatea de a gestiona stresul și de a construi relații sănătoase. Este despre a fi în contact cu sentimentele noastre și a le exprima într-un mod constructiv.' },
+            { icon: '🤝', title: 'Wellness social', content: 'Presupune construirea și menținerea unor relații sănătoase, de susținere, cu familia, prietenii și comunitatea. Conexiunile sociale puternice sunt un factor protector împotriva multor afecțiuni.' },
+            { icon: '🌱', title: 'Wellness spiritual', content: 'Se referă la sentimentul de scop și sens în viață. Poate fi legat de credințe religioase, valori personale, meditație sau conexiunea cu natura. Este ancora noastră interioară.' },
+            { icon: '🌍', title: 'Wellness de mediu', content: 'Implică recunoașterea impactului pe care mediul înconjurător îl are asupra sănătății noastre și asumarea responsabilității pentru protejarea lui. Un mediu curat și sigur este vital pentru o viață sănătoasă.' },
+            { icon: '💼', title: 'Wellness ocupațional', content: 'Se referă la satisfacția și împlinirea pe care le obținem din munca noastră. Este despre a găsi un echilibru între viața profesională și cea personală și a ne folosi talentele într-un mod care ne aduce bucurie.' },
+            { icon: '💰', title: 'Wellness financiar', content: 'Presupune o relație sănătoasă cu banii, gestionarea eficientă a resurselor financiare și planificarea pentru viitor. Stabilitatea financiară reduce stresul și contribuie la starea generală de bine.' },
+        ];
         
         const ingrasareData = [
             { icon: '⚖️', title: 'De ce contează o greutate sănătoasă?', content: 'Un Indice de Masă Corporală (IMC) sub 18.5 poate indica o stare de subponderalitate. Aceasta poate duce la o serie de probleme de sănătate, inclusiv: un sistem imunitar slăbit, oboseală cronică, anemie, probleme de fertilitate și o densitate osoasă redusă (risc de osteoporoză). Scopul nu este doar estetic, ci funcțional: să oferim corpului resursele de care are nevoie pentru a funcționa la capacitate maximă.' },
@@ -631,6 +655,7 @@
         generateMealPlan();
         populateDaySelector();
         populateFullTable();
+        createAccordion(wellnessAccordion, wellnessData);
         createAccordion(ingrasareAccordion, ingrasareData);
         
         if (daySelector) {
