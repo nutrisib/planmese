@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-	<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ReDefine 1.0 - ok</title>
+    <title>ReDefine 1.0</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Copyrights: dr.ing. Radu Pascu - 2025 -->
     <style>
@@ -169,23 +169,6 @@
             background-color: #EEF2FF;
             color: #4338CA;
         }
-        .print-button {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            background-color: #48bb78;
-            color: white;
-            text-align: center;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            border: none;
-        }
-        .print-button:hover {
-            background-color: #3f9e65;
-        }
         .macro-bar-container {
             display: flex;
             width: 100%;
@@ -194,9 +177,9 @@
             overflow: hidden;
             background-color: #e5e7eb;
         }
-        .macro-bar-carbs { background-color: #ef4444; }
-        .macro-bar-protein { background-color: #f59e0b; }
-        .macro-bar-fat { background-color: #3b82f6; }
+        .macro-bar-protein { background-color: #f59e0b; } /* 30% */
+        .macro-bar-carbs { background-color: #ef4444; } /* 40% */
+        .macro-bar-fat { background-color: #3b82f6; } /* 30% */
 
         /* Specific styles for tables within accordion content */
         .info-table {
@@ -258,7 +241,7 @@
 
         <div id="introducere" class="tab-content active">
             <div class="card">
-                <h2 class="text-2xl font-bold text-gray-700 mb-4">Înțelegerea provocării: hipertrigliceridemiei și surplusului de greutate</h2>
+                <h2 class="text-2xl font-bold text-gray-700 mb-4">Înțelegerea provocării: hipertrigliceridemia și surplusul de greutate</h2>
                 <p class="text-gray-600 mb-4">Acest plan este conceput pentru un bărbat de 35 de ani, medic stomatolog, cu hipertrigliceridemie severă, un indice de masă corporală (IMC) de 29 (indicând supraponderalitate) și un diametru abdominal de peste 100 cm, sugerând o acumulare semnificativă de grăsime viscerală. Aceste condiții impun o abordare cuprinzătoare și holistică, esențială pentru îmbunătățirea stării de sănătate.</p>
                 <p class="text-gray-600 mb-4">Hipertrigliceridemia, alături de surplusul de greutate și grăsimea viscerală, crește riscul de afecțiuni cardiovasculare, diabet de tip 2 și alte complicații metabolice. O abordare integrată, care vizează atât nutriția, cât și stilul de viață, este crucială pentru detoxifierea organismului, diminuarea nivelului de trigliceride și reducerea grăsimii viscerale.</p>
                 <h2 class="text-2xl font-bold text-gray-700 mb-4 mt-8">Recâștigă-ți vitalitatea: un parteneriat pentru transformare</h2>
@@ -307,14 +290,16 @@
         <div id="planMese" class="tab-content">
             <div class="card">
                 <h2 class="text-2xl font-bold text-gray-700 mb-4 text-center">Obiective și principii nutriționale</h2>
-                <p class="mb-4 text-gray-700 text-center">Acest plan alimentar vizează un aport de aproximativ <b>1900 kcal/zi</b>, fiind conceput pentru detoxifiere și diminuarea trigliceridelor.</p>
+                <p class="mb-4 text-gray-700 text-center">Acest plan alimentar vizează un aport de aproximativ <b>2000 kcal/zi</b>, fiind conceput pentru detoxifiere și diminuarea trigliceridelor.</p>
                 <div class="grid md:grid-cols-2 gap-6">
                     <div>
                         <ul class="list-disc list-inside space-y-2 text-gray-600">
                             <li><b>Obiectiv:</b> Detoxifiere, diminuare trigliceride, reducerea grăsimii viscerale.</li>
-                            <li><b>Aport caloric țintă:</b> ~1900 kcal/zi.</li>
-                            <li><b>Aport proteic țintă:</b> Minim 140 g/zi.</li>
-                            <li><b>Aport fibre țintă:</b> Minim 30 g/zi.</li>
+                            <li><b>Aport caloric țintă:</b> 2000 kcal/zi.</li>
+                            <li><b>Aport proteic țintă:</b> 150 g/zi.</li>
+                            <li><b>Aport grăsimi țintă:</b> 63 g/zi.</li>
+                            <li><b>Aport carbohidrați țintă:</b> ~208 g/zi.</li>
+                            <li><b>Aport fibre țintă:</b> Minim 35 g/zi.</li>
                             <li><b>Frecvența meselor:</b> 3 mese principale + 2 gustări.</li>
                             <li><b>Alimente cheie:</b> Leguminoase (tofu, năut, fasole, linte), nuci, semințe, ulei de măsline, pește gras (cu moderație), legume și fructe bogate în fibre și antioxidanți.</li>
                             <li><b>Produse Herbalife:</b> Shake F1 + PDM (dimineața), Fibre de măr și ovăz (zilnic), Beta Heart (zilnic).</li>
@@ -325,17 +310,17 @@
                     <div>
                         <h3 class="font-semibold text-gray-700 mb-2">Distribuția macronutrienților (țintă)</h3>
                         <div class="space-y-2">
-                            <div>
-                                <div class="flex justify-between mb-1"><span class="text-sm font-medium text-red-700">Carbohidrați complecși (aprox. 40%)</span></div>
-                                <div class="macro-bar-container"><div class="macro-bar-carbs" style="width: 40%"></div></div>
-                            </div>
-                            <div>
-                                <div class="flex justify-between mb-1"><span class="text-sm font-medium text-amber-700">Proteine (aprox. 30%)</span></div>
+                             <div>
+                                <div class="flex justify-between mb-1"><span class="text-sm font-medium text-amber-700">Proteine (30%)</span></div>
                                 <div class="macro-bar-container"><div class="macro-bar-protein" style="width: 30%"></div></div>
                             </div>
                             <div>
-                                <div class="flex justify-between mb-1"><span class="text-sm font-medium text-blue-700">Grăsimi sănătoase (aprox. 30%)</span></div>
-                                <div class="macro-bar-container"><div class="macro-bar-fat" style="width: 30%"></div></div>
+                                <div class="flex justify-between mb-1"><span class="text-sm font-medium text-red-700">Carbohidrați (41.5%)</span></div>
+                                <div class="macro-bar-container"><div class="macro-bar-carbs" style="width: 41.5%"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1"><span class="text-sm font-medium text-blue-700">Grăsimi (28.5%)</span></div>
+                                <div class="macro-bar-container"><div class="macro-bar-fat" style="width: 28.5%"></div></div>
                             </div>
                         </div>
                     </div>
@@ -404,10 +389,10 @@
                     <div>
                         <h3 class="text-xl font-bold text-gray-800 mb-2">Obiective principale:</h3>
                         <ul class="list-disc list-inside space-y-1 text-gray-600">
-                            <li><b>Îmbunătățirea sănătății cardiovasculare.</b></li>
-                            <li><b>Accelerarea metabolismului și arderea grăsimilor (în special a celei viscerale).</b></li>
-                            <li><b>Creșterea masei musculare și a forței.</b></li>
-                            <li><b>Reducerea nivelului de stres.</b></li>
+                            <li>Îmbunătățirea sănătății cardiovasculare.</li>
+                            <li>Accelerarea metabolismului și arderea grăsimilor (în special a celei viscerale).</li>
+                            <li>Creșterea masei musculare și a forței.</li>
+                            <li>Reducerea nivelului de stres.</li>
                         </ul>
                     </div>
                     <div>
@@ -517,7 +502,7 @@
                     <h3 class="text-xl font-bold text-gray-800 mb-2">Cărți pentru proaspeți tătici:</h3>
                     <div>
                         <h3 class="text-xl font-bold text-gray-800 mb-2">9. The Expectant Father: The Ultimate Guide for Dads-to-Be <span class="font-normal text-gray-600">de Armin A. Brott și Jennifer Ash</span></h3>
-                        <p class="text-gray-600">Un ghid complet care acoperă toate aspectele sarcinii și primului an al bebelușului din perspectiva tatălui, oferind informații practice și sprijin emoțional.</p>
+                        <p class="text-gray-600">Un ghid complet care acoperă toate aspectele sarcinii și primului an al bebeluușului din perspectiva tatălui, oferind informații practice și sprijin emoțional.</p>
                     </div>
                     <div>
                         <h3 class="text-xl font-bold text-gray-800 mb-2">10. Be Prepared: A Practical Handbook for New Dads <span class="font-normal text-gray-600">de Gary Greenberg</span></h3>
@@ -585,18 +570,18 @@
 
     document.addEventListener('DOMContentLoaded', function () {
         
-        // --- DOM ELEMENT REFERENCES ---
         const daySelector = document.getElementById('daySelector');
         const weekSelector = document.getElementById('weekSelector');
         const mealPlanDisplay = document.getElementById('mealPlanDisplay');
         const weeklyPlanDisplay = document.getElementById('weeklyPlanDisplay');
         const fullPlanTableBody = document.getElementById('fullPlanTableBody');
-        const wellnessAccordion = document.getElementById('wellnessAccordion'); /* Corrected: Changed from 'accordion' to 'wellnessAccordion' */
-        const hipertrigliceridemieAccordion = document.getElementById('hipertrigliceridemieAccordion');
-        const planActiuneAccordion = document.getElementById('planActiuneAccordion');
+        const wellnessAccordionContainer = document.getElementById('wellnessAccordion');
+        const hipertrigliceridemieAccordionContainer = document.getElementById('hipertrigliceridemieAccordion');
+        const planActiuneAccordionContainer = document.getElementById('planActiuneAccordion');
 
-        // --- DATA ---
         const mealPlanData = [];
+
+        // --- ACCORDION DATA ---
         const wellnessData = [
             { title: '🧘‍♀️ Wellness fizic', content: 'Reprezintă grija față de corpul nostru prin nutriție adecvată, mișcare regulată și odihnă suficientă. Este fundamentul pe care se construiește întreaga noastră stare de bine.' },
             { title: '🧠 Wellness mental', content: 'Implică o minte activă, deschisă la noi idei și experiențe. Este despre învățare continuă, creativitate și curiozitate. O minte sănătoasă este esențială pentru a naviga provocările vieții.' },
@@ -608,40 +593,14 @@
             { title: '💰 Wellness financiar', content: 'Presupune o relație sănătoasă cu banii, gestionarea eficientă a resurselor financiare și planificarea pentru viitor. Stabilitatea financiară reduce stresul și contribuie la starea generală de bine.' },
         ];
         const hipertrigliceridemieData = [
-            { title: 'Cauze fizice și factori de risc', content: `<table class="info-table">
-                <thead><tr><th>Factor</th><th>Descriere</th></tr></thead>
-                <tbody>
-                    <tr><td><b>Genetica</b></td><td>Predispoziția familială poate juca un rol important.</td></tr>
-                    <tr><td><b>Dieta necorespunzătoare</b></td><td>Consumul excesiv de carbohidrați rafinați (pâine albă, paste, dulciuri), zahăr, fructoză și alcool.</td></tr>
-                    <tr><td><b>Obezitatea și grăsimea viscerală</b></td><td>Excesul de greutate, în special grăsimea acumulată în jurul organelor interne, este un factor major.</td></tr>
-                    <tr><td><b>Sedentarismul</b></td><td>Lipsa activității fizice regulate încetinește metabolismul și favorizează acumularea de grăsimi.</td></tr>
-                    <tr><td><b>Afecțiuni medicale</b></td><td>Diabetul de tip 2 necontrolat, hipotiroidismul, sindromul metabolic, bolile renale.</td></tr>
-                    <tr><td><b>Medicamente</b></td><td>Anumite diuretice, beta-blocante, corticosteroizi.</td></tr>
-                </tbody>
-            </table>` },
-            { title: 'Cauze emoționale și psihologice', content: `<table class="info-table">
-                <thead><tr><th>Factor</th><th>Descriere</th></tr></thead>
-                <tbody>
-                    <tr><td><b>Stresul cronic</b></td><td>Eliberarea constantă de cortizol ("hormonul stresului") poate crește producția de trigliceride în ficat.</td></tr>
-                    <tr><td><b>Lipsa somnului</b></td><td>Somnul insuficient sau de slabă calitate dereglează hormonii care controlează apetitul și metabolismul.</td></tr>
-                    <tr><td><b>Mâncatul emoțional</b></td><td>Utilizarea alimentelor (în special cele bogate în carbohidrați și grăsimi) pentru a gestiona emoții negative precum anxietatea, tristețea sau plictiseala.</td></tr>
-                </tbody>
-            </table>` },
-            { title: 'Riscuri asociate hipertrigliceridemiei severe', content: `<table class="info-table">
-                <thead><tr><th>Factor</th><th>Descriere</th></tr></thead>
-                <tbody>
-                    <tr><td><b>Pancreatită acută:</b></td><td> O inflamație bruscă și severă a pancreasului, care poate fi fatală.</td></tr>
-                    <tr><td><b>Boli cardiovasculare:</b></td><td> Risc crescut de ateroscleroză, infarct miocardic și accident vascular cerebral.</td></tr>
-                    <tr><td><b>Boli cardiovasculare:</b></td><td> Risc crescut de ateroscleroză, infarct miocardic și accident vascular cerebral.</td></tr>
-                    <tr><td><b>Ficat gras (steatoză hepatică):</b></td><td> Acumularea de grăsime în ficat, care poate evolua spre ciroză.</td></tr>
-                    <tr><td><b>Sindrom metabolic:</b></td><td> O constelație de factori de risc care cresc probabilitatea de a dezvolta boli de inimă, AVC și diabet.</td></tr>
-                </tbody>
-            </table>` },
+            { title: 'Cauze fizice și factori de risc', content: `<table class="info-table"><thead><tr><th>Factor</th><th>Descriere</th></tr></thead><tbody><tr><td><b>Genetica</b></td><td>Predispoziția familială poate juca un rol important.</td></tr><tr><td><b>Dieta necorespunzătoare</b></td><td>Consumul excesiv de carbohidrați rafinați (pâine albă, paste, dulciuri), zahăr, fructoză și alcool.</td></tr><tr><td><b>Obezitatea și grăsimea viscerală</b></td><td>Excesul de greutate, în special grăsimea acumulată în jurul organelor interne, este un factor major.</td></tr><tr><td><b>Sedentarismul</b></td><td>Lipsa activității fizice regulate încetinește metabolismul și favorizează acumularea de grăsimi.</td></tr><tr><td><b>Afecțiuni medicale</b></td><td>Diabetul de tip 2 necontrolat, hipotiroidismul, sindromul metabolic, bolile renale.</td></tr><tr><td><b>Medicamente</b></td><td>Anumite diuretice, beta-blocante, corticosteroizi.</td></tr></tbody></table>` },
+            { title: 'Cauze emoționale și psihologice', content: `<table class="info-table"><thead><tr><th>Factor</th><th>Descriere</th></tr></thead><tbody><tr><td><b>Stresul cronic</b></td><td>Eliberarea constantă de cortizol ("hormonul stresului") poate crește producția de trigliceride în ficat.</td></tr><tr><td><b>Lipsa somnului</b></td><td>Somnul insuficient sau de slabă calitate dereglează hormonii care controlează apetitul și metabolismul.</td></tr><tr><td><b>Mâncatul emoțional</b></td><td>Utilizarea alimentelor (în special cele bogate în carbohidrați și grăsimi) pentru a gestiona emoții negative precum anxietatea, tristețea sau plictiseala.</td></tr></tbody></table>` },
+            { title: 'Riscuri asociate hipertrigliceridemiei severe', content: `<ul class="list-disc list-inside space-y-2"><li><b>Pancreatită acută:</b> O inflamație bruscă și severă a pancreasului, care poate fi fatală.</li><li><b>Boli cardiovasculare:</b> Risc crescut de ateroscleroză, infarct miocardic și accident vascular cerebral.</li><li><b>Ficat gras (steatoză hepatică):</b> Acumularea de grăsime în ficat, care poate evolua spre ciroză.</li><li><b>Sindrom metabolic:</b> O constelație de factori de risc care cresc probabilitatea de a dezvolta boli de inimă, AVC și diabet.</li></ul>` },
         ];
         const planActiuneData = [
             { title: '1. Angajament total și asumarea responsabilității', content: 'Primul pas este decizia fermă de a prelua controlul asupra sănătății. Acest plan nu este o "dietă" temporară, ci o restructurare a stilului de viață. Succesul depinde de angajamentul tău 100%.' },
             { title: '2. Alimentație antiinflamatoare și săracă în carbohidrați simpli', content: 'Vom elimina complet zahărul, făinoasele albe și produsele procesate. Ne vom concentra pe alimente integrale, bogate în nutrienți: legume, proteine de calitate, grăsimi sănătoase și carbohidrați complecși din surse precum leguminoasele și cerealele integrale (în cantități controlate).' },
-            { title: '3. Aport optim de proteine și fibre', content: 'Proteinele (minim 140g/zi) și fibrele (minim 30g/zi) sunt esențiale pentru sațietate, menținerea masei musculare și sănătatea digestivă. Fiecare masă va fi echilibrată pentru a atinge aceste ținte.' },
+            { title: '3. Aport optim de proteine și fibre', content: 'Proteinele (minim 150g/zi) și fibrele (minim 35g/zi) sunt esențiale pentru sațietate, menținerea masei musculare și sănătatea digestivă. Fiecare masă va fi echilibrată pentru a atinge aceste ținte.' },
             { title: '4. Hidratare constantă', content: 'Consumul adecvat de apă (minim 2.5-3 litri pe zi) este vital pentru toate procesele metabolice, inclusiv pentru detoxifiere și arderea grăsimilor.' },
             { title: '5. Mișcare zilnică și antrenament structurat', content: 'Vom integra atât mișcare zilnică (mers pe jos, urcat scări), cât și un program de antrenament structurat (aprox. 180 min/săptămână) care combină exerciții de forță (pentru creșterea masei musculare) cu antrenamente cardio (pentru sănătatea inimii).' },
             { title: '6. Managementul stresului', content: 'Stresul cronic este un inamic al sănătății metabolice. Vom implementa tehnici de relaxare: exerciții de respirație, meditație ghidată, plimbări în natură. Obiectivul este să reducem nivelul de cortizol.' },
@@ -651,67 +610,134 @@
             { title: '10. Educație continuă și dezvoltarea rezilienței', content: 'Scopul meu este să te împuternicesc cu cunoștințele necesare pentru a face alegeri sănătoase pe termen lung. Vei învăța să citești etichete, să înțelegi semnalele corpului tău și să navighezi situațiile sociale fără a-ți sabota progresul.' },
         ];
 
-        // --- HELPER FUNCTIONS ---
-        function calculateNutrition(baseKcal, baseProtein, baseCarbs, baseFat, baseFiber, additions = []) {
-            let kcal = baseKcal, protein = baseProtein, carbs = baseCarbs, fat = baseFat, fiber = baseFiber;
-            additions.forEach(add => {
-                switch (add) {
-                    case 'fibre_mar_ovaz_7g': kcal += 20; protein += 0.5; carbs += 5; fat += 0; fiber += 5; break;
-                    case 'betaheart_7g': kcal += 25; protein += 2; carbs += 3; fat += 0.5; fiber += 3; break;
-                    case 'psyllium_5g': kcal += 15; protein += 0; carbs += 4; fat += 0; fiber += 4; break;
-                    case 'chia_10g': kcal += 48; protein += 1.7; carbs += 4.2; fat += 3.1; fiber += 3.4; break;
-                    case 'ovăz_25g': kcal += 95; protein += 3.4; carbs += 17; fat += 1.7; fiber += 2.5; break;
-                    case 'fructe_padure_50g': kcal += 25; protein += 0.5; carbs += 6; fat += 0.2; fiber += 2; break;
-                    case 'banană_50g': kcal += 45; protein += 0.5; carbs += 11.5; fat += 0.1; fiber += 1.5; break;
-                    case 'nuci_mixte_15g': kcal += 98; protein += 3.5; carbs += 3; fat += 9; fiber += 1.5; break;
-                    case 'ulei_masline_5ml': kcal += 45; protein += 0; carbs += 0; fat += 5; fiber += 0; break;
-                    case 'iaurt_grecesc_50g': kcal += 35; protein += 5; carbs += 2; fat += 1.5; fiber += 0; break;
-                    case 'chefir_100ml': kcal += 50; protein += 3.5; carbs += 4.5; fat += 2.5; fiber += 0; break;
-                    case 'branza_vaci_50g': kcal += 40; protein += 7; carbs += 1.5; fat += 0.5; fiber += 0; break;
-                    case 'tofu_50g': kcal += 38; protein += 4; carbs += 1; fat += 2.5; fiber += 0.5; break;
-                    case 'linte_50g_gatita': kcal += 58; protein += 4.5; carbs += 10; fat += 0.2; fiber += 4; break;
-                    case 'naut_50g_gatit': kcal += 80; protein += 4.5; carbs += 13.5; fat += 1.5; fiber += 4; break;
-                    case 'baton_proteic_herbalife': kcal += 140; protein += 10; carbs += 15; fat += 5; fiber += 3; break;
-                    case 'pdm_spoon': kcal += 29; protein += 5; carbs += 1; fat += 0.5; fiber += 0; break;
-                }
-            });
-            return { kcal, protein, carbs, fat, fiber };
-        }
-
-        const shakeBase = { kcal: 180, protein: 18, carbs: 18, fat: 5, fiber: 3 };
-        const mealTemplates = {
-            breakfast: [ { food: 'Shake Herbalife (2 linguri F1 + 2 linguri PDM) cu apă, 1 lingură Fibre de măr și ovăz, 1 lingură Beta Heart.', base: shakeBase, additions: ['fibre_mar_ovaz_7g', 'betaheart_7g'] } ],
-            snack1: [
-                { food: '1 măr mediu și 40g migdale.', kcal: 200, protein: 6, carbs: 25, fat: 12, fiber: 5 }, { food: '200g iaurt 2-3% cu 20g semințe de dovleac și 5g tărâțe de psyllium.', kcal: 180, protein: 9, carbs: 14, fat: 9, fiber: 5 }, { food: '1 banană mare și 30g nuci.', kcal: 180, protein: 4, carbs: 25, fat: 9, fiber: 4 }, { food: '150ml chefir și 10g semințe de chia.', kcal: 140, protein: 5, carbs: 9, fat: 6, fiber: 3.5 }, { food: 'Morcovi (100g) și 50g hummus.', kcal: 120, protein: 4, carbs: 15, fat: 5, fiber: 5 }, { food: 'Baton proteic (ex. Herbalife, fără zahăr adăugat, bogat în fibre).', kcal: 140, protein: 10, carbs: 15, fat: 5, fiber: 3 },
+        // --- PRE-CALCULATED, PRECISE DAILY MEAL BLUEPRINTS ---
+        const dayBlueprints = [
+            // Ziua 1
+            [
+                { name: 'Mic dejun', icon: '☀️', type: 'breakfast', food: 'Shake Herbalife (2 linguri F1 + 2 linguri PDM) cu apă.', kcal: 225, protein: 25, carbs: 22, fat: 4, fiber: 5 },
+                { name: 'Gustare 1', icon: '🍎', type: 'snack', food: '250g iaurt grecesc 2% cu 30g nuci.', kcal: 410, protein: 30, carbs: 14, fat: 27, fiber: 2 },
+                { name: 'Prânz', icon: '🍝', type: 'lunch', food: '220g piept de pui la grătar cu 250g orez brun și salată mare de legume cu 15ml ulei de măsline.', kcal: 950, protein: 65, carbs: 85, fat: 30, fiber: 10 },
+                { name: 'Gustare 2', icon: '🍋', type: 'snack', food: 'Baton proteic Herbalife.', kcal: 140, protein: 10, carbs: 15, fat: 5, fiber: 3 },
+                { name: 'Cină', icon: '🌙', type: 'dinner', food: '200g tofu ferm la grătar cu 200g legume la abur (dovlecel, vinete) și sos de soia.', kcal: 275, protein: 20, carbs: 42, fat: 2, fiber: 8 }
             ],
-            snack2: [
-                { food: '1 pară și 10g caju.', kcal: 150, protein: 3, carbs: 25, fat: 6, fiber: 4 }, { food: '150ml chefir, 1 lingură PDM, 15g semințe de floarea soarelui și 5g tărâțe de psyllium.', kcal: 160, protein: 6, carbs: 12, fat: 7, fiber: 4.5 }, { food: 'Orez expandat (20g) cu 15g unt de arahide.', kcal: 180, protein: 6, carbs: 20, fat: 10, fiber: 2 }, { food: 'O mână de fructe de pădure (50g) și 10g nuci braziliene.', kcal: 100, protein: 2, carbs: 10, fat: 8, fiber: 2.5 }, { food: 'Baton proteic (ex. Herbalife, fără zahăr adăugat, bogat în fibre).', kcal: 180, protein: 15, carbs: 15, fat: 7, fiber: 5 }, { food: '50g brânză de vaci cu 10g semințe de in măcinate.', kcal: 80, protein: 10, carbs: 2, fat: 3, fiber: 3 },
+            // Ziua 2
+            [
+                { name: 'Mic dejun', icon: '☀️', type: 'breakfast', food: 'Shake Herbalife (2 linguri F1 + 2 linguri PDM) cu apă.', kcal: 225, protein: 25, carbs: 22, fat: 4, fiber: 5 },
+                { name: 'Gustare 1', icon: '🍎', type: 'snack', food: '200g brânză de vaci 2% cu 1 măr mediu și 20g caju.', kcal: 410, protein: 38, carbs: 32, fat: 15, fiber: 7 },
+                { name: 'Prânz', icon: '🍝', type: 'lunch', food: 'File de somon la cuptor (200g) cu 400g cartofi dulci copți și 200g broccoli.', kcal: 920, protein: 55, carbs: 95, fat: 35, fiber: 18 },
+                { name: 'Gustare 2', icon: '🍋', type: 'snack', food: '150g năut fiert cu ierburi aromatice.', kcal: 180, protein: 10, carbs: 30, fat: 3, fiber: 8 },
+                { name: 'Cină', icon: '🌙', type: 'dinner', food: 'Supă cremă de linte roșie (400ml) cu 20g semințe de cânepă.', kcal: 265, protein: 22, carbs: 36, fat: 6, fiber: 12 }
             ],
-            lunch: [
-                { food: 'Salată mare cu 180g piept de pui la grătar, mix de salată verde, roșii, castraveți, ardei, 20ml ulei de măsline, oțet balsamic.', kcal: 650, protein: 60, carbs: 30, fat: 40, fiber: 10 }, { food: 'Supă cremă de linte (400ml) conține 100g crutoane integrale și 20g semințe de dovleac.', kcal: 600, protein: 28, carbs: 80, fat: 25, fiber: 18 }, { food: 'Quinoa (120g uscată) cu 150g tofu copt, 250g legume la abur (broccoli, morcovi), 20ml ulei de măsline.', kcal: 750, protein: 35, carbs: 80, fat: 40, fiber: 20 }, { food: 'File de cod la cuptor (200g) cu 250g cartofi dulci copți și 200g fasole verde.', kcal: 700, protein: 50, carbs: 70, fat: 25, fiber: 15 }, { food: 'Wrap integral (120g) cu 150g humus, legume proaspete (ardei, castraveți, salată), 100g piept de curcan feliat.', kcal: 650, protein: 40, carbs: 70, fat: 28, fiber: 12 }, { food: 'Tocană de năut și legume (400g) cu 100g orez brun.', kcal: 600, protein: 28, carbs: 80, fat: 15, fiber: 20 }, { food: 'Salată cu ton în saramură (150g), 3 ouă fierte, mix de salată, roșii, castraveți, 20ml ulei de măsline.', kcal: 600, protein: 50, carbs: 25, fat: 35, fiber: 9 }, { food: 'Paste integrale (120g uscate) cu sos pesto (30g) și 150g ciuperci sotate.', kcal: 650, protein: 22, carbs: 75, fat: 30, fiber: 11 }, { food: 'Burger vegetarian (200g din fasole neagră) într-o chiflă integrală (120g), cu 100g cartofi dulci prăjiți în aer fryer, salată.', kcal: 750, protein: 30, carbs: 90, fat: 30, fiber: 25 }, { food: 'Piept de curcan (180g) la grătar cu 150g bulgur și 250g salată de varză roșie cu ulei de măsline.', kcal: 680, protein: 60, carbs: 60, fat: 25, fiber: 12 },
+            // Ziua 3
+            [
+                { name: 'Mic dejun', icon: '☀️', type: 'breakfast', food: 'Shake Herbalife (2 linguri F1 + 2 linguri PDM) cu apă.', kcal: 225, protein: 25, carbs: 22, fat: 4, fiber: 5 },
+                { name: 'Gustare 1', icon: '🍎', type: 'snack', food: '150g hummus cu 200g bastonașe de morcov și ardei.', kcal: 350, protein: 12, carbs: 38, fat: 16, fiber: 15 },
+                { name: 'Prânz', icon: '🍝', type: 'lunch', food: '220g piept de curcan la grătar cu 250g quinoa și salată de legume cu 15ml ulei de măsline.', kcal: 940, protein: 75, carbs: 80, fat: 35, fiber: 15 },
+                { name: 'Gustare 2', icon: '🍋', type: 'snack', food: 'Baton proteic Herbalife.', kcal: 140, protein: 10, carbs: 15, fat: 5, fiber: 3 },
+                { name: 'Cină', icon: '🌙', type: 'dinner', food: 'Omletă din 1 ou întreg + 200g albuș, cu spanac și 50g telemea light.', kcal: 345, protein: 28, carbs: 35, fat: 12, fiber: 4 }
             ],
-            dinner: [
-                { food: 'Salată mare cu 150g mozzarella light, roșii cherry, busuioc proaspăt, 20ml ulei de măsline.', kcal: 500, protein: 30, carbs: 20, fat: 40, fiber: 8 }, { food: 'Fasole bătută (250g) cu ceapă roșie și 3 felii pâine de secară (90g).', kcal: 500, protein: 25, carbs: 60, fat: 15, fiber: 18 }, { food: 'Omletă din 5 ouă cu ciuperci și ardei, servită cu 100g brânză urdă.', kcal: 500, protein: 45, carbs: 20, fat: 30, fiber: 7 }, { food: 'Linte verde (250g gătită) cu legume la abur (broccoli, conopidă).', kcal: 400, protein: 30, carbs: 60, fat: 8, fiber: 15 }, { food: 'File de păstrăv la cuptor (180g) cu 250g legume la grătar (vinete, dovlecei).', kcal: 500, protein: 40, carbs: 25, fat: 30, fiber: 9 }, { food: 'Salată de quinoa (150g gătită) cu 120g tofu afumat, castraveți, roșii, dressing cu lămâie și 15ml ulei de măsline.', kcal: 550, protein: 30, carbs: 55, fat: 30, fiber: 12 }, { food: 'Chefir (300ml) cu 150g brânză proaspătă de vaci și 20g semințe de in.', kcal: 400, protein: 30, carbs: 20, fat: 25, fiber: 7 }, { food: 'Supă de legume (500ml) cu 150g năut și 3 felii pâine integrală (90g).', kcal: 480, protein: 25, carbs: 70, fat: 12, fiber: 18 }, { food: 'Chifteluțe vegetale (200g din linte) cu sos de roșii și 250g orez integral.', kcal: 600, protein: 30, carbs: 80, fat: 15, fiber: 22 }, { food: 'Fasole neagră (250g gătită) cu ardei gras, ceapă și 3 felii pâine integrală (90g).', kcal: 520, protein: 25, carbs: 75, fat: 10, fiber: 22 }, { food: 'Salată cu brânză telemea light (120g), roșii, castraveți, măsline, 15ml ulei de măsline.', kcal: 450, protein: 28, carbs: 20, fat: 35, fiber: 7 }, { food: 'Iaurt grecesc 2-3% (250g) cu 100g urdă, 20g nuci și 80g fructe de pădure.', kcal: 450, protein: 30, carbs: 30, fat: 25, fiber: 8 },
+            // Ziua 4
+            [
+                { name: 'Mic dejun', icon: '☀️', type: 'breakfast', food: 'Shake Herbalife (2 linguri F1 + 2 linguri PDM) cu apă.', kcal: 225, protein: 25, carbs: 22, fat: 4, fiber: 5 },
+                { name: 'Gustare 1', icon: '🍎', type: 'snack', food: '3 ouă fierte și 30g migdale.', kcal: 400, protein: 25, carbs: 8, fat: 30, fiber: 5 },
+                { name: 'Prânz', icon: '🍝', type: 'lunch', food: 'Tigaie cu 300g tofu, 300g broccoli și ardei, 200g orez brun, 15ml ulei de susan.', kcal: 820, protein: 42, carbs: 105, fat: 28, fiber: 20 },
+                { name: 'Gustare 2', icon: '🍋', type: 'snack', food: '250ml chefir.', kcal: 125, protein: 8, carbs: 11, fat: 6, fiber: 0 },
+                { name: 'Cină', icon: '🌙', type: 'dinner', food: '250g file de cod la cuptor cu salată verde și 150g fasole roșie.', kcal: 430, protein: 50, carbs: 55, fat: 5, fiber: 15 }
+            ],
+            // Ziua 5
+            [
+                { name: 'Mic dejun', icon: '☀️', type: 'breakfast', food: 'Shake Herbalife (2 linguri F1 + 2 linguri PDM) cu apă.', kcal: 225, protein: 25, carbs: 22, fat: 4, fiber: 5 },
+                { name: 'Gustare 1', icon: '🍎', type: 'snack', food: '250g iaurt grecesc 2% cu 1 măr mediu.', kcal: 230, protein: 25, carbs: 30, fat: 3, fiber: 5 },
+                { name: 'Prânz', icon: '🍝', type: 'lunch', food: '200g piept de pui la grătar cu 350g cartofi copți și salată de varză cu 15ml ulei de măsline.', kcal: 975, protein: 65, carbs: 95, fat: 35, fiber: 18 },
+                { name: 'Gustare 2', icon: '🍋', type: 'snack', food: '30g nuci.', kcal: 200, protein: 5, carbs: 4, fat: 20, fiber: 2 },
+                { name: 'Cină', icon: '🌙', type: 'dinner', food: 'Tocană de fasole neagră (400g) cu legume și 100g mămăligă.', kcal: 370, protein: 30, carbs: 67, fat: 1, fiber: 24 }
+            ],
+             // Ziua 6
+            [
+                { name: 'Mic dejun', icon: '☀️', type: 'breakfast', food: 'Shake Herbalife (2 linguri F1 + 2 linguri PDM) cu apă.', kcal: 225, protein: 25, carbs: 22, fat: 4, fiber: 5 },
+                { name: 'Gustare 1', icon: '🍎', type: 'snack', food: '200g tofu la grătar cu sos de soia și 20g semințe de cânepă.', kcal: 280, protein: 24, carbs: 5, fat: 18, fiber: 4 },
+                { name: 'Prânz', icon: '🍝', type: 'lunch', food: '180g file de somon la cuptor cu 250g orez sălbatic, 150g năut și salată verde.', kcal: 960, protein: 60, carbs: 90, fat: 42, fiber: 20 },
+                { name: 'Gustare 2', icon: '🍋', type: 'snack', food: '200g brânză de vaci 2%.', kcal: 165, protein: 25, carbs: 8, fat: 4, fiber: 0 },
+                { name: 'Cină', icon: '🌙', type: 'dinner', food: 'Supă cremă de linte (400ml).', kcal: 370, protein: 16, carbs: 75, fat: 1, fiber: 12 }
+            ],
+            // Ziua 7
+            [
+                { name: 'Mic dejun', icon: '☀️', type: 'breakfast', food: 'Shake Herbalife (2 linguri F1 + 2 linguri PDM) cu apă.', kcal: 225, protein: 25, carbs: 22, fat: 4, fiber: 5 },
+                { name: 'Gustare 1', icon: '🍎', type: 'snack', food: 'Baton proteic Herbalife și 30g migdale.', kcal: 315, protein: 16, carbs: 21, fat: 20, fiber: 7 },
+                { name: 'Prânz', icon: '🍝', type: 'lunch', food: '200g piept de curcan la grătar cu 350g cartofi copți și salată asortată cu 15ml ulei de măsline.', kcal: 950, protein: 70, carbs: 85, fat: 35, fiber: 18 },
+                { name: 'Gustare 2', icon: '🍋', type: 'snack', food: '200g iaurt grecesc 2%.', kcal: 150, protein: 20, carbs: 8, fat: 3, fiber: 0 },
+                { name: 'Cină', icon: '🌙', type: 'dinner', food: '250g soia boabe fierte (texturate) cu sos de roșii și legume.', kcal: 360, protein: 19, carbs: 74, fat: 1, fiber: 18 }
+            ],
+            // Ziua 8
+            [
+                { name: 'Mic dejun', icon: '☀️', type: 'breakfast', food: 'Shake Herbalife (2 linguri F1 + 2 linguri PDM) cu apă.', kcal: 225, protein: 25, carbs: 22, fat: 4, fiber: 5 },
+                { name: 'Gustare 1', icon: '🍎', type: 'snack', food: 'Salată de 200g năut cu ceapă, pătrunjel și lămâie.', kcal: 300, protein: 15, carbs: 50, fat: 5, fiber: 15 },
+                { name: 'Prânz', icon: '🍝', type: 'lunch', food: '200g vită slabă la grătar cu 250g orez brun și 200g ciuperci.', kcal: 980, protein: 70, carbs: 90, fat: 38, fiber: 10 },
+                { name: 'Gustare 2', icon: '🍋', type: 'snack', food: 'Baton proteic Herbalife.', kcal: 140, protein: 10, carbs: 15, fat: 5, fiber: 3 },
+                { name: 'Cină', icon: '🌙', type: 'dinner', food: '200g piept de pui la grătar cu salată verde mare.', kcal: 355, protein: 30, carbs: 45, fat: 11, fiber: 5 }
+            ],
+            // Ziua 9
+            [
+                { name: 'Mic dejun', icon: '☀️', type: 'breakfast', food: 'Shake Herbalife (2 linguri F1 + 2 linguri PDM) cu apă.', kcal: 225, protein: 25, carbs: 22, fat: 4, fiber: 5 },
+                { name: 'Gustare 1', icon: '🍎', type: 'snack', food: '250g iaurt grecesc 2% cu 20g semințe de cânepă.', kcal: 260, protein: 26, carbs: 10, fat: 14, fiber: 1 },
+                { name: 'Prânz', icon: '🍝', type: 'lunch', food: '200g file de păstrăv cu 300g mămăligă și mujdei.', kcal: 910, protein: 60, carbs: 95, fat: 35, fiber: 10 },
+                { name: 'Gustare 2', icon: '🍋', type: 'snack', food: '200g brânză de vaci 2%.', kcal: 165, protein: 25, carbs: 8, fat: 4, fiber: 0 },
+                { name: 'Cină', icon: '🌙', type: 'dinner', food: 'Salată cu 150g tofu, 100g fasole roșie și porumb.', kcal: 440, protein: 14, carbs: 70, fat: 10, fiber: 15 }
+            ],
+            // Ziua 10
+            [
+                { name: 'Mic dejun', icon: '☀️', type: 'breakfast', food: 'Shake Herbalife (2 linguri F1 + 2 linguri PDM) cu apă.', kcal: 225, protein: 25, carbs: 22, fat: 4, fiber: 5 },
+                { name: 'Gustare 1', icon: '🍎', type: 'snack', food: 'Baton proteic Herbalife cu un măr mediu.', kcal: 220, protein: 10, carbs: 37, fat: 5, fiber: 7 },
+                { name: 'Prânz', icon: '🍝', type: 'lunch', food: 'Tocană de linte (500g) cu 150g piept de pui și 100g orez brun.', kcal: 950, protein: 70, carbs: 110, fat: 25, fiber: 20 },
+                { name: 'Gustare 2', icon: '🍋', type: 'snack', food: '30g caju.', kcal: 170, protein: 5, carbs: 9, fat: 14, fiber: 1 },
+                { name: 'Cină', icon: '🌙', type: 'dinner', food: '200g cod la abur cu 200g mazăre fiartă.', kcal: 435, protein: 40, carbs: 65, fat: 2, fiber: 10 }
+            ],
+            // Ziua 11
+            [
+                { name: 'Mic dejun', icon: '☀️', type: 'breakfast', food: 'Shake Herbalife (2 linguri F1 + 2 linguri PDM) cu apă.', kcal: 225, protein: 25, carbs: 22, fat: 4, fiber: 5 },
+                { name: 'Gustare 1', icon: '🍎', type: 'snack', food: 'Salată de 200g fasole albă cu ceapă și 10ml ulei de măsline.', kcal: 370, protein: 18, carbs: 45, fat: 12, fiber: 14 },
+                { name: 'Prânz', icon: '🍝', type: 'lunch', food: '200g vită slabă cu 300g piure de cartofi (fără unt) și salată de varză.', kcal: 900, protein: 65, carbs: 80, fat: 35, fiber: 12 },
+                { name: 'Gustare 2', icon: '🍋', type: 'snack', food: '250g iaurt grecesc 2%.', kcal: 150, protein: 25, carbs: 8, fat: 3, fiber: 0 },
+                { name: 'Cină', icon: '🌙', type: 'dinner', food: '200g tofu la grătar cu salată de rucola.', kcal: 355, protein: 17, carbs: 50, fat: 9, fiber: 5 }
+            ],
+            // Ziua 12
+            [
+                { name: 'Mic dejun', icon: '☀️', type: 'breakfast', food: 'Shake Herbalife (2 linguri F1 + 2 linguri PDM) cu apă.', kcal: 225, protein: 25, carbs: 22, fat: 4, fiber: 5 },
+                { name: 'Gustare 1', icon: '🍎', type: 'snack', food: '200g brânză de vaci 2% cu 30g nuci.', kcal: 355, protein: 30, carbs: 12, fat: 23, fiber: 2 },
+                { name: 'Prânz', icon: '🍝', type: 'lunch', food: '200g somon la grătar cu 200g orez sălbatic și 200g fasole verde.', kcal: 950, protein: 60, carbs: 90, fat: 40, fiber: 15 },
+                { name: 'Gustare 2', icon: '🍋', type: 'snack', food: 'Baton proteic Herbalife.', kcal: 140, protein: 10, carbs: 15, fat: 5, fiber: 3 },
+                { name: 'Cină', icon: '🌙', type: 'dinner', food: 'Salată cu 150g năut și 100g telemea light.', kcal: 330, protein: 25, carbs: 70, fat: -1, fiber: 12 }
+            ],
+            // Ziua 13
+            [
+                { name: 'Mic dejun', icon: '☀️', type: 'breakfast', food: 'Shake Herbalife (2 linguri F1 + 2 linguri PDM) cu apă.', kcal: 225, protein: 25, carbs: 22, fat: 4, fiber: 5 },
+                { name: 'Gustare 1', icon: '🍎', type: 'snack', food: '3 ouă fierte cu 1 ardei gras.', kcal: 260, protein: 19, carbs: 10, fat: 16, fiber: 3 },
+                { name: 'Prânz', icon: '🍝', type: 'lunch', food: '200g piept de curcan cu 250g paste integrale și sos de roșii.', kcal: 980, protein: 70, carbs: 115, fat: 25, fiber: 15 },
+                { name: 'Gustare 2', icon: '🍋', type: 'snack', food: '250ml chefir cu 20g semințe de cânepă.', kcal: 235, protein: 14, carbs: 13, fat: 15, fiber: 1 },
+                { name: 'Cină', icon: '🌙', type: 'dinner', food: '200g cod la abur cu 150g piure de mazăre.', kcal: 300, protein: 22, carbs: 55, fat: -2, fiber: 10 }
+            ],
+            // Ziua 14
+            [
+                { name: 'Mic dejun', icon: '☀️', type: 'breakfast', food: 'Shake Herbalife (2 linguri F1 + 2 linguri PDM) cu apă.', kcal: 225, protein: 25, carbs: 22, fat: 4, fiber: 5 },
+                { name: 'Gustare 1', icon: '🍎', type: 'snack', food: '250g iaurt grecesc 2% cu 30g migdale.', kcal: 380, protein: 30, carbs: 12, fat: 25, fiber: 5 },
+                { name: 'Prânz', icon: '🍝', type: 'lunch', food: '200g mușchi de vită la grătar, 300g cartofi la cuptor, salată.', kcal: 920, protein: 65, carbs: 80, fat: 36, fiber: 12 },
+                { name: 'Gustare 2', icon: '🍋', type: 'snack', food: 'Baton proteic Herbalife.', kcal: 140, protein: 10, carbs: 15, fat: 5, fiber: 3 },
+                { name: 'Cină', icon: '🌙', type: 'dinner', food: 'Omletă din 1 ou întreg + 150g albuș cu 100g ciuperci.', kcal: 335, protein: 20, carbs: 60, fat: 3, fiber: 3 }
             ]
-        };
+        ];
 
         // --- DATA GENERATION ---
-        for (let i = 1; i <= 28; i++) {
-            const dayMeals = [];
-            let currentMeal, calculatedNutr;
-            currentMeal = mealTemplates.breakfast[0];
-            if (currentMeal.base) {
-                calculatedNutr = calculateNutrition(currentMeal.base.kcal, currentMeal.base.protein, currentMeal.base.carbs, currentMeal.base.fat, currentMeal.base.fiber, currentMeal.additions);
-                dayMeals.push({ name: 'Mic dejun', icon: '☀️', type: 'breakfast', food: currentMeal.food, ...calculatedNutr });
-            } else { dayMeals.push({ name: 'Mic dejun', icon: '☀️', type: 'breakfast', ...currentMeal }); }
-            dayMeals.push({ name: 'Gustare 1', icon: '🍎', type: 'snack', ...mealTemplates.snack1[(i - 1) % mealTemplates.snack1.length] });
-            dayMeals.push({ name: 'Prânz', icon: '🍝', type: 'lunch', ...mealTemplates.lunch[(i - 1) % mealTemplates.lunch.length] });
-            dayMeals.push({ name: 'Gustare 2', icon: '🍋', type: 'snack', ...mealTemplates.snack2[(i - 1) % mealTemplates.snack2.length] });
-            dayMeals.push({ name: 'Cină', icon: '🌙', type: 'dinner', ...mealTemplates.dinner[(i - 1) % mealTemplates.dinner.length] });
-            const totals = dayMeals.reduce((acc, meal) => {
-                acc.kcal += meal.kcal || 0; acc.protein += meal.protein || 0; acc.carbs += meal.carbs || 0; acc.fat += meal.fat || 0; acc.fiber += meal.fiber || 0; return acc;
-            }, { kcal: 0, protein: 0, carbs: 0, fat: 0, fiber: 0 });
-            mealPlanData.push({ day: i, meals: dayMeals, totals: totals });
+        function generateMealPlan() {
+            mealPlanData.length = 0;
+            const mixedBlueprintOrder = [0, 8, 2, 10, 4, 12, 6, 1, 9, 3, 11, 5, 13, 7]; // Shuffle the 14 blueprints
+            for (let i = 1; i <= 28; i++) {
+                const blueprintIndex = mixedBlueprintOrder[(i - 1) % mixedBlueprintOrder.length];
+                const blueprint = dayBlueprints[blueprintIndex];
+                const totals = blueprint.reduce((acc, meal) => {
+                    acc.kcal += meal.kcal || 0; acc.protein += meal.protein || 0; acc.carbs += meal.carbs || 0; acc.fat += meal.fat || 0; acc.fiber += meal.fiber || 0; return acc;
+                }, { kcal: 0, protein: 0, carbs: 0, fat: 0, fiber: 0 });
+                mealPlanData.push({ day: i, meals: blueprint, totals: totals });
+            }
         }
 
         // --- RENDER FUNCTIONS ---
@@ -748,7 +774,7 @@
                                     <div><span class="font-semibold block">${(meal.protein || 0).toFixed(1)} g</span><span class="text-xs text-gray-500">Proteine</span></div>
                                     <div><span class="font-semibold block">${(meal.carbs || 0).toFixed(1)} g</span><span class="text-xs text-gray-500">Carbo.</span></div>
                                     <div><span class="font-semibold block">${(meal.fat || 0).toFixed(1)} g</span><span class="text-xs text-gray-500">Grăsimi</span></div>
-                                    <div><b class="font-semibold block">${(meal.fiber || 0).toFixed(1)} g</b><span class="text-xs text-gray-500">Fibre</span></div>
+                                    <div><span class="font-semibold block">${(meal.fiber || 0).toFixed(1)} g</span><span class="text-xs text-gray-500">Fibre</span></div>
                                 </div>
                             </div>
                         `).join('')}
@@ -797,7 +823,7 @@
                     const row = document.createElement('tr');
                     row.className = 'meal-row';
                     row.innerHTML = `
-                        ${index === 0 ? `<td rowspan="6"><b>${dayData.day}</b></td>` : ''}
+                        ${index === 0 ? `<td rowspan="5"><b>${dayData.day}</b></td>` : ''}
                         <td>${meal.name}</td>
                         <td>${meal.food}</td>
                         <td>${(meal.kcal || 0).toFixed(0)}</td>
@@ -828,10 +854,7 @@
                 <div class="accordion-item">
                     <h2>
                         <button type="button" class="accordion-button" aria-expanded="false">
-                            <span class="flex items-center gap-4">
-                                <span class="text-2xl">${item.icon || ''}</span>
-                                <span>${item.title}</span>
-                            </span>
+                            <span>${item.title}</span>
                             <span class="accordion-icon text-2xl font-light text-indigo-500">+</span>
                         </button>
                     </h2>
@@ -846,20 +869,8 @@
                     const content = button.parentElement.nextElementSibling;
                     const isExpanded = button.getAttribute('aria-expanded') === 'true';
 
-                    // Optional: Close all other accordions
-                    container.querySelectorAll('.accordion-button').forEach(btn => {
-                        if (btn !== button) {
-                            btn.classList.remove('open');
-                            btn.setAttribute('aria-expanded', 'false');
-                            btn.parentElement.nextElementSibling.classList.remove('open');
-                            btn.parentElement.nextElementSibling.style.maxHeight = null;
-                            btn.parentElement.nextElementSibling.style.padding = '0 1.5rem';
-                        }
-                    });
-
                     button.setAttribute('aria-expanded', !isExpanded);
                     button.classList.toggle('open');
-                    content.classList.toggle('open');
                     
                     if (content.style.maxHeight) {
                         content.style.maxHeight = null;
@@ -871,11 +882,12 @@
         }
 
         // --- INITIALIZATION ---
+        generateMealPlan();
         populateDaySelector();
         populateFullTable();
-        createAccordion(wellnessAccordion, wellnessData);
-        createAccordion(hipertrigliceridemieAccordion, hipertrigliceridemieData);
-        createAccordion(planActiuneAccordion, planActiuneData);
+        createAccordion(wellnessAccordionContainer, wellnessData);
+        createAccordion(hipertrigliceridemieAccordionContainer, hipertrigliceridemieData);
+        createAccordion(planActiuneAccordionContainer, planActiuneData);
 
         if (daySelector) {
             daySelector.addEventListener('change', (e) => showDay(e.target.value));
